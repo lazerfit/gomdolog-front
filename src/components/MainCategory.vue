@@ -26,7 +26,6 @@
 
 .container {
   width: $desktop-width;
-  // border: 1px solid #000;
   margin: auto;
   display: flex;
   justify-content: space-between;
