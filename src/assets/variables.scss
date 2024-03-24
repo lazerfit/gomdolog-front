@@ -1,0 +1,19 @@
+@import './fonts.scss';
+
+// font
+$primary-font-en: "Montserrat";
+$secondary-font : "SUITE Variable";
+$primary-font : "Pretendard Variable";
+
+// width
+$desktop-width: 1180px;
+
+// color
+$background-color: #FFFDF6;
+$black-forest: #031403;
+$ghost: #CDCBD6;
+
+@function px-to-rem($px) {
+  @return #{calc($px / 16)}rem;
+}
+
