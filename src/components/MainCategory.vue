@@ -29,14 +29,40 @@
   margin: auto;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   .cetegory {
-    border: 1px solid #000;
+    font-family: $secondary-font;
     width: px-to-rem(170);
     text-align: center;
-    border-radius: px-to-rem(7);
+    border-radius: px-to-rem(20);
     padding: px-to-rem(10);
     margin-top: px-to-rem(10);
+    cursor: pointer;
+    box-shadow: 5px 5px 20px rgba($color: #333, $alpha: .17);
+    overflow: hidden;
+    z-index: 1;
+    position: relative;
+
+    &:before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 100%;
+      background-color: darken(#fff, 5%);
+      transition: all .3s;
+      z-index: -1;
+    }
+
+    &:hover {
+      color: #fff;
+
+      &:before {
+        width: 100%;
+      }
+    }
   }
 
   .cetegory:nth-child(1) {
@@ -68,6 +94,5 @@
     border: none;
     color: #B33939;
   }
-
 }
 </style>
