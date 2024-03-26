@@ -2,6 +2,8 @@
 import MainHeader from '@/components/MainHeader.vue';
 import MainBanner from '@/components/MainBanner.vue';
 import MainCategory from '@/components/MainCategory.vue'
+import RecentPost from '@/components/RecentPost.vue'
+import AllPost from '@/components/AllPost.vue';
 </script>
 
 <template>
@@ -9,6 +11,8 @@ import MainCategory from '@/components/MainCategory.vue'
     <main-header />
     <main-banner />
     <main-category />
+    <recent-post />
+    <all-post />
   </main>
 </template>
 
