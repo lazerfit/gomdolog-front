@@ -39,6 +39,7 @@ header {
     span {
       margin-right: px-to-rem(5);
       font-size: px-to-rem(25);
+      cursor: pointer;
     }
   }
 }
