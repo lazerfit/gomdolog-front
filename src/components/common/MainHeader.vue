@@ -5,7 +5,7 @@
 <template>
   <header>
     <div class="main-logo">
-      <img src="../assets/img/gomdol2.jpg" alt="main-logo">
+      <img src="@/assets/img/gomdol2.jpg" alt="main-logo">
     </div>
     <div class="sub-logo-container">
       <span class="search-bar">
@@ -19,8 +19,6 @@
 </template>
 
 <style lang='scss' scoped>
-@import '../assets/variables.scss';
-
 header {
   width: $desktop-width;
   margin: px-to-rem(10) auto;
