@@ -18,7 +18,7 @@
             Vue.js
           </div>
           <div class="main-post-title">
-            Open API vs Composition API
+            Option API vs Composition API
           </div>
           <div class="main-post-text">
             대법원장과 대법관이 아닌 법관은 대법관회의의 동의를 얻어 대법원장이 임명한다. 국가는 국민 모두의 생산 및 생활의 기반이 되는 국토의 효율적이고 균형있는 이용·개발과 보전을 위하여 법률이 정하는
@@ -47,7 +47,7 @@
               Vue.js
             </div>
             <div class="sub-post-title">
-              Open API vs Composition API111111111111111
+              Option API vs Composition API111111111111111
             </div>
             <div class="sub-post-text">
               대법원장과 대법관이 아닌 법관은 대법관회의의 동의를 얻어 대법원장이 임명한다. 국가는 국민 모두의 생산 및 생활의 기반이 되는 국토의 효율적이고 균형있는 이용·개발과 보전을 위하여 법률이
@@ -77,7 +77,7 @@
               Vue.js
             </div>
             <div class="sub-post-title">
-              Open API vs Composition API111111111111111
+              Option API vs Composition API111111111111111
             </div>
             <div class="sub-post-text">
               대법원장과 대법관이 아닌 법관은 대법관회의의 동의를 얻어 대법원장이 임명한다. 국가는 국민 모두의 생산 및 생활의 기반이 되는 국토의 효율적이고 균형있는 이용·개발과 보전을 위하여 법률이
@@ -141,6 +141,10 @@
           white-space: nowrap;
           margin-top: px-to-rem(5);
           cursor: pointer;
+
+          &:hover {
+            animation: color-change-2x 2s linear infinite alternate both;
+          }
         }
 
         .main-post-text {
@@ -221,6 +225,10 @@
             overflow: hidden;
             white-space: nowrap;
             cursor: pointer;
+
+            &:hover {
+              animation: color-change-2x 2s linear infinite alternate both;
+            }
           }
 
           .sub-post-text {
