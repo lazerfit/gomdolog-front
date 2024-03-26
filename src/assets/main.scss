@@ -8,6 +8,7 @@
 body {
   background-color: $background-color;
   font-family: ($primary-font, $secondary-font, sans-serif);
+  box-sizing: border-box;
 }
 
 a {
