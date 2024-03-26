@@ -22,11 +22,9 @@
 </template>
 
 <style lang='scss' scoped>
-@import '../assets/variables.scss';
-
 .container {
   width: $desktop-width;
-  margin: auto;
+  margin: px-to-rem(20) auto;
   display: flex;
   justify-content: space-between;
   align-items: center;

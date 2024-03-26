@@ -4,14 +4,12 @@
 <template>
   <div class="container">
     <div class="banner">
-      <img src="../assets/img/beach2.jpg" alt="main-banner">
+      <img src="@/assets/img/beach2.jpg" alt="main-banner">
     </div>
   </div>
 </template>
 
 <style lang='scss' scoped>
-@import '../assets/variables.scss';
-
 .container {
   width: $desktop-width;
   height: px-to-rem(440);
