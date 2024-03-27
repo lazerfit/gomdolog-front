@@ -9,6 +9,7 @@ body {
   background-color: $background-color;
   font-family: ($primary-font, $secondary-font, sans-serif);
   box-sizing: border-box;
+  color: $black-forest;
 }
 
 a {
@@ -17,4 +18,8 @@ a {
 
 img {
   object-fit: cover;
+}
+
+button {
+  background-color: none;
 }
