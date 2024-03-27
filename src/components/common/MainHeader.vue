@@ -1,12 +1,12 @@
 <script setup lang=ts>
-
+import { RouterLink } from 'vue-router';
 </script>
 
 <template>
   <header>
-    <div class="main-logo">
+    <RouterLink class="main-logo" to="/">
       <img src="@/assets/img/gomdol2.jpg" alt="main-logo">
-    </div>
+    </RouterLink>
     <div class="sub-logo-container">
       <span class="search-bar">
         <i class="fa-solid fa-magnifying-glass"></i>
@@ -21,7 +21,7 @@
 <style lang='scss' scoped>
 header {
   width: $desktop-width;
-  margin: px-to-rem(10) auto;
+  margin: px-to-rem(15) auto px-to-rem(10) auto;
   display: flex;
   align-items: center;
 

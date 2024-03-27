@@ -3,48 +3,56 @@
 </script>
 <template>
   <div class="container">
-    <div class="sns">
-      <span>
-        <a target="_blank" href="https://github.com/lazerfit">
-          <i class="fa-brands fa-github"></i>
-        </a>
-      </span>
-      <span>
-        <a target="_blank" href="https://www.linkedin.com/in/ddoddi14/">
-          <i class="fa-brands fa-linkedin"></i>
-        </a>
-      </span>
-    </div>
-    <div class="copywrite">
-      @Designed By gomdolog.
+    <div class="content-wrapper">
+      <div class="sns">
+        <span>
+          <a target="_blank" href="https://github.com/lazerfit">
+            <i class="fa-brands fa-github"></i>
+          </a>
+        </span>
+        <span>
+          <a target="_blank" href="https://www.linkedin.com/in/ddoddi14/">
+            <i class="fa-brands fa-linkedin"></i>
+          </a>
+        </span>
+      </div>
+      <div class="copywrite">
+        @Designed By gomdolog.
+      </div>
     </div>
   </div>
 </template>
 
 <style lang='scss' scoped>
 .container {
-  width: $desktop-width;
+  width: 100%;
   height: px-to-rem(120);
-  border-top: 1px solid $ghost;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
-  color: #555;
+  background-color: #dddddd73;
+  box-sizing: border-box;
 
-  .sns {
-    span {
-      a {
-        margin-right: px-to-rem(5);
-        font-size: px-to-rem(20);
-        color: #555;
+  .content-wrapper {
+    width: $desktop-width;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    color: $black-forest;
+
+    .sns {
+      span {
+        a {
+          margin-right: px-to-rem(5);
+          font-size: px-to-rem(20);
+          color: $black-forest;
+        }
       }
     }
-  }
 
-  .copywrite {
-    margin-top: px-to-rem(5);
+    .copywrite {
+      margin-top: px-to-rem(5);
+    }
   }
 }
 </style>
