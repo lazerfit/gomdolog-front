@@ -5,19 +5,38 @@ import MainCategory from '@/components/MainCategory.vue'
 import RecentPost from '@/components/RecentPost.vue'
 import AllPost from '@/components/AllPost.vue';
 import MainFooter from '@/components/common/MainFooter.vue';
+import MoreButton from '@/components/common/MoreButton.vue';
+
+const bannerImage = '/src/assets/img/banner4.jpg';
 </script>
 
 <template>
   <main>
     <main-header />
-    <main-banner />
+    <main-banner :img="bannerImage" />
     <main-category />
     <recent-post />
+    <div class="all-post-title">
+      <h1>All Posts</h1>
+    </div>
     <all-post />
+    <more-button />
     <main-footer />
   </main>
 </template>
 
 <style lang="scss" scoped>
 @import '../assets/main.scss';
+
+.all-post-title {
+  width: $desktop-width;
+  margin: px-to-rem(10) auto;
+  margin-top: px-to-rem(200);
+
+  h1 {
+    font-weight: 600;
+    font-family: $secondary-font-en;
+    font-size: px-to-rem(40);
+  }
+}
 </style>

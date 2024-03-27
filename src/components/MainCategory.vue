@@ -1,11 +1,11 @@
 <script setup lang=ts>
-
+import { RouterLink } from 'vue-router';
 </script>
 <template>
   <div class="container">
-    <div class="cetegory">
+    <RouterLink to="/category/vue" class="cetegory">
       Vue.js
-    </div>
+    </RouterLink>
     <div class="cetegory">
       Spring
     </div>

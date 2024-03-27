@@ -17,15 +17,19 @@ import { RouterLink } from 'vue-router';
           <div class="main-post-category">
             Vue.js
           </div>
-          <RouterLink class="main-post-title" to="/post/1">
-            Option API vs Composition API
-          </RouterLink>
-          <RouterLink class="main-post-text" to="/post/1">
-            대법원장과 대법관이 아닌 법관은 대법관회의의 동의를 얻어 대법원장이 임명한다. 국가는 국민 모두의 생산 및 생활의 기반이 되는 국토의 효율적이고 균형있는 이용·개발과 보전을 위하여 법률이 정하는
-            바에 의하여 그에 관한 필요한 제한과 의무를 과할 수 있다.
+          <RouterLink to="/post/1">
+            <div class="main-post-title">
+              Option API vs Composition API
+            </div>
+            <div class="main-post-text">
+              대법원장과 대법관이 아닌 법관은 대법관회의의 동의를 얻어 대법원장이 임명한다. 국가는 국민 모두의 생산 및 생활의 기반이 되는 국토의 효율적이고 균형있는 이용·개발과 보전을 위하여 법률이
+              정하는
+              바에 의하여 그에 관한 필요한 제한과 의무를 과할 수 있다.
 
-            모든 국민은 신체의 자유를 가진다. 누구든지 법률에 의하지 아니하고는 체포·구속·압수·수색 또는 심문을 받지 아니하며, 법률과 적법한 절차에 의하지 아니하고는 처벌·보안처분 또는 강제노역을 받지
-            아니한다.
+              모든 국민은 신체의 자유를 가진다. 누구든지 법률에 의하지 아니하고는 체포·구속·압수·수색 또는 심문을 받지 아니하며, 법률과 적법한 절차에 의하지 아니하고는 처벌·보안처분 또는 강제노역을
+              받지
+              아니한다.
+            </div>
           </RouterLink>
           <div class="main-post-day">
             2024년 3월 25일
@@ -41,17 +45,20 @@ import { RouterLink } from 'vue-router';
             <div class="sub-post-category">
               Vue.js
             </div>
-            <RouterLink class="sub-post-title" to="/post/2">
-              Option API vs Composition APIiiiiiiiiiiiiiiiii
-            </RouterLink>
-            <RouterLink class="sub-post-text" to="/post/2">
-              대법원장과 대법관이 아닌 법관은 대법관회의의 동의를 얻어 대법원장이 임명한다. 국가는 국민 모두의 생산 및 생활의 기반이 되는 국토의 효율적이고 균형있는 이용·개발과 보전을 위하여 법률이
-              정하는
-              바에 의하여 그에 관한 필요한 제한과 의무를 과할 수 있다.
+            <RouterLink to="/post/2">
+              <div class="sub-post-title">
+                Option API vs Composition APIiiiiiiiiiiiiiiiii
+              </div>
+              <div class="sub-post-text">
+                대법원장과 대법관이 아닌 법관은 대법관회의의 동의를 얻어 대법원장이 임명한다. 국가는 국민 모두의 생산 및 생활의 기반이 되는 국토의 효율적이고 균형있는 이용·개발과 보전을 위하여 법률이
+                정하는
+                바에 의하여 그에 관한 필요한 제한과 의무를 과할 수 있다.
 
-              모든 국민은 신체의 자유를 가진다. 누구든지 법률에 의하지 아니하고는 체포·구속·압수·수색 또는 심문을 받지 아니하며, 법률과 적법한 절차에 의하지 아니하고는 처벌·보안처분 또는 강제노역을
-              받지
-              아니한다.
+                모든 국민은 신체의 자유를 가진다. 누구든지 법률에 의하지 아니하고는 체포·구속·압수·수색 또는 심문을 받지 아니하며, 법률과 적법한 절차에 의하지 아니하고는 처벌·보안처분 또는
+                강제노역을
+                받지
+                아니한다.
+              </div>
             </RouterLink>
             <div class="sub-post-day">
               2024년 3월 25일
@@ -98,7 +105,9 @@ import { RouterLink } from 'vue-router';
   flex-direction: column;
 
   h1 {
-    font-family: $secondary-font;
+    font-weight: 600;
+    font-family: $secondary-font-en;
+    font-size: px-to-rem(40);
   }
 
   .post-wrapper {
@@ -159,7 +168,7 @@ import { RouterLink } from 'vue-router';
           line-height: px-to-rem(20);
           height: px-to-rem(180);
           margin-top: px-to-rem(14);
-          color: #555;
+          color: $dim-black;
           cursor: pointer;
 
         }
@@ -167,7 +176,7 @@ import { RouterLink } from 'vue-router';
         .main-post-day {
           margin-top: px-to-rem(30);
           font-size: px-to-rem(13);
-          color: #999;
+          color: $light-black;
         }
       }
     }

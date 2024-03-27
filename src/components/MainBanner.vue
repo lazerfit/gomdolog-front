@@ -1,10 +1,10 @@
 <script setup lang=ts>
-
+const props = defineProps(['img']);
 </script>
 <template>
   <div class="container">
     <div class="banner">
-      <img src="@/assets/img/beach2.jpg" alt="main-banner">
+      <img :src="props.img" alt="main-banner">
     </div>
   </div>
 </template>

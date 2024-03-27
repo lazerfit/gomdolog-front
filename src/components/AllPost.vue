@@ -3,9 +3,6 @@
 </script>
 <template>
   <div class="container">
-    <h1>
-      All Posts
-    </h1>
     <div class="post-wrapper">
       <div class="post">
         <img src="../assets/img/pineapples.jpg" alt="all-post-img">
@@ -140,11 +137,7 @@
 <style lang='scss' scoped>
 .container {
   width: $desktop-width;
-  margin: px-to-rem(200) auto;
-
-  h1 {
-    font-family: $secondary-font;
-  }
+  margin: px-to-rem(50) auto 0 auto;
 
   .post-wrapper {
     width: 100%;
@@ -194,14 +187,14 @@
           line-height: px-to-rem(20);
           height: px-to-rem(80);
           margin-top: px-to-rem(14);
-          color: #555;
+          color: $dim-black;
           cursor: pointer;
         }
 
         .all-post-day {
           margin-top: px-to-rem(15);
           font-size: px-to-rem(13);
-          color: #999;
+          color: $light-black;
         }
       }
     }
