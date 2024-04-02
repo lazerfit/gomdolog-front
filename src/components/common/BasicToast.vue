@@ -24,7 +24,7 @@ const store = useToasterStore()
   color: $pearl;
   border-radius: 10px;
   box-shadow: 5px 5px 20px rgba($color: #333, $alpha: .25);
-  animation: simple-bounce .5s linear;
+  animation: simple-bounce .2s linear;
 
   i {
     margin-right: px-to-rem(5);

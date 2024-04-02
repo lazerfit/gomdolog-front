@@ -41,25 +41,26 @@ import { RouterLink } from 'vue-router';
     overflow: hidden;
     z-index: 1;
     position: relative;
+    transition: all .3s ease;
 
-    &:before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0%;
-      height: 100%;
-      background-color: darken(#fff, 5%);
-      transition: all .3s;
-      z-index: -1;
+    &:nth-child(1):hover {
+      @include box-shadow-animation(#ccae62);
     }
 
-    &:hover {
-      color: #fff;
+    &:nth-child(2):hover {
+      @include box-shadow-animation(#226f938c);
+    }
 
-      &:before {
-        width: 100%;
-      }
+    &:nth-child(3):hover {
+      @include box-shadow-animation(#47478788);
+    }
+
+    &:nth-child(4):hover {
+      @include box-shadow-animation(#218c758a);
+    }
+
+    &:nth-child(5):hover {
+      @include box-shadow-animation(#b339398e);
     }
   }
 

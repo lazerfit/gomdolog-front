@@ -200,12 +200,15 @@ onMounted(() => {
     .post-title {
       text-align: center;
       font-weight: 500;
-      font-size: px-to-rem(35);
       font-family: $secondary-font;
+
+      .title {
+        font-size: px-to-rem(35);
+      }
 
       .post-title-tags {
         span {
-          font-size: 1rem;
+          font-size: 0.9rem;
           color: #ffda79;
           margin-right: px-to-rem(7);
         }
@@ -217,9 +220,14 @@ onMounted(() => {
         color: $light-black;
         display: flex;
         justify-content: center;
+        flex-direction: column;
+
+        .created-date {
+          font-size: 0.9rem;
+        }
 
         .admin-wrapper {
-          margin-left: px-to-rem(7);
+          margin-top: px-to-rem(7);
 
           span {
             margin-right: px-to-rem(10);
@@ -263,8 +271,10 @@ onMounted(() => {
 
         span {
 
+
           i {
             transition: all .3s ease;
+            font-size: 1.25rem;
 
             &:hover {
               transform: translateY(-5px) scale(1.1);

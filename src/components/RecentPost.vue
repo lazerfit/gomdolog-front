@@ -155,7 +155,7 @@ import { RouterLink } from 'vue-router';
           font-family: $secondary-font;
 
           &:hover {
-            animation: color-change-2x 2s linear infinite alternate both;
+            text-shadow: 1.5px 1.5px $light-black;
           }
         }
 

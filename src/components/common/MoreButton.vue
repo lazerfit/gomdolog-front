@@ -22,6 +22,11 @@
     background-color: $black-forest;
     color: $pearl;
     cursor: pointer;
+    transition: all .3s ease;
+
+    &:hover {
+      @include box-shadow-animation($silver-black);
+    }
   }
 }
 </style>
