@@ -3,13 +3,20 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  font-size: 16px;
 }
 
 body {
   background-color: $background-color;
   font-family: ($primary-font, $secondary-font, sans-serif);
-  box-sizing: border-box;
   color: $black-forest;
+}
+
+input {
+  &:focus {
+    outline: none;
+  }
 }
 
 a {
@@ -22,4 +29,9 @@ img {
 
 button {
   background-color: none;
+}
+
+::selection {
+  background-color: hotpink;
+  color: white;
 }
