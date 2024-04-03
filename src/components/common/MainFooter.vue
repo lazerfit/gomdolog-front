@@ -31,6 +31,10 @@
   background-color: #dddddd73;
   box-sizing: border-box;
 
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
+
   .content-wrapper {
     width: $desktop-width;
     display: flex;
@@ -39,6 +43,10 @@
     align-items: center;
     margin: auto;
     color: $black-forest;
+
+    @media screen and (max-width: 767px) {
+      width: 100%;
+    }
 
     .sns {
       span {

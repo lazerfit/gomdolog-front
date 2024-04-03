@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
+import BasicLoader from './components/common/BasicLoader.vue';
 </script>
 
 <template>
@@ -8,6 +9,7 @@ import { RouterView } from 'vue-router'
       <component :is="Component" />
     </Transition>
   </RouterView>
+  <basic-loader />
 </template>
 
 <style scoped>

@@ -97,6 +97,15 @@ const editor = useEditor({
   width: px-to-rem(900);
   margin: px-to-rem(60) auto;
 
+  @media (max-width: 767px) {
+    width: 100%;
+    margin: 35px 0 20px 0;
+  }
+
+  @media (min-width:768px) and (max-width: 1024px) {
+    width: 100%;
+  }
+
   #post-category {
     margin-bottom: px-to-rem(17);
     border-radius: px-to-rem(8);

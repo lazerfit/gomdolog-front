@@ -194,6 +194,14 @@ onMounted(() => {
   display: flex;
   justify-content: center;
 
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+
+  @media (min-width:768px) and (max-width: 1024px) {
+    width: 100%;
+  }
+
   .content-wrapper {
     width: px-to-rem(900);
 
@@ -250,6 +258,13 @@ onMounted(() => {
       font-size: px-to-rem(16);
       line-height: px-to-rem(31);
 
+      @media (max-width: 767px) {
+        margin: 30px 10px;
+      }
+
+      @media (min-width:768px) and (max-width: 1024px) {
+        margin: 30px 20px;
+      }
 
       img {
         width: 100%;

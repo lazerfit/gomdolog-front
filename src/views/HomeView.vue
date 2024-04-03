@@ -2,10 +2,10 @@
 import MainHeader from '@/components/common/MainHeader.vue';
 import MainBanner from '@/components/MainBanner.vue';
 import MainCategory from '@/components/MainCategory.vue'
-import RecentPost from '@/components/RecentPost.vue'
 import AllPost from '@/components/AllPost.vue';
 import MainFooter from '@/components/common/MainFooter.vue';
 import MoreButton from '@/components/common/MoreButton.vue';
+import PopularPost from '@/components/PopularPost.vue';
 
 const bannerImage = '/src/assets/img/banner4.jpg';
 </script>
@@ -15,7 +15,7 @@ const bannerImage = '/src/assets/img/banner4.jpg';
     <main-header />
     <main-banner :img="bannerImage" />
     <main-category />
-    <recent-post />
+    <popular-post />
     <div class="all-post-title">
       <h1>All Posts</h1>
     </div>
@@ -32,6 +32,18 @@ const bannerImage = '/src/assets/img/banner4.jpg';
   width: $desktop-width;
   margin: px-to-rem(10) auto;
   margin-top: px-to-rem(200);
+
+  @media screen and (max-width: 767px) {
+    width: 100%;
+    margin-top: 270px;
+    text-align: center;
+  }
+
+  @media (min-width:768px) and (max-width: 1024px) {
+    width: 100%;
+    margin-top: 0;
+  }
+
 
   h1 {
     font-weight: 600;

@@ -14,6 +14,15 @@
   display: flex;
   justify-content: center;
 
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
+
+  @media (min-width:768px) and (max-width: 1024px) {
+    width: 100%;
+    margin-top: 50px;
+  }
+
   button {
     font-family: $secondary-font;
     padding: px-to-rem(5);

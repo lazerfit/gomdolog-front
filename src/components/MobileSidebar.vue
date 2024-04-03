@@ -57,6 +57,10 @@ import SearchBar from './common/SearchBar.vue';
     display: none;
   }
 
+  @media (min-width:768px) and (max-width: 1023px) {
+    display: none;
+  }
+
   input[id=trigger] {
     @media screen and (max-width: 767px) {
       display: none;

@@ -19,9 +19,17 @@ const props = defineProps(['img']);
   align-items: center;
   justify-content: space-between;
 
+  @media screen and (max-width: 767px) {
+    width: 100%;
+    height: 50px;
+  }
+
+  @media (min-width:768px) and (max-width: 1024px) {
+    width: 100%;
+  }
+
   .banner {
     width: 100%;
-    height: 100%;
     height: px-to-rem(420);
     margin-top: px-to-rem(10);
 

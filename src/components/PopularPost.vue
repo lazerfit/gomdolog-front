@@ -5,7 +5,7 @@ import { RouterLink } from 'vue-router';
   <div class="container">
     <div>
       <h1>
-        Recent Posts
+        Popular Posts
       </h1>
     </div>
     <div class="post-wrapper">
@@ -104,6 +104,16 @@ import { RouterLink } from 'vue-router';
   display: flex;
   flex-direction: column;
 
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
+
+  @media (min-width:768px) and (max-width: 1024px) {
+    width: 100%;
+    margin-top: 60px;
+    height: 700px;
+  }
+
   h1 {
     font-weight: 600;
     font-family: $secondary-font-en;
@@ -120,6 +130,10 @@ import { RouterLink } from 'vue-router';
 
     .main-post {
       width: px-to-rem(570);
+
+      @media (min-width:768px) and (max-width: 1024px) {
+        display: none;
+      }
 
       .main-post-img {
         width: 100%;
@@ -187,6 +201,11 @@ import { RouterLink } from 'vue-router';
       flex-direction: column;
       justify-content: space-between;
 
+      @media (min-width:768px) and (max-width: 1024px) {
+        width: 100%;
+        height: 580px;
+      }
+
       .sub-post {
         width: 100%;
         height: px-to-rem(270);
@@ -199,12 +218,17 @@ import { RouterLink } from 'vue-router';
             object-fit: cover;
             border-radius: px-to-rem(10);
             cursor: pointer;
+
           }
         }
 
         .content-wrapper {
           margin-left: px-to-rem(10);
           width: px-to-rem(295);
+
+          @media (min-width:768px) and (max-width: 1024px) {
+            width: 100%;
+          }
 
           .sub-post-category {
             @include post-category

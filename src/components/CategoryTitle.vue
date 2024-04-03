@@ -21,6 +21,16 @@ const route = useRoute();
   width: $desktop-width;
   margin: px-to-rem(50) auto;
 
+  @media screen and (max-width: 767px) {
+    width: 100%;
+    margin: 0;
+    margin-top: 270px;
+  }
+
+  @media (min-width:768px) and (max-width: 1024px) {
+    width: 100%;
+  }
+
   .home {
     text-align: center;
 

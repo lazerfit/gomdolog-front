@@ -42,6 +42,10 @@ aside {
   border-radius: px-to-rem(10);
   box-shadow: 5px 5px 5px $light-black;
 
+  @media (max-width: 767px) {
+    display: none;
+  }
+
   .content-wrapper {
     margin: px-to-rem(20);
     text-align: left;

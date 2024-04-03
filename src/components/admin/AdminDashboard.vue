@@ -117,6 +117,14 @@ import AdminAside from './AdminAside.vue';
   margin: px-to-rem(40) auto;
   font-family: $secondary-font;
 
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+
+  @media (min-width:768px) and (max-width: 1024px) {
+    width: 100%;
+  }
+
   h1 {
     font-size: 1.5rem;
     font-family: $secondary-font-en;
@@ -130,14 +138,31 @@ import AdminAside from './AdminAside.vue';
     border-radius: px-to-rem(10);
     box-shadow: 5px 5px 5px $light-black;
 
+    @media (max-width: 767px) {
+      width: 100%;
+      display: flex;
+      flex-flow: column wrap;
+      margin: 0;
+    }
+
     .content-wrapper {
       display: flex;
       flex-flow: row wrap;
       justify-content: center;
 
+      @media (max-width: 767px) {
+        width: 100%;
+        display: flex;
+        margin: 0;
+      }
+
       .popular-post {
         margin: px-to-rem(20);
         width: 45%;
+
+        @media (max-width: 767px) {
+          width: 100%;
+        }
 
         .posts {
           border-radius: px-to-rem(10);
@@ -154,6 +179,10 @@ import AdminAside from './AdminAside.vue';
               text-overflow: ellipsis;
               overflow: hidden;
               white-space: nowrap;
+
+              @media (max-width: 767px) {
+                width: 220px;
+              }
             }
 
             .views {
@@ -167,13 +196,20 @@ import AdminAside from './AdminAside.vue';
         margin: px-to-rem(20);
         width: 40%;
 
+        @media (max-width: 767px) {
+          width: 100%;
+        }
+
         .users {
-          // border: 1px solid #000;
           border-radius: px-to-rem(10);
           box-shadow: 3px 3px 10px $light-black;
           margin-top: px-to-rem(15);
           width: px-to-rem(350);
           padding: px-to-rem(10);
+
+          @media (max-width: 767px) {
+            width: 100%;
+          }
 
           .user {
             display: flex;
@@ -194,11 +230,19 @@ import AdminAside from './AdminAside.vue';
         margin: px-to-rem(20);
         width: 20%;
 
+        @media (max-width: 767px) {
+          width: 100%;
+        }
+
         .categories {
           border-radius: px-to-rem(10);
           box-shadow: 3px 3px 10px $light-black;
           margin-top: px-to-rem(15);
           padding: px-to-rem(10);
+
+          @media (max-width: 767px) {
+            width: 100%;
+          }
 
           .category {
             margin: px-to-rem(15);
@@ -210,11 +254,19 @@ import AdminAside from './AdminAside.vue';
         margin: px-to-rem(20);
         width: 40%;
 
+        @media (max-width: 767px) {
+          width: 100%;
+        }
+
         .posts {
           border-radius: px-to-rem(10);
           box-shadow: 3px 3px 10px $light-black;
           margin-top: px-to-rem(15);
           padding: px-to-rem(10);
+
+          @media (max-width: 767px) {
+            width: 100%;
+          }
 
           .post {
             display: flex;
