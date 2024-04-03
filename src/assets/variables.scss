@@ -112,30 +112,45 @@ $light-gray: #f5f5f5;
   }
 }
 
-@keyframes simple-bounce {
+@keyframes toast-bounce {
   0% {
     opacity: 0;
     top: 0;
+    transform: scale(0) translateX(-50%);
+    transform-origin: top left;
   }
 
   50% {
     opacity: 0.5;
-    top: 15px;
+    top: 35px;
+    transform: scale(1.25) translateX(-50%);
+    transform-origin: top left;
   }
 
   100% {
     top: 30px;
+    transform: scale(1) translateX(-50%);
+    transform-origin: top left;
   }
 }
 
 @keyframes bounce-in {
   0% {
-    transform: scale(0);
+    top: 100%;
+    left: px-to-rem(-65);
+    transform: scale(0) translateX(35%);
+    transform-origin: top right;
   }
   50% {
-    transform: scale(1.25);
+    top: 100%;
+    left: px-to-rem(-65);
+    transform: scale(1.25) translateX(35%);
+    transform-origin: top right;
   }
   100% {
-    transform: scale(1);
+    top: 100%;
+    left: px-to-rem(-65);
+    transform: scale(1) translateX(35%);
+    transform-origin: top right;
   }
 }

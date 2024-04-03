@@ -11,6 +11,9 @@ body {
   background-color: $background-color;
   font-family: ($primary-font, $secondary-font, sans-serif);
   color: $black-forest;
+  @media (max-width: 767px) {
+    padding: 0 7px;
+  }
 }
 
 input {
