@@ -2,8 +2,11 @@
 import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import BasicModal from './BasicModal.vue';
+import MobileSidebar from '../MobileSidebar.vue';
+import SearchBar from './SearchBar.vue';
 
 const isModalOpened = ref(false);
+const isLoginMenuOpened = ref(false);
 
 const openModal = () => {
   isModalOpened.value = true;
@@ -23,15 +26,26 @@ const submitHandler = () => {
     <RouterLink class="main-logo" to="/">
       <img src="@/assets/img/gomdol2.jpg" alt="main-logo">
     </RouterLink>
+    <mobile-sidebar />
     <div class="sub-logo-container">
-      <div class="search-bar">
-        <form action="#none">
-          <input type="search" name="search" pattern=".*\S.*" required placeholder="search...">
-        </form>
-      </div>
+      <search-bar />
       <span class="login">
-        <!-- <i class="fa-solid fa-user" @click="openModal"></i> -->
-        <i class="fa-solid fa-user"></i>
+        <!-- <i class="fa-regular fa-user" @click="openModal"></i> -->
+        <i class="fa-solid fa-user" @click="isLoginMenuOpened = !isLoginMenuOpened">
+          <Transition name="bounce">
+            <div class="wrapper" v-show="isLoginMenuOpened">
+              <div>
+                <RouterLink to="/post/new">글쓰기</RouterLink>
+              </div>
+              <div>
+                <RouterLink to="/admin">설정</RouterLink>
+              </div>
+              <div>
+                <a href="#none">로그아웃</a>
+              </div>
+            </div>
+          </Transition>
+        </i>
         <Transition name="fade">
           <basic-modal :isOpen="isModalOpened" @modal-close="closeModal" @submit="submitHandler">
             <template #header>
@@ -82,6 +96,15 @@ const submitHandler = () => {
 </template>
 
 <style lang='scss' scoped>
+.bounce-enter-active {
+  animation: bounce-in 0.5s;
+}
+
+.bounce-leave-active {
+  animation: bounce-in 0.5s reverse;
+}
+
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
@@ -98,9 +121,23 @@ header {
   display: flex;
   align-items: center;
 
+  @media screen and (max-width: 767px) {
+    width: 100%;
+
+  }
+
   .main-logo {
+    @media screen and (max-width: 767px) {
+      margin: 0 auto;
+      padding-left: 20px;
+    }
+
     img {
       width: px-to-rem(250);
+
+      @media screen and (max-width: 767px) {
+        width: 200px;
+      }
     }
   }
 
@@ -108,41 +145,49 @@ header {
     margin-left: auto;
     display: flex;
 
-    .search-bar {
-
-      form {
-        margin-right: 10px;
-
-        input {
-          max-width: px-to-rem(150);
-          border: none;
-          border-bottom: 1px solid $dim-black;
-          height: px-to-rem(23);
-          transition: all .3s ease-in-out;
-          font-family: $secondary-font;
-          padding-left: px-to-rem(2);
-
-          &:focus::placeholder {
-            opacity: 0;
-          }
-
-          &::placeholder {
-            font-family: $secondary-font-en;
-            font-size: 1.3rem;
-            font-weight: 600;
-            transition: all .3s ease-in-out;
-          }
-        }
-      }
+    @media screen and (max-width: 767px) {
+      display: none;
     }
 
     .login {
       margin-right: px-to-rem(5);
 
-
       .fa-user {
         font-size: px-to-rem(23);
         cursor: pointer;
+        position: relative;
+
+        .wrapper {
+          position: absolute;
+          border: 1px solid #000;
+          width: px-to-rem(65);
+          top: 100%;
+          left: px-to-rem(-65);
+          transform: translateX(35%);
+          margin-top: px-to-rem(10);
+          background-color: #fff;
+          box-shadow: 3px 3px 5px $light-black;
+
+          div {
+            text-align: center;
+            padding: px-to-rem(5);
+
+            &:hover {
+              background-color: $black-forest;
+
+              a {
+                color: $pearl;
+              }
+            }
+
+            a {
+              font-size: px-to-rem(13);
+              cursor: pointer;
+              font-family: $secondary-font;
+              color: $black-forest;
+            }
+          }
+        }
       }
 
       .fa-x {
@@ -231,7 +276,6 @@ header {
           display: flex;
           margin: px-to-rem(20) auto 0 auto;
           gap: px-to-rem(10);
-
 
           button {
             width: px-to-rem(80);
