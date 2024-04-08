@@ -1,5 +1,6 @@
 <script setup lang=ts>
 import AdminAside from './AdminAside.vue';
+import AdminCategory from './AdminCategory.vue';
 </script>
 <template>
   <div class="container">
@@ -78,16 +79,7 @@ import AdminAside from './AdminAside.vue';
             </div>
           </div>
         </div>
-        <div class="category-container">
-          <h1>Category</h1>
-          <div class="categories">
-            <div class="category">
-              <div class="title">
-                Vue.js
-              </div>
-            </div>
-          </div>
-        </div>
+        <admin-category />
         <div class="recyclebin-container">
           <h1>Recycle Bin</h1>
           <div class="posts">
@@ -226,29 +218,7 @@ import AdminAside from './AdminAside.vue';
         }
       }
 
-      .category-container {
-        margin: px-to-rem(20);
-        width: 20%;
 
-        @media (max-width: 767px) {
-          width: 100%;
-        }
-
-        .categories {
-          border-radius: px-to-rem(10);
-          box-shadow: 3px 3px 10px $light-black;
-          margin-top: px-to-rem(15);
-          padding: px-to-rem(10);
-
-          @media (max-width: 767px) {
-            width: 100%;
-          }
-
-          .category {
-            margin: px-to-rem(15);
-          }
-        }
-      }
 
       .recyclebin-container {
         margin: px-to-rem(20);
