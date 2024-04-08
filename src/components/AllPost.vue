@@ -1,136 +1,34 @@
 <script setup lang=ts>
+import { usePostResponseStore } from '@/stores/usePostResponseStore';
+import { onBeforeMount } from 'vue';
+import { formatDate } from '@/utils/FormatDate';
+
+const store = usePostResponseStore();
+
+onBeforeMount(() =>
+  store.FETCH_ALL()
+)
 
 </script>
 <template>
   <div class="container">
     <div class="post-wrapper">
-      <div class="post">
-        <img src="../assets/img/pineapples.jpg" alt="all-post-img">
+      <div class="post" v-for="item in store.posts" :key="item.id">
+        <img src="../assets/img/pineapples.jpg" alt="all-post-img" v-if="item.thumbnail === 'Default Thumbnail'">
+        <img :src="item.thumbnail" v-else>
         <div class="content-wrapper">
           <div class="all-post-category">
-            CSS
+            {{ item.categoryTitle }}
           </div>
-          <RouterLink to="/post/1">
+          <RouterLink :to="{ name: 'post', params: { id: item.id } }">
             <div class="all-post-title">
-              CSS vs SCSS vs SASS
+              {{ item.title }}
             </div>
-            <div class="all-post-text">
-              대법원장과 대법관이 아닌 법관은 대법관회의의 동의를 얻어 대법원장이 임명한다. 국가는 국민 모두의 생산 및 생활의 기반이 되는 국토의 효율적이고 균형있는 이용·개발과 보전을 위하여 법률이
-              정하는
-              바에 의하여 그에 관한 필요한 제한과 의무를 과할 수 있다.
-
-              모든 국민은 신체의 자유를 가진다. 누구든지 법률에 의하지 아니하고는 체포·구속·압수·수색 또는 심문을 받지 아니하며, 법률과 적법한 절차에 의하지 아니하고는 처벌·보안처분 또는 강제노역을
-              받지
-              아니한다.
+            <div class="all-post-text" v-html="item.content">
             </div>
           </RouterLink>
           <div class="all-post-day">
-            2024년 3월 26일
-          </div>
-        </div>
-      </div>
-      <div class="post">
-        <img src="../assets/img/pineapples.jpg" alt="all-post-img">
-        <div class="content-wrapper">
-          <div class="all-post-category">
-            CSS
-          </div>
-          <div class="all-post-title">
-            CSS vs SCSS vs SASS
-          </div>
-          <div class="all-post-text">
-            대법원장과 대법관이 아닌 법관은 대법관회의의 동의를 얻어 대법원장이 임명한다. 국가는 국민 모두의 생산 및 생활의 기반이 되는 국토의 효율적이고 균형있는 이용·개발과 보전을 위하여 법률이 정하는
-            바에 의하여 그에 관한 필요한 제한과 의무를 과할 수 있다.
-
-            모든 국민은 신체의 자유를 가진다. 누구든지 법률에 의하지 아니하고는 체포·구속·압수·수색 또는 심문을 받지 아니하며, 법률과 적법한 절차에 의하지 아니하고는 처벌·보안처분 또는 강제노역을 받지
-            아니한다.
-          </div>
-          <div class="all-post-day">
-            2024년 3월 26일
-          </div>
-        </div>
-      </div>
-      <div class="post">
-        <img src="../assets/img/pineapples.jpg" alt="all-post-img">
-        <div class="content-wrapper">
-          <div class="all-post-category">
-            CSS
-          </div>
-          <div class="all-post-title">
-            CSS vs SCSS vs SASS
-          </div>
-          <div class="all-post-text">
-            대법원장과 대법관이 아닌 법관은 대법관회의의 동의를 얻어 대법원장이 임명한다. 국가는 국민 모두의 생산 및 생활의 기반이 되는 국토의 효율적이고 균형있는 이용·개발과 보전을 위하여 법률이 정하는
-            바에 의하여 그에 관한 필요한 제한과 의무를 과할 수 있다.
-
-            모든 국민은 신체의 자유를 가진다. 누구든지 법률에 의하지 아니하고는 체포·구속·압수·수색 또는 심문을 받지 아니하며, 법률과 적법한 절차에 의하지 아니하고는 처벌·보안처분 또는 강제노역을 받지
-            아니한다.
-          </div>
-          <div class="all-post-day">
-            2024년 3월 26일
-          </div>
-        </div>
-      </div>
-      <div class="post">
-        <img src="../assets/img/pineapples.jpg" alt="all-post-img">
-        <div class="content-wrapper">
-          <div class="all-post-category">
-            CSS
-          </div>
-          <div class="all-post-title">
-            CSS vs SCSS vs SASS
-          </div>
-          <div class="all-post-text">
-            대법원장과 대법관이 아닌 법관은 대법관회의의 동의를 얻어 대법원장이 임명한다. 국가는 국민 모두의 생산 및 생활의 기반이 되는 국토의 효율적이고 균형있는 이용·개발과 보전을 위하여 법률이 정하는
-            바에 의하여 그에 관한 필요한 제한과 의무를 과할 수 있다.
-
-            모든 국민은 신체의 자유를 가진다. 누구든지 법률에 의하지 아니하고는 체포·구속·압수·수색 또는 심문을 받지 아니하며, 법률과 적법한 절차에 의하지 아니하고는 처벌·보안처분 또는 강제노역을 받지
-            아니한다.
-          </div>
-          <div class="all-post-day">
-            2024년 3월 26일
-          </div>
-        </div>
-      </div>
-      <div class="post">
-        <img src="../assets/img/pineapples.jpg" alt="all-post-img">
-        <div class="content-wrapper">
-          <div class="all-post-category">
-            CSS
-          </div>
-          <div class="all-post-title">
-            CSS vs SCSS vs SASS
-          </div>
-          <div class="all-post-text">
-            대법원장과 대법관이 아닌 법관은 대법관회의의 동의를 얻어 대법원장이 임명한다. 국가는 국민 모두의 생산 및 생활의 기반이 되는 국토의 효율적이고 균형있는 이용·개발과 보전을 위하여 법률이 정하는
-            바에 의하여 그에 관한 필요한 제한과 의무를 과할 수 있다.
-
-            모든 국민은 신체의 자유를 가진다. 누구든지 법률에 의하지 아니하고는 체포·구속·압수·수색 또는 심문을 받지 아니하며, 법률과 적법한 절차에 의하지 아니하고는 처벌·보안처분 또는 강제노역을 받지
-            아니한다.
-          </div>
-          <div class="all-post-day">
-            2024년 3월 26일
-          </div>
-        </div>
-      </div>
-      <div class="post">
-        <img src="../assets/img/pineapples.jpg" alt="all-post-img">
-        <div class="content-wrapper">
-          <div class="all-post-category">
-            CSS
-          </div>
-          <div class="all-post-title">
-            CSS vs SCSS vs SASS
-          </div>
-          <div class="all-post-text">
-            대법원장과 대법관이 아닌 법관은 대법관회의의 동의를 얻어 대법원장이 임명한다. 국가는 국민 모두의 생산 및 생활의 기반이 되는 국토의 효율적이고 균형있는 이용·개발과 보전을 위하여 법률이 정하는
-            바에 의하여 그에 관한 필요한 제한과 의무를 과할 수 있다.
-
-            모든 국민은 신체의 자유를 가진다. 누구든지 법률에 의하지 아니하고는 체포·구속·압수·수색 또는 심문을 받지 아니하며, 법률과 적법한 절차에 의하지 아니하고는 처벌·보안처분 또는 강제노역을 받지
-            아니한다.
-          </div>
-          <div class="all-post-day">
-            2024년 3월 26일
+            {{ formatDate(item.createdDate) }}
           </div>
         </div>
       </div>
