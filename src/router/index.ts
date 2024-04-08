@@ -5,6 +5,7 @@ const PostView = () => import('../views/PostView.vue');
 const CategoryView = () => import('../views/CategoryView.vue');
 const PostSaveView = () => import('../views/PostSaveView.vue');
 const AdminView = () => import('../views/AdminView.vue');
+const NotFound = () => import('../views/404View.vue');
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -18,7 +19,6 @@ const router = createRouter({
       path: '/post/:id',
       name: 'post',
       component: PostView
-      // beforeEnter: (to, from, next) => {}
     },
     {
       path: '/category/:title',
@@ -27,13 +27,18 @@ const router = createRouter({
     },
     {
       path: '/post/new',
-      name: 'postSave',
+      name: 'post-save',
       component: PostSaveView
     },
     {
       path: '/admin',
       name: 'admin-dashboard',
       component: AdminView
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
+      component: NotFound
     }
   ],
   scrollBehavior(to, from, savedPosition) {

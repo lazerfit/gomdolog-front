@@ -7,3 +7,8 @@ export interface PostResopnse {
   thumbnail: string;
   views: number;
 }
+
+export interface PostSave {
+  title: string;
+  content: string;
+}
