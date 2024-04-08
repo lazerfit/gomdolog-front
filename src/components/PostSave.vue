@@ -1,21 +1,29 @@
 <script setup lang="ts">
 import { usePostSaveStore } from '@/stores/usePostSaveStore';
+import { useCategoryResponseStore } from '@/stores/useCategoryResponseStore';
+import { onBeforeMount } from 'vue';
 import TiptapEditor from './TiptapEditor.vue';
 
 const store = usePostSaveStore();
+const categoryStore = useCategoryResponseStore();
 
 const submitSavePost = () => {
   store.SAVE_POST()
 }
+
+onBeforeMount(() => {
+  categoryStore.FETCH_ALL();
+})
+
 </script>
 
 <template>
   <div class="tip-tap-container">
     <div class="tip-tap-submit">
       <div class="tip-tap-category-wrapper">
-        <select name="category" id="post-category">
+        <select name="category" id="post-category" v-model="store.postSaveForm.categoryTitle">
           <option value="">카테고리</option>
-          <option value="Vueljs">Vue.js</option>
+          <option :value="item.title" v-for="item in categoryStore.categories" :key="item.id">{{ item.title }}</option>
         </select>
       </div>
       <input type="text" placeholder="제목을 입력해주세요." class="tip-tap-post-title" v-model="store.postSaveForm.title">
