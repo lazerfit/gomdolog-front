@@ -6,7 +6,8 @@ import type { PostSave } from '@/utils/types';
 export const usePostSaveStore = defineStore('post-save-store', () => {
   const postSaveForm = ref<PostSave>({
     title: '',
-    content: ''
+    content: '',
+    categoryTitle: ''
   });
 
   const SAVE_POST = async () => {

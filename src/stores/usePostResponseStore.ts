@@ -1,12 +1,12 @@
 import { ref } from 'vue';
 import { defineStore } from 'pinia';
-import { fetchPost } from '@/api';
+import { fetchPost, fetchPostAll } from '@/api';
 import type { PostResopnse } from '@/utils/types';
 import { useLoaderStore } from './useLoaderStore';
 
-const loaderStore = useLoaderStore();
-
 export const usePostResponseStore = defineStore('post-response-store', () => {
+  const posts = ref([]);
+
   const post = ref<PostResopnse | null>({
     id: 0,
     title: 'default',
@@ -14,10 +14,12 @@ export const usePostResponseStore = defineStore('post-response-store', () => {
     createdDate: 'default',
     modifiedDate: 'default',
     thumbnail: 'default',
-    views: 0
+    views: 0,
+    categoryTitle: 'default'
   });
 
   const FETCH_POST = async (postId: string | string[]) => {
+    const loaderStore = useLoaderStore();
     loaderStore.isLoaded = true;
     try {
       await fetchPost(postId)
@@ -37,5 +39,13 @@ export const usePostResponseStore = defineStore('post-response-store', () => {
     }
   };
 
-  return { post, FETCH_POST };
+  const FETCH_ALL = async () => {
+    await fetchPostAll()
+      .then((response) => {
+        posts.value = response.data;
+      })
+      .catch((error) => console.log('Error fetching post: ', error));
+  };
+
+  return { post, posts, FETCH_POST, FETCH_ALL };
 });
