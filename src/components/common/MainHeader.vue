@@ -1,12 +1,17 @@
 <script setup lang=ts>
 import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
-import BasicModal from './BasicModal.vue';
+// import BasicModal from './BasicModal.vue';
 import MobileSidebar from '../MobileSidebar.vue';
 import SearchBar from './SearchBar.vue';
+import { defineAsyncComponent } from 'vue';
 
 const isModalOpened = ref(false);
 const isLoginMenuOpened = ref(false);
+
+const BasicModal = defineAsyncComponent(() =>
+  import('./BasicModal.vue')
+);
 
 const openModal = () => {
   isModalOpened.value = true;
