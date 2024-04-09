@@ -1,7 +1,7 @@
 <script setup lang=ts>
 import MainHeader from '@/components/common/MainHeader.vue';
-import TiptapEditor from '@/components/TiptapEditor.vue';
-import { onBeforeRouteLeave, onBeforeRouteUpdate } from 'vue-router';
+import PostSave from '@/components/PostSave.vue';
+import { onBeforeRouteLeave } from 'vue-router';
 
 
 onBeforeRouteLeave((to, from) => {
@@ -13,7 +13,7 @@ onBeforeRouteLeave((to, from) => {
 <template>
   <div class="container">
     <main-header />
-    <tiptap-editor />
+    <post-save />
   </div>
 </template>
 
