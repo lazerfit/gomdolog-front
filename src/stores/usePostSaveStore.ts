@@ -4,10 +4,13 @@ import { savePost } from '@/api';
 import type { PostSave } from '@/utils/types';
 
 export const usePostSaveStore = defineStore('post-save-store', () => {
+  const tagValue = ref([]);
+
   const postSaveForm = ref<PostSave>({
     title: '',
     content: '',
-    categoryTitle: ''
+    categoryTitle: '',
+    tags: tagValue.value
   });
 
   const SAVE_POST = async () => {
@@ -16,5 +19,5 @@ export const usePostSaveStore = defineStore('post-save-store', () => {
       .catch((error) => console.log(error));
   };
 
-  return { postSaveForm, SAVE_POST };
+  return { postSaveForm, tagValue, SAVE_POST };
 });

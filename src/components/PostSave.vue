@@ -3,6 +3,7 @@ import { usePostSaveStore } from '@/stores/usePostSaveStore';
 import { useCategoryResponseStore } from '@/stores/useCategoryResponseStore';
 import { onBeforeMount } from 'vue';
 import TiptapEditor from './TiptapEditor.vue';
+import TagInput from './common/TagInput.vue';
 
 const store = usePostSaveStore();
 const categoryStore = useCategoryResponseStore();
@@ -22,16 +23,13 @@ onBeforeMount(() => {
     <div class="tip-tap-submit">
       <div class="tip-tap-category-wrapper">
         <select name="category" id="post-category" v-model="store.postSaveForm.categoryTitle">
-          <option value="">카테고리</option>
           <option :value="item.title" v-for="item in categoryStore.categories" :key="item.id">{{ item.title }}</option>
         </select>
       </div>
       <input type="text" placeholder="제목을 입력해주세요." class="tip-tap-post-title" v-model="store.postSaveForm.title">
       <tiptap-editor />
       <div class="tip-tap-tag-submit">
-        <div class="tip-tap-tag">
-          <input type="text" placeholder="#..">
-        </div>
+        <tag-input v-model="store.tagValue" />
         <div class="tip-tap-submit">
           <button @click="submitSavePost">Submit</button>
         </div>
@@ -91,23 +89,6 @@ onBeforeMount(() => {
     display: flex;
     justify-content: space-between;
     margin-top: px-to-rem(17);
-
-    .tip-tap-tag {
-      input {
-        border-radius: px-to-rem(10);
-        border: 1px solid $light-black;
-        padding: px-to-rem(5);
-        font-family: $secondary-font;
-
-        &::placeholder {
-          transition: all .3s ease;
-        }
-
-        &:focus::placeholder {
-          opacity: 0;
-        }
-      }
-    }
 
     .tip-tap-submit {
       button {
