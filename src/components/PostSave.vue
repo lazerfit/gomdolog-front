@@ -1,19 +1,50 @@
 <script setup lang="ts">
 import { usePostSaveStore } from '@/stores/usePostSaveStore';
 import { useCategoryResponseStore } from '@/stores/useCategoryResponseStore';
+import { usePostResponseStore } from '@/stores/usePostResponseStore';
+import { usePostDeleteUpdateStore } from '@/stores/usePostDeleteUpdateStore';
 import { onBeforeMount } from 'vue';
 import TiptapEditor from './TiptapEditor.vue';
 import TagInput from './common/TagInput.vue';
+import { useRoute } from 'vue-router';
 
 const store = usePostSaveStore();
 const categoryStore = useCategoryResponseStore();
+const postResponseStore = usePostResponseStore();
+const postUpdateStore = usePostDeleteUpdateStore();
+const route = useRoute();
+
+const updatePost = () => {
+  postUpdateStore.UPDATE(route.params.id)
+};
 
 const submitSavePost = () => {
   store.SAVE_POST()
 }
 
+const isUpdateMode = () => {
+  if (!route.params.id) {
+    return false
+  }
+
+  return true;
+}
+
 onBeforeMount(() => {
   categoryStore.FETCH_ALL();
+
+  if (route.params.id) {
+    postResponseStore.FETCH_POST(route.params.id)
+    store.postSaveForm.title = postResponseStore.post.title
+    store.postSaveForm.content = postResponseStore.post.content
+    store.postSaveForm.tags = postResponseStore.post.tags
+    store.postSaveForm.categoryTitle = postResponseStore.post.categoryTitle
+  } else {
+    store.postSaveForm.title = '';
+    store.postSaveForm.content = '';
+    store.postSaveForm.tags = [];
+    store.postSaveForm.categoryTitle = '';
+  }
 })
 
 </script>
@@ -23,6 +54,7 @@ onBeforeMount(() => {
     <div class="tip-tap-submit">
       <div class="tip-tap-category-wrapper">
         <select name="category" id="post-category" v-model="store.postSaveForm.categoryTitle">
+          <option value="" selected>카테고리</option>
           <option :value="item.title" v-for="item in categoryStore.categories" :key="item.id">{{ item.title }}</option>
         </select>
       </div>
@@ -30,8 +62,11 @@ onBeforeMount(() => {
       <tiptap-editor />
       <div class="tip-tap-tag-submit">
         <tag-input v-model="store.postSaveForm.tags" />
-        <div class="tip-tap-submit">
+        <div class="tip-tap-submit" v-if="!isUpdateMode">
           <button @click="submitSavePost">Submit</button>
+        </div>
+        <div class="tip-tap-submit" v-else>
+          <button @click="updatePost">Update</button>
         </div>
       </div>
     </div>

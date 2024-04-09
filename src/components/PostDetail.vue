@@ -6,11 +6,15 @@ import { useToasterStore } from '@/stores/useToasterStore';
 import { usePostResponseStore } from '@/stores/usePostResponseStore';
 import { defineAsyncComponent } from 'vue';
 import { formatDate } from '@/utils/FormatDate';
+import { usePostDeleteUpdateStore } from '@/stores/usePostDeleteUpdateStore';
+import { RouterLink } from 'vue-router';
+
 const utterancesContainer: Ref<HTMLDivElement | null> = ref(null);
 const router = useRouter();
 const route = useRoute();
 const toastStore = useToasterStore();
 const postResponseStore = usePostResponseStore();
+const postDeleteUpdateStore = usePostDeleteUpdateStore();
 
 const BasicToast = defineAsyncComponent(() =>
   import('./common/BasicToast.vue')
@@ -52,6 +56,10 @@ const linkCopy = () => {
     })
 }
 
+const deletePost = () => {
+  postDeleteUpdateStore.DELETE(route.params.id)
+}
+
 onMounted(() => {
   addUtterancesScript();
 });
@@ -68,8 +76,7 @@ onBeforeMount(() => {
     <div class="content-wrapper">
       <div class="post-title">
         <div class="post-title-tags">
-          <span>#Vue.js</span>
-          <span>#CSS</span>
+          <span v-for="(tag, index) in postResponseStore.post.tags" :key="index">#{{ tag }}</span>
         </div>
         <div class="title">
           {{ postResponseStore.post.title }}
@@ -79,11 +86,13 @@ onBeforeMount(() => {
             {{ formatDate(postResponseStore.post.createdDate) }}
           </div>
           <div class="admin-wrapper">
+            <RouterLink :to="{ name: 'post-update', params: { id: route.params.id } }">
+              <span>
+                <i class="fa-solid fa-pen"></i>
+              </span>
+            </RouterLink>
             <span>
-              <i class="fa-solid fa-pen"></i>
-            </span>
-            <span>
-              <i class="fa-solid fa-trash"></i>
+              <i class="fa-solid fa-trash" @click="deletePost"></i>
             </span>
           </div>
         </div>
@@ -175,6 +184,7 @@ onBeforeMount(() => {
 
             i {
               cursor: pointer;
+              color: $light-black;
               transition: all .3s ease;
 
               &:hover {

@@ -17,6 +17,14 @@ export interface PostSave {
   tags: string[];
 }
 
+export interface PostUpdate {
+  title: string;
+  content: string;
+  categoryTitle: string;
+  tags: string[];
+  id: string | string[];
+}
+
 export interface CategorySave {
   title: string;
 }

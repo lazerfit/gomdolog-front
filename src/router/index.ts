@@ -21,6 +21,11 @@ const router = createRouter({
       component: PostView
     },
     {
+      path: '/post/:id/update',
+      name: 'post-update',
+      component: PostSaveView
+    },
+    {
       path: '/category/:title',
       name: 'category',
       component: CategoryView
