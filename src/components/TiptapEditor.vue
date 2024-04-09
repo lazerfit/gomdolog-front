@@ -1,6 +1,7 @@
 <script setup lang=ts>
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
+import Image from '@tiptap/extension-image'
 import { usePostSaveStore } from '@/stores/usePostSaveStore';
 
 const store = usePostSaveStore();
@@ -15,6 +16,7 @@ const editor = useEditor({
   },
   extensions: [
     StarterKit,
+    Image
   ],
   editorProps: {
     attributes: {
@@ -22,6 +24,13 @@ const editor = useEditor({
     },
   },
 })
+
+const addImage = () => {
+  const url = window.prompt('URL');
+  if (url) {
+    editor.value.chain().focus().setImage({ src: url }).run()
+  }
+}
 </script>
 <template>
   <div class=" tip-tap-buttons" v-if="editor">
@@ -49,6 +58,7 @@ const editor = useEditor({
       :class="{ 'is-active': editor.isActive('codeBlock') }" class="menu-btn">
       <i class="fa-brands fa-codepen"></i>
     </button>
+    <button @click="addImage" class="menu-btn"><i class="fa-solid fa-image"></i></button>
     <button @click="editor.chain().focus().toggleHeading({ level: 1 }).run()"
       :class="{ 'is-active': editor.isActive('heading', { level: 1 }) }" class="menu-btn">
       <i class="fa-solid fa-heading"></i>1

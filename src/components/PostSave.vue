@@ -29,7 +29,7 @@ onBeforeMount(() => {
       <input type="text" placeholder="제목을 입력해주세요." class="tip-tap-post-title" v-model="store.postSaveForm.title">
       <tiptap-editor />
       <div class="tip-tap-tag-submit">
-        <tag-input v-model="store.tagValue" />
+        <tag-input v-model="store.postSaveForm.tags" />
         <div class="tip-tap-submit">
           <button @click="submitSavePost">Submit</button>
         </div>

@@ -7,6 +7,7 @@ export interface PostResopnse {
   thumbnail: string;
   views: number;
   categoryTitle: string;
+  tags: string[];
 }
 
 export interface PostSave {

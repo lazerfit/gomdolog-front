@@ -15,7 +15,8 @@ export const usePostResponseStore = defineStore('post-response-store', () => {
     modifiedDate: 'default',
     thumbnail: 'default',
     views: 0,
-    categoryTitle: 'default'
+    categoryTitle: 'default',
+    tags: ['default']
   });
 
   const FETCH_POST = async (postId: string | string[]) => {
