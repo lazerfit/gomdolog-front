@@ -31,6 +31,11 @@ const router = createRouter({
       component: CategoryView
     },
     {
+      path: '/search/:q',
+      name: 'post-search',
+      component: CategoryView
+    },
+    {
       path: '/post/new',
       name: 'post-save',
       component: PostSaveView

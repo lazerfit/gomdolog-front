@@ -6,8 +6,16 @@ import AllPost from '@/components/AllPost.vue';
 import MainFooter from '@/components/common/MainFooter.vue';
 import MoreButton from '@/components/common/MoreButton.vue';
 import PopularPost from '@/components/PopularPost.vue';
+import { usePostResponseStore } from '@/stores/usePostResponseStore';
+import { onBeforeMount } from 'vue';
 
 const bannerImage = '/src/assets/img/banner4.jpg';
+
+const store = usePostResponseStore();
+
+onBeforeMount(() =>
+  store.FETCH_ALL()
+)
 </script>
 
 <template>

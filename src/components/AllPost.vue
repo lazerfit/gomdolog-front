@@ -5,9 +5,9 @@ import { formatDate } from '@/utils/FormatDate';
 
 const store = usePostResponseStore();
 
-onBeforeMount(() =>
-  store.FETCH_ALL()
-)
+// onBeforeMount(() =>
+//   store.FETCH_ALL()
+// )
 
 </script>
 <template>

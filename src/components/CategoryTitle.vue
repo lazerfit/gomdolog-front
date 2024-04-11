@@ -7,7 +7,10 @@ const route = useRoute();
     <div class="home">
       <RouterLink to="/" class="fa-solid fa-house"></RouterLink>
     </div>
-    <div class="category-title">
+    <div class="category-title" v-if="route.params.q">
+      {{ route.params.q }}
+    </div>
+    <div class="category-title" v-else>
       {{ route.params.title }}
     </div>
     <div class="post-count">
@@ -48,8 +51,8 @@ const route = useRoute();
 
   .category-title {
     font-weight: 300;
-    font-family: $secondary-font;
-    font-size: px-to-rem(65);
+    // font-family: $secondary-font;
+    font-size: px-to-rem(55);
     text-align: center;
   }
 

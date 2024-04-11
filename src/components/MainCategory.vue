@@ -1,23 +1,23 @@
 <script setup lang=ts>
 import { RouterLink } from 'vue-router';
+import { useCategoryResponseStore } from '@/stores/useCategoryResponseStore';
+import { computed, onBeforeMount } from 'vue';
+
+const store = useCategoryResponseStore();
+
+const filteredCategory = (computed(() => store.categories.filter(category => category.title !== '없음')))
+
+onBeforeMount(() => {
+  store.FETCH_ALL()
+})
+
 </script>
 <template>
-  <div class="container">
-    <RouterLink to="/category/vue" class="category">
-      Vue.js
+  <div class="container" v-if="filteredCategory.length > 0">
+    <RouterLink :to="{ name: 'category', params: { title: item.title } }" class="category"
+      v-for="(item, index) in filteredCategory" :key="index">
+      {{ item.title }}
     </RouterLink>
-    <div class="category">
-      Spring
-    </div>
-    <div class="category">
-      CSS
-    </div>
-    <div class="category">
-      개발기
-    </div>
-    <div class="category">
-      글쓰기
-    </div>
   </div>
 </template>
 

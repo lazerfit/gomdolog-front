@@ -1,16 +1,18 @@
 <script setup lang=ts>
 import { RouterLink } from 'vue-router';
 import { usePostResponseStore } from '@/stores/usePostResponseStore';
-import { computed } from 'vue';
 import { formatDate } from '@/utils/FormatDate';
+import { onBeforeMount } from 'vue';
 
 const store = usePostResponseStore();
 
-const popularPost = computed(() => store.posts.slice(0, 3).sort((a, b) => a.views - b.views));
+onBeforeMount(() => {
+  store.FETCH_POPULAR()
+})
 
 </script>
 <template>
-  <div class="container" v-if="!store.isPostLoaded">
+  <div class="container" v-if="store.popularPosts.length > 0">
     <div>
       <h1>
         Popular Posts
@@ -18,27 +20,27 @@ const popularPost = computed(() => store.posts.slice(0, 3).sort((a, b) => a.view
     </div>
     <div class="post-wrapper">
       <div class="main-post">
-        <RouterLink class="main-post-img" :to="{ name: 'post', params: { id: popularPost[0].id } }">
+        <RouterLink class="main-post-img" :to="{ name: 'post', params: { id: store.popularPosts[0].id } }">
           <img src="@/assets/img/pineapples.jpg" alt="mockup">
         </RouterLink>
         <div class="content-wrapper">
           <div class="main-post-category">
-            {{ popularPost[0].categoryTitle }}
+            {{ store.popularPosts[0].categoryTitle }}
           </div>
-          <RouterLink :to="{ name: 'post', params: { id: popularPost[0].id } }">
+          <RouterLink :to="{ name: 'post', params: { id: store.popularPosts[0].id } }">
             <div class="main-post-title">
-              {{ popularPost[0].title }}
+              {{ store.popularPosts[0].title }}
             </div>
-            <div class="main-post-text" v-html="popularPost[0].content">
+            <div class="main-post-text" v-html="store.popularPosts[0].content">
             </div>
           </RouterLink>
           <div class="main-post-day">
-            {{ formatDate(popularPost[0].createdDate) }}
+            {{ formatDate(store.popularPosts[0].createdDate) }}
           </div>
         </div>
       </div>
       <div class="sub-post-wrapper">
-        <div class="sub-post" v-for="item in popularPost.slice(1, 3)" :key="item.id">
+        <div class="sub-post" v-for="item in store.popularPosts.slice(1, 3)" :key="item.id">
           <RouterLink class="sub-post-img" :to="{ name: 'post', params: { id: item.id } }">
             <img src="@/assets/img/pineapples.jpg" alt="mockup">
           </RouterLink>

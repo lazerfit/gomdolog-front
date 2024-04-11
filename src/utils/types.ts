@@ -3,11 +3,18 @@ export interface PostResopnse {
   title: string;
   content: string;
   createdDate: string;
-  modifiedDate: string;
   thumbnail: string;
-  views: number;
   categoryTitle: string;
   tags: string[];
+}
+
+export interface PostResopnseWithoutTags {
+  id: number;
+  title: string;
+  content: string;
+  createdDate: string;
+  thumbnail: string;
+  categoryTitle: string;
 }
 
 export interface PostSave {
