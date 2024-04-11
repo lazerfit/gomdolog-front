@@ -11,7 +11,7 @@ onBeforeMount(() =>
 
 </script>
 <template>
-  <div class="container">
+  <div class="container" v-if="!store.isPostLoaded">
     <div class="post-wrapper">
       <div class="post" v-for="item in store.posts" :key="item.id">
         <img src="../assets/img/pineapples.jpg" alt="all-post-img" v-if="item.thumbnail === 'Default Thumbnail'">

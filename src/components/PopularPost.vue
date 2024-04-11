@@ -1,8 +1,16 @@
 <script setup lang=ts>
 import { RouterLink } from 'vue-router';
+import { usePostResponseStore } from '@/stores/usePostResponseStore';
+import { computed } from 'vue';
+import { formatDate } from '@/utils/FormatDate';
+
+const store = usePostResponseStore();
+
+const popularPost = computed(() => store.posts.slice(0, 3).sort((a, b) => a.views - b.views));
+
 </script>
 <template>
-  <div class="container">
+  <div class="container" v-if="!store.isPostLoaded">
     <div>
       <h1>
         Popular Posts
@@ -10,83 +18,43 @@ import { RouterLink } from 'vue-router';
     </div>
     <div class="post-wrapper">
       <div class="main-post">
-        <RouterLink class="main-post-img" to="/post/1">
+        <RouterLink class="main-post-img" :to="{ name: 'post', params: { id: popularPost[0].id } }">
           <img src="@/assets/img/pineapples.jpg" alt="mockup">
         </RouterLink>
         <div class="content-wrapper">
           <div class="main-post-category">
-            Vue.js
+            {{ popularPost[0].categoryTitle }}
           </div>
-          <RouterLink to="/post/1">
+          <RouterLink :to="{ name: 'post', params: { id: popularPost[0].id } }">
             <div class="main-post-title">
-              Option API vs Composition API
+              {{ popularPost[0].title }}
             </div>
-            <div class="main-post-text">
-              대법원장과 대법관이 아닌 법관은 대법관회의의 동의를 얻어 대법원장이 임명한다. 국가는 국민 모두의 생산 및 생활의 기반이 되는 국토의 효율적이고 균형있는 이용·개발과 보전을 위하여 법률이
-              정하는
-              바에 의하여 그에 관한 필요한 제한과 의무를 과할 수 있다.
-
-              모든 국민은 신체의 자유를 가진다. 누구든지 법률에 의하지 아니하고는 체포·구속·압수·수색 또는 심문을 받지 아니하며, 법률과 적법한 절차에 의하지 아니하고는 처벌·보안처분 또는 강제노역을
-              받지
-              아니한다.
+            <div class="main-post-text" v-html="popularPost[0].content">
             </div>
           </RouterLink>
           <div class="main-post-day">
-            2024년 3월 25일
+            {{ formatDate(popularPost[0].createdDate) }}
           </div>
         </div>
       </div>
       <div class="sub-post-wrapper">
-        <div class="sub-post">
-          <RouterLink class="sub-post-img" to="/post/2">
+        <div class="sub-post" v-for="item in popularPost.slice(1, 3)" :key="item.id">
+          <RouterLink class="sub-post-img" :to="{ name: 'post', params: { id: item.id } }">
             <img src="@/assets/img/pineapples.jpg" alt="mockup">
           </RouterLink>
           <div class="content-wrapper">
             <div class="sub-post-category">
-              Vue.js
+              {{ item.categoryTitle }}
             </div>
-            <RouterLink to="/post/2">
+            <RouterLink :to="{ name: 'post', params: { id: item.id } }">
               <div class="sub-post-title">
-                Option API vs Composition APIiiiiiiiiiiiiiiiii
+                {{ item.title }}
               </div>
-              <div class="sub-post-text">
-                대법원장과 대법관이 아닌 법관은 대법관회의의 동의를 얻어 대법원장이 임명한다. 국가는 국민 모두의 생산 및 생활의 기반이 되는 국토의 효율적이고 균형있는 이용·개발과 보전을 위하여 법률이
-                정하는
-                바에 의하여 그에 관한 필요한 제한과 의무를 과할 수 있다.
-
-                모든 국민은 신체의 자유를 가진다. 누구든지 법률에 의하지 아니하고는 체포·구속·압수·수색 또는 심문을 받지 아니하며, 법률과 적법한 절차에 의하지 아니하고는 처벌·보안처분 또는
-                강제노역을
-                받지
-                아니한다.
+              <div class="sub-post-text" v-html="item.content">
               </div>
             </RouterLink>
             <div class="sub-post-day">
-              2024년 3월 25일
-            </div>
-          </div>
-        </div>
-        <div class="sub-post">
-          <RouterLink class="sub-post-img" to="/post/1">
-            <img src="../assets/img/pineapples.jpg" alt="mockup">
-          </RouterLink>
-          <div class="content-wrapper">
-            <div class="sub-post-category">
-              Vue.js
-            </div>
-            <div class="sub-post-title">
-              Option API vs Composition API111111111111111
-            </div>
-            <div class="sub-post-text">
-              대법원장과 대법관이 아닌 법관은 대법관회의의 동의를 얻어 대법원장이 임명한다. 국가는 국민 모두의 생산 및 생활의 기반이 되는 국토의 효율적이고 균형있는 이용·개발과 보전을 위하여 법률이
-              정하는
-              바에 의하여 그에 관한 필요한 제한과 의무를 과할 수 있다.
-
-              모든 국민은 신체의 자유를 가진다. 누구든지 법률에 의하지 아니하고는 체포·구속·압수·수색 또는 심문을 받지 아니하며, 법률과 적법한 절차에 의하지 아니하고는 처벌·보안처분 또는 강제노역을
-              받지
-              아니한다.
-            </div>
-            <div class="sub-post-day">
-              2024년 3월 25일
+              {{ formatDate(item.createdDate) }}
             </div>
           </div>
         </div>

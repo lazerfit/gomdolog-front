@@ -25,9 +25,9 @@ const submitSavePost = () => {
 const isUpdateMode = () => {
   if (!route.params.id) {
     return false
+  } else {
+    return true;
   }
-
-  return true;
 }
 
 onBeforeMount(() => {
@@ -62,7 +62,7 @@ onBeforeMount(() => {
       <tiptap-editor />
       <div class="tip-tap-tag-submit">
         <tag-input v-model="store.postSaveForm.tags" />
-        <div class="tip-tap-submit" v-if="!isUpdateMode">
+        <div class="tip-tap-submit" v-if="!isUpdateMode()">
           <button @click="submitSavePost">Submit</button>
         </div>
         <div class="tip-tap-submit" v-else>
