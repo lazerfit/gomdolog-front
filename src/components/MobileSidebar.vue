@@ -1,10 +1,36 @@
 <script setup lang=ts>
 import SearchBar from './common/SearchBar.vue';
+import { RouterLink } from 'vue-router';
+import { useCategoryResponseStore } from '@/stores/useCategoryResponseStore';
+import { computed, onBeforeMount, ref, watchEffect } from 'vue';
+import { usePostResponseStore } from '@/stores/usePostResponseStore';
+import { useRoute } from 'vue-router';
+import { watch } from 'fs';
+
+const store = useCategoryResponseStore();
+const postStore = usePostResponseStore();
+const route = useRoute();
+
+const filteredCategory = (computed(() => store.categories.filter(category => category.title !== '없음')))
+
+const isBoxChecked = ref(false);
+
+onBeforeMount(() => {
+  store.FETCH_ALL()
+})
+
+watchEffect(() => {
+  const categoryTitle = route.params.title;
+  if (categoryTitle) {
+    isBoxChecked.value = false
+    postStore.BY_CATEGORY_SEARCH(categoryTitle);
+  }
+})
 
 </script>
 <template>
   <div class="mobile-menu">
-    <input type="checkbox" id="trigger">
+    <input type="checkbox" id="trigger" v-model="isBoxChecked">
     <label for="trigger">
       <span></span>
       <span></span>
@@ -15,21 +41,10 @@ import SearchBar from './common/SearchBar.vue';
         <search-bar />
       </div>
       <div class="category-wrapper">
-        <RouterLink to="/category/vue" class="category">
-          Vue.js
+        <RouterLink :to="{ name: 'category', params: { title: item.title } }" class="category"
+          v-for="(item, index) in filteredCategory" :key="index">
+          {{ item.title }}
         </RouterLink>
-        <div class="category">
-          Spring
-        </div>
-        <div class="category">
-          CSS
-        </div>
-        <div class="category">
-          개발기
-        </div>
-        <div class="category">
-          글쓰기
-        </div>
       </div>
       <div class="login-wrapper">
         <!-- <div class="login-btn">
