@@ -2,13 +2,8 @@
 import { RouterLink } from 'vue-router';
 import { usePostResponseStore } from '@/stores/usePostResponseStore';
 import { formatDate } from '@/utils/FormatDate';
-import { onBeforeMount } from 'vue';
 
 const store = usePostResponseStore();
-
-onBeforeMount(() => {
-  store.FETCH_POPULAR()
-})
 
 </script>
 <template>

@@ -1,42 +1,49 @@
 <script setup lang=ts>
 import { usePostResponseStore } from '@/stores/usePostResponseStore';
-import { onBeforeMount } from 'vue';
 import { formatDate } from '@/utils/FormatDate';
 
 const store = usePostResponseStore();
 
-// onBeforeMount(() =>
-//   store.FETCH_ALL()
-// )
-
 </script>
 <template>
-  <div class="container" v-if="!store.isPostLoaded">
-    <div class="post-wrapper">
-      <div class="post" v-for="item in store.posts" :key="item.id">
-        <img src="../assets/img/pineapples.jpg" alt="all-post-img" v-if="item.thumbnail === 'Default Thumbnail'">
-        <img :src="item.thumbnail" v-else>
-        <div class="content-wrapper">
-          <div class="all-post-category">
-            {{ item.categoryTitle }}
-          </div>
-          <RouterLink :to="{ name: 'post', params: { id: item.id } }">
-            <div class="all-post-title">
-              {{ item.title }}
+  <transition name="fade">
+    <div class="container" v-if="!store.isPostLoaded">
+      <div class="post-wrapper">
+        <div class="post" v-for="item in store.posts.content" :key="item.id">
+          <img src="../assets/img/pineapples.jpg" alt="all-post-img" v-if="item.thumbnail === 'Default Thumbnail'">
+          <img :src="item.thumbnail" v-else>
+          <div class="content-wrapper">
+            <div class="all-post-category">
+              {{ item.categoryTitle }}
             </div>
-            <div class="all-post-text" v-html="item.content">
+            <RouterLink :to="{ name: 'post', params: { id: item.id } }">
+              <div class="all-post-title">
+                {{ item.title }}
+              </div>
+              <div class="all-post-text" v-html="item.content">
+              </div>
+            </RouterLink>
+            <div class="all-post-day">
+              {{ formatDate(item.createdDate) }}
             </div>
-          </RouterLink>
-          <div class="all-post-day">
-            {{ formatDate(item.createdDate) }}
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <style lang='scss' scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
 .container {
   width: $desktop-width;
   margin: px-to-rem(50) auto 0 auto;

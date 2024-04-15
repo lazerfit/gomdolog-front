@@ -1,9 +1,20 @@
 <script setup lang=ts>
+import { usePostResponseStore } from '@/stores/usePostResponseStore';
+import { computed } from 'vue';
+
+const postStore = usePostResponseStore();
+
+const fetchMorePost = () => {
+  postStore.pageSize += 6;
+  postStore.FETCH_ALL(postStore.pageSize)
+}
+
+const hasNextPage = computed(() => postStore.posts.size > postStore.posts.numberOfElements)
 
 </script>
 <template>
-  <div class="container">
-    <button>More Posts</button>
+  <div class="container" v-if="!postStore.isPostLoaded">
+    <button @click="fetchMorePost" v-if="!hasNextPage">More Posts</button>
   </div>
 </template>
 

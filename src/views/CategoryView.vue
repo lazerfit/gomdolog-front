@@ -16,8 +16,8 @@ const route = useRoute();
 onBeforeMount(() => {
   if (route.params.q) {
     postStore.BY_TITLE_SEARCH()
-  } else if (route.params.title) {
-    postStore.BY_CATEGORY_SEARCH();
+    // } else if (route.params.title) {
+    //   postStore.BY_CATEGORY_SEARCH();
   }
 })
 const bannerImage = '/src/assets/img/banner3.jpg';

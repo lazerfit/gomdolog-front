@@ -1,9 +1,13 @@
 <script setup lang=ts>
 import { RouterLink } from 'vue-router';
 import { useCategoryResponseStore } from '@/stores/useCategoryResponseStore';
-import { computed, onBeforeMount } from 'vue';
+import { computed, onBeforeMount, watchEffect } from 'vue';
+import { usePostResponseStore } from '@/stores/usePostResponseStore';
+import { useRoute } from 'vue-router';
 
 const store = useCategoryResponseStore();
+const postStore = usePostResponseStore();
+const route = useRoute();
 
 const filteredCategory = (computed(() => store.categories.filter(category => category.title !== '없음')))
 
@@ -11,9 +15,16 @@ onBeforeMount(() => {
   store.FETCH_ALL()
 })
 
+watchEffect(() => {
+  const categoryTitle = route.params.title;
+  if (categoryTitle) {
+    postStore.BY_CATEGORY_SEARCH(categoryTitle);
+  }
+})
+
 </script>
 <template>
-  <div class="container" v-if="filteredCategory.length > 0">
+  <div class="container" v-if="store.categories.length > 1">
     <RouterLink :to="{ name: 'category', params: { title: item.title } }" class="category"
       v-for="(item, index) in filteredCategory" :key="index">
       {{ item.title }}
