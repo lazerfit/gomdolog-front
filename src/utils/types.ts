@@ -1,4 +1,4 @@
-export interface PostResopnse {
+export interface Post {
   id: number;
   title: string;
   content: string;
@@ -6,6 +6,18 @@ export interface PostResopnse {
   thumbnail: string;
   categoryTitle: string;
   tags: string[];
+}
+
+export interface DeletePost {
+  id: number;
+  title: string;
+  deletedDate: string;
+}
+
+export interface PostPageResponse {
+  content: Post[];
+  numberOfElements: number;
+  size: number;
 }
 
 export interface PostResopnseWithoutTags {

@@ -1,6 +1,8 @@
 <script setup lang=ts>
 import AdminAside from './AdminAside.vue';
 import AdminCategory from './AdminCategory.vue';
+import AdminRecycleBin from './AdminRecycleBin.vue';
+
 </script>
 <template>
   <div class="container">
@@ -80,23 +82,7 @@ import AdminCategory from './AdminCategory.vue';
           </div>
         </div>
         <admin-category />
-        <div class="recyclebin-container">
-          <h1>Recycle Bin</h1>
-          <div class="posts">
-            <div class="post">
-              <div class="title">
-                Option API 란 무엇인가?
-              </div>
-              <div class="date">
-                2024년 3월 29일
-              </div>
-              <div class="btns">
-                <i class="fa-solid fa-rotate"></i>
-                <i class="fa-solid fa-trash"></i>
-              </div>
-            </div>
-          </div>
-        </div>
+        <admin-recycle-bin />
       </div>
     </div>
   </div>
@@ -220,52 +206,7 @@ import AdminCategory from './AdminCategory.vue';
 
 
 
-      .recyclebin-container {
-        margin: px-to-rem(20);
-        width: 40%;
 
-        @media (max-width: 767px) {
-          width: 100%;
-        }
-
-        .posts {
-          border-radius: px-to-rem(10);
-          box-shadow: 3px 3px 10px $light-black;
-          margin-top: px-to-rem(15);
-          padding: px-to-rem(10);
-
-          @media (max-width: 767px) {
-            width: 100%;
-          }
-
-          .post {
-            display: flex;
-            gap: px-to-rem(10);
-            align-items: center;
-            margin: px-to-rem(15);
-
-            .date {
-              font-size: 0.8rem;
-              color: $light-black;
-            }
-
-            .btns {
-              margin-left: auto;
-
-              i {
-                margin-right: px-to-rem(5);
-                cursor: pointer;
-                color: $light-black;
-                transition: all .3s ease;
-
-                &:hover {
-                  color: $black-forest;
-                }
-              }
-            }
-          }
-        }
-      }
     }
   }
 }
