@@ -9,25 +9,35 @@ const store = usePostResponseStore();
   <transition name="fade">
     <div class="container" v-if="!store.isPostLoaded">
       <div class="post-wrapper">
-        <div class="post" v-for="item in store.posts.content" :key="item.id">
-          <img src="../assets/img/pineapples.jpg" alt="all-post-img" v-if="item.thumbnail === 'Default Thumbnail'">
-          <img :src="item.thumbnail" v-else>
-          <div class="content-wrapper">
-            <div class="all-post-category">
-              {{ item.categoryTitle }}
-            </div>
-            <RouterLink :to="{ name: 'post', params: { id: item.id } }">
-              <div class="all-post-title">
-                {{ item.title }}
+        <template v-if="store.posts.content && store.posts.content.length > 0">
+          <div class="post" v-for="item in store.posts.content" :key="item.id">
+            <img src="../assets/img/pineapples.jpg" alt="all-post-img" v-if="item.thumbnail === 'Default Thumbnail'">
+            <img :src="item.thumbnail" v-else>
+            <div class="content-wrapper">
+              <div class="all-post-category">
+                {{ item.categoryTitle }}
               </div>
-              <div class="all-post-text" v-html="item.content">
+              <RouterLink :to="{ name: 'post', params: { id: item.id } }">
+                <div class="all-post-title">
+                  {{ item.title }}
+                </div>
+                <div class="all-post-text" v-html="item.content">
+                </div>
+              </RouterLink>
+              <div class="all-post-day">
+                {{ formatDate(item.createdDate) }}
               </div>
-            </RouterLink>
-            <div class="all-post-day">
-              {{ formatDate(item.createdDate) }}
             </div>
           </div>
-        </div>
+        </template>
+        <template v-else>
+          <div class="empty-img-container">
+            <img src="/src/assets/img/box.png" alt="empty-post-img">
+            <p>
+              Looks like there's nothing here.
+            </p>
+          </div>
+        </template>
       </div>
     </div>
   </transition>
@@ -47,6 +57,24 @@ const store = usePostResponseStore();
 .container {
   width: $desktop-width;
   margin: px-to-rem(50) auto 0 auto;
+
+  .empty-img-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+
+    img {
+      width: 300px;
+      border-radius: 30%;
+    }
+
+    p {
+      font-family: "Rancho";
+      margin-top: 20px;
+      font-size: 1.5rem;
+    }
+  }
 
   @media screen and (max-width: 767px) {
     width: 100%;

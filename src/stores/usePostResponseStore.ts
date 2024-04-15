@@ -1,3 +1,4 @@
+import type { PostPageResponse } from './../utils/types';
 import { ref } from 'vue';
 import { defineStore } from 'pinia';
 import {
@@ -7,18 +8,19 @@ import {
   searchPostByTitle,
   searchPostByCategory
 } from '@/api';
-import type { PostResopnse, PostResopnseWithoutTags } from '@/utils/types';
+import type { Post, PostResopnseWithoutTags } from '@/utils/types';
 import { useLoaderStore } from './useLoaderStore';
 import { useRoute } from 'vue-router';
 
 export const usePostResponseStore = defineStore('post-response-store', () => {
-  const posts = ref<PostResopnseWithoutTags[]>([]);
+  const posts = ref<PostPageResponse | null>(null);
   const popularPosts = ref<PostResopnseWithoutTags[]>([]);
   const searchQuery = ref('');
   const isPostLoaded = ref(false);
   const route = useRoute();
+  const pageSize = ref(6);
 
-  const post = ref<PostResopnse | null>({
+  const post = ref<Post | null>({
     id: 0,
     title: 'default',
     content: 'default',
@@ -27,6 +29,21 @@ export const usePostResponseStore = defineStore('post-response-store', () => {
     categoryTitle: 'default',
     tags: ['default']
   });
+
+  const FETCH_MAIN_PAGE = async () => {
+    const loaderStore = useLoaderStore();
+    loaderStore.isLoaded = true;
+    isPostLoaded.value = true;
+    try {
+      await fetchPostAll(pageSize.value).then((response) => (posts.value = response.data));
+      await fetchPopularPost().then((response) => (popularPosts.value = response.data));
+    } catch (error) {
+      console.log(error);
+    } finally {
+      loaderStore.isLoaded = false;
+      isPostLoaded.value = false;
+    }
+  };
 
   const FETCH_POST = async (postId: string | string[]) => {
     const loaderStore = useLoaderStore();
@@ -64,12 +81,12 @@ export const usePostResponseStore = defineStore('post-response-store', () => {
     }
   };
 
-  const FETCH_ALL = async () => {
+  const FETCH_ALL = async (pageSize: number) => {
     const loaderStore = useLoaderStore();
     loaderStore.isLoaded = true;
     isPostLoaded.value = true;
     try {
-      await fetchPostAll()
+      await fetchPostAll(pageSize)
         .then((response) => {
           posts.value = response.data;
         })
@@ -96,12 +113,12 @@ export const usePostResponseStore = defineStore('post-response-store', () => {
     }
   };
 
-  const BY_CATEGORY_SEARCH = async () => {
+  const BY_CATEGORY_SEARCH = async (categoryTitle: string | string[]) => {
     const loaderStore = useLoaderStore();
     loaderStore.isLoaded = true;
     isPostLoaded.value = true;
     try {
-      await searchPostByCategory(route.params.title)
+      await searchPostByCategory(categoryTitle)
         .then((response) => {
           posts.value = response.data;
         })
@@ -118,10 +135,12 @@ export const usePostResponseStore = defineStore('post-response-store', () => {
     popularPosts,
     isPostLoaded,
     searchQuery,
+    pageSize,
     FETCH_POST,
     FETCH_ALL,
     FETCH_POPULAR,
     BY_TITLE_SEARCH,
-    BY_CATEGORY_SEARCH
+    BY_CATEGORY_SEARCH,
+    FETCH_MAIN_PAGE
   };
 });

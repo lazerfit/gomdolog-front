@@ -1,6 +1,10 @@
 <script setup lang=ts>
 import { useRoute, RouterLink } from 'vue-router';
+import { usePostResponseStore } from '@/stores/usePostResponseStore';
+
 const route = useRoute();
+const postStore = usePostResponseStore();
+
 </script>
 <template>
   <div class="container">
@@ -13,8 +17,8 @@ const route = useRoute();
     <div class="category-title" v-else>
       {{ route.params.title }}
     </div>
-    <div class="post-count">
-      6 posts
+    <div class="post-count" v-if="postStore.posts.numberOfElements">
+      {{ postStore.posts.numberOfElements }} Posts
     </div>
   </div>
 </template>

@@ -16,22 +16,33 @@ const route = useRoute();
 onBeforeMount(() => {
   if (route.params.q) {
     postStore.BY_TITLE_SEARCH()
-    // } else if (route.params.title) {
-    //   postStore.BY_CATEGORY_SEARCH();
   }
 })
 const bannerImage = '/src/assets/img/banner3.jpg';
 </script>
 <template>
+
   <div class="container">
     <main-header />
     <main-banner :img="bannerImage" />
-    <main-category />
-    <category-title />
-    <all-post />
+    <transition-group name="fade">
+      <main-category />
+      <category-title />
+      <all-post />
+    </transition-group>
     <more-button />
     <main-footer />
   </div>
 </template>
 
-<style lang='scss' scoped></style>
+<style lang='scss' scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity .7s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
