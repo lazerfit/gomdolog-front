@@ -54,6 +54,23 @@ const store = usePostResponseStore();
   opacity: 0;
 }
 
+.darkMode {
+  .post {
+
+    .all-post-category {
+      color: $black-forest !important;
+    }
+
+    .all-post-title {
+      color: #E9FF92 !important;
+    }
+
+    .all-post-text {
+      color: $pearl !important;
+    }
+  }
+}
+
 .container {
   width: $desktop-width;
   margin: px-to-rem(50) auto 0 auto;

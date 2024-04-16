@@ -25,11 +25,9 @@ const bannerImage = '/src/assets/img/banner3.jpg';
   <div class="container">
     <main-header />
     <main-banner :img="bannerImage" />
-    <transition-group name="fade">
-      <main-category />
-      <category-title />
-      <all-post />
-    </transition-group>
+    <main-category />
+    <category-title />
+    <all-post />
     <more-button />
     <main-footer />
   </div>

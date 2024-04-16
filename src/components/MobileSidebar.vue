@@ -5,7 +5,6 @@ import { useCategoryResponseStore } from '@/stores/useCategoryResponseStore';
 import { computed, onBeforeMount, ref, watchEffect } from 'vue';
 import { usePostResponseStore } from '@/stores/usePostResponseStore';
 import { useRoute } from 'vue-router';
-import { watch } from 'fs';
 
 const store = useCategoryResponseStore();
 const postStore = usePostResponseStore();
@@ -67,6 +66,23 @@ watchEffect(() => {
 </template>
 
 <style lang='scss' scoped>
+.darkMode {
+  label[for=trigger] {
+    span {
+      background-color: $pearl !important;
+    }
+  }
+
+  .sidebar {
+    background-color: #121212 !important;
+
+    .category {
+      background-color: $pearl !important;
+      color: $black-forest !important;
+    }
+  }
+}
+
 .mobile-menu {
   @media screen and (min-width: 1024px) {
     display: none;
@@ -140,7 +156,7 @@ watchEffect(() => {
       background-color: $background-color;
       right: -300px;
       top: 70px;
-      transition: .3s ease;
+      transition: .5s ease;
 
       .searchbar-wrapper {
         position: absolute;

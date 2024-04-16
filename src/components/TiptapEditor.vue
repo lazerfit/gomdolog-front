@@ -117,6 +117,10 @@ const addImage = () => {
     i {
       cursor: pointer;
       font-size: px-to-rem(16);
+
+      @media (max-width: 767px) {
+        font-size: px-to-rem(14);
+      }
     }
   }
 }

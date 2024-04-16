@@ -15,6 +15,18 @@ const store = useLoaderStore();
 </template>
 
 <style lang='scss' scoped>
+.darkMode {
+  .wrapper {
+    background-color: #121212 !important;
+
+    .loader {
+      .dot {
+        background-color: $pearl !important;
+      }
+    }
+  }
+}
+
 .wrapper {
   position: fixed;
   z-index: 9998;

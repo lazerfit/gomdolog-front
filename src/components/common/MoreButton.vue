@@ -19,6 +19,13 @@ const hasNextPage = computed(() => postStore.posts.size > postStore.posts.number
 </template>
 
 <style lang='scss' scoped>
+.darkMode {
+  button {
+    background-color: $pearl !important;
+    color: $black-forest !important;
+  }
+}
+
 .container {
   width: $desktop-width;
   margin: px-to-rem(50) auto px-to-rem(150) auto;

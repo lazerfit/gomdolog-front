@@ -1,6 +1,15 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
 import BasicLoader from './components/common/BasicLoader.vue';
+import { useDarkModeStore } from '@/stores/useDarkModeStore';
+import { onBeforeMount } from 'vue';
+
+const darkModeStore = useDarkModeStore();
+
+onBeforeMount(() => {
+  darkModeStore.setDarkMode()
+})
+
 </script>
 
 <template>

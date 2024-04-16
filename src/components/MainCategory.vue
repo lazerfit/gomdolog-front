@@ -33,6 +33,12 @@ watchEffect(() => {
 </template>
 
 <style lang='scss' scoped>
+.darkMode {
+  .category {
+    background-color: $pearl !important;
+  }
+}
+
 .container {
   width: $desktop-width;
   margin: px-to-rem(20) auto;

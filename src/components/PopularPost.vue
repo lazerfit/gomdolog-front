@@ -61,6 +61,30 @@ const store = usePostResponseStore();
 </template>
 
 <style lang='scss' scoped>
+.darkMode {
+
+  h1 {
+    color: $pearl !important;
+  }
+
+  .main-post-title {
+    color: #E9FF92 !important;
+  }
+
+  .main-post-text {
+    color: $pearl !important;
+  }
+
+  .sub-post-title {
+    color: #E9FF92 !important;
+  }
+
+  .sub-post-text {
+    color: $pearl !important;
+  }
+}
+
+
 .container {
   color: $black-forest;
   width: $desktop-width;

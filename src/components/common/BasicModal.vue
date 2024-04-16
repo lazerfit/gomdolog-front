@@ -34,6 +34,13 @@ onClickOutside(target, () => emit('modal-close'));
 </template>
 
 <style lang='scss' scoped>
+.darkMode {
+  .modal-container {
+    background-color: #121212 !important;
+  }
+}
+
+
 .modal-mask {
   position: fixed;
   z-index: 9998;

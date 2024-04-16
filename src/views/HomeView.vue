@@ -7,7 +7,6 @@ import MainFooter from '@/components/common/MainFooter.vue';
 import MoreButton from '@/components/common/MoreButton.vue';
 import PopularPost from '@/components/PopularPost.vue';
 import { usePostResponseStore } from '@/stores/usePostResponseStore';
-import { useCategoryResponseStore } from '@/stores/useCategoryResponseStore';
 import { onBeforeMount } from 'vue';
 
 const bannerImage = '/src/assets/img/banner4.jpg';

@@ -4,6 +4,7 @@ import { RouterLink } from 'vue-router';
 // import BasicModal from './BasicModal.vue';
 import MobileSidebar from '../MobileSidebar.vue';
 import SearchBar from './SearchBar.vue';
+import DarkmodeToggle from './DarkmodeToggle.vue';
 import { defineAsyncComponent } from 'vue';
 
 const isModalOpened = ref(false);
@@ -31,12 +32,13 @@ const submitHandler = () => {
     <RouterLink class="main-logo" to="/">
       <img src="@/assets/img/gomdol2.jpg" alt="main-logo">
     </RouterLink>
+    <darkmode-toggle />
     <mobile-sidebar />
     <div class="sub-logo-container">
       <search-bar />
       <span class="login">
-        <!-- <i class="fa-regular fa-user" @click="openModal"></i> -->
-        <i class="fa-solid fa-user" @click="isLoginMenuOpened = !isLoginMenuOpened">
+        <i class="fa-regular fa-user" @click="openModal"></i>
+        <!-- <i class="fa-solid fa-user" @click="isLoginMenuOpened = !isLoginMenuOpened">
           <Transition name="bounce">
             <div class="wrapper" v-show="isLoginMenuOpened">
               <div>
@@ -50,7 +52,7 @@ const submitHandler = () => {
               </div>
             </div>
           </Transition>
-        </i>
+        </i> -->
         <Transition name="fade">
           <basic-modal :isOpen="isModalOpened" @modal-close="closeModal" @submit="submitHandler">
             <template #header>
@@ -120,6 +122,14 @@ const submitHandler = () => {
   transition: opacity .5s ease-in-out;
 }
 
+.darkMode {
+  .main-logo {
+    img {
+      filter: invert(100%);
+    }
+  }
+}
+
 header {
   width: $desktop-width;
   margin: px-to-rem(15) auto px-to-rem(10) auto;
@@ -137,7 +147,7 @@ header {
   .main-logo {
     @media screen and (max-width: 767px) {
       margin: 0 auto;
-      padding-left: 20px;
+      padding-left: 60px;
     }
 
     img {

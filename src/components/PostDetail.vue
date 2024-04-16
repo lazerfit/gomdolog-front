@@ -130,6 +130,21 @@ onBeforeMount(() => {
 </template>
 
 <style lang='scss' scoped>
+.darkMode {
+  .admin-wrapper {
+
+    span {
+
+      i {
+
+        &:hover {
+          color: $pearl !important;
+        }
+      }
+    }
+  }
+}
+
 .container {
   width: $desktop-width;
   margin: px-to-rem(40) auto;
