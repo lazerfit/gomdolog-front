@@ -60,13 +60,23 @@ const deletePost = () => {
   postDeleteUpdateStore.DELETE(route.params.id)
 }
 
+const isVisitedPost = () => {
+  const visitedPost = localStorage.getItem('visitedPost');
+  return visitedPost ? visitedPost.includes(route.params.id as string) : false;
+}
+
 onMounted(() => {
   addUtterancesScript();
 });
 
-
 onBeforeMount(() => {
   postResponseStore.FETCH_POST(route.params.id);
+  if (!isVisitedPost()) {
+    postResponseStore.ADD_VIEWS(route.params.id as string)
+    const visitedPost = JSON.parse(localStorage.getItem('visitedPost'));
+    visitedPost.push(route.params.id);
+    localStorage.setItem('visitedPost', JSON.stringify(visitedPost));
+  }
 });
 
 </script>

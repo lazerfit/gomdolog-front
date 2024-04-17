@@ -33,6 +33,10 @@ function fetchPostAll(pageSize: number) {
   return axios.get(`${config.baseUrl}post/all?size=` + pageSize);
 }
 
+function addViews(id: string) {
+  return axios.post(`${config.baseUrl}post/${id}/views`);
+}
+
 function searchPostByTitle(q: string[] | string) {
   return axios.get(`${config.baseUrl}post/search`, {
     params: {
@@ -88,5 +92,6 @@ export {
   searchPostByTitle,
   searchPostByCategory,
   deletePostPermanent,
-  revertPostDelete
+  revertPostDelete,
+  addViews
 };

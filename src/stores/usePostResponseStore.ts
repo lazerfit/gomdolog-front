@@ -6,7 +6,8 @@ import {
   fetchPostAll,
   fetchPopularPost,
   searchPostByTitle,
-  searchPostByCategory
+  searchPostByCategory,
+  addViews
 } from '@/api';
 import type { Post, PostResopnseWithoutTags } from '@/utils/types';
 import { useLoaderStore } from './useLoaderStore';
@@ -129,6 +130,12 @@ export const usePostResponseStore = defineStore('post-response-store', () => {
     }
   };
 
+  const ADD_VIEWS = async (id: string) => {
+    await addViews(id)
+      .then()
+      .catch((error) => console.log(error));
+  };
+
   return {
     post,
     posts,
@@ -141,6 +148,7 @@ export const usePostResponseStore = defineStore('post-response-store', () => {
     FETCH_POPULAR,
     BY_TITLE_SEARCH,
     BY_CATEGORY_SEARCH,
-    FETCH_MAIN_PAGE
+    FETCH_MAIN_PAGE,
+    ADD_VIEWS
   };
 });
