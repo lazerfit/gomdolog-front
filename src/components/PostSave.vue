@@ -3,7 +3,7 @@ import { usePostSaveStore } from '@/stores/usePostSaveStore';
 import { useCategoryResponseStore } from '@/stores/useCategoryResponseStore';
 import { usePostResponseStore } from '@/stores/usePostResponseStore';
 import { usePostDeleteUpdateStore } from '@/stores/usePostDeleteUpdateStore';
-import { onBeforeMount } from 'vue';
+import { onBeforeMount, onUnmounted } from 'vue';
 import TiptapEditor from './TiptapEditor.vue';
 import TagInput from './common/TagInput.vue';
 import { useRoute } from 'vue-router';
@@ -19,6 +19,7 @@ const updatePost = () => {
 };
 
 const submitSavePost = () => {
+  localStorage.removeItem('draft')
   store.SAVE_POST()
 }
 
@@ -30,9 +31,7 @@ const isUpdateMode = () => {
   }
 }
 
-onBeforeMount(() => {
-  categoryStore.FETCH_ALL();
-
+const postEditMode = () => {
   if (route.params.id) {
     postResponseStore.FETCH_POST(route.params.id)
     store.postSaveForm.title = postResponseStore.post.title
@@ -45,6 +44,33 @@ onBeforeMount(() => {
     store.postSaveForm.tags = [];
     store.postSaveForm.categoryTitle = '';
   }
+}
+
+const loadDraft = () => {
+  if (localStorage.getItem('draft')) {
+    if (window.confirm('임시저장된 게시글이 존재합니다. 불러오시겠습니까?')) {
+      const draft = JSON.parse(localStorage.getItem('draft'));
+      store.postSaveForm = draft
+    }
+  }
+}
+
+const saveDraft = () => {
+  localStorage.setItem('draft', JSON.stringify(store.postSaveForm));
+  console.log('Draft saved');
+}
+
+const timer = setInterval(() => saveDraft(), 30 * 1000)
+
+onBeforeMount(() => {
+  categoryStore.FETCH_ALL();
+  postEditMode();
+  loadDraft();
+  timer
+})
+
+onUnmounted(() => {
+  clearInterval(timer);
 })
 
 </script>
