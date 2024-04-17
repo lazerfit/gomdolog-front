@@ -1,9 +1,9 @@
 <script setup lang=ts>
 import MainHeader from '@/components/common/MainHeader.vue';
-import MainBanner from '@/components/MainBanner.vue';
-import MainCategory from '@/components/MainCategory.vue';
-import CategoryTitle from '@/components/CategoryTitle.vue';
-import AllPost from '@/components/AllPost.vue';
+import MainBanner from '@/components/common/MainBanner.vue';
+import MainCategory from '@/components/category/MainCategory.vue';
+import CategoryTitle from '@/components/category/CategoryTitle.vue';
+import PostAll from '@/components/post/PostAll.vue';
 import MoreButton from '@/components/common/MoreButton.vue';
 import MainFooter from '@/components/common/MainFooter.vue';
 import { usePostResponseStore } from '@/stores/usePostResponseStore';
@@ -27,7 +27,7 @@ const bannerImage = '/src/assets/img/banner3.jpg';
     <main-banner :img="bannerImage" />
     <main-category />
     <category-title />
-    <all-post />
+    <post-all />
     <more-button />
     <main-footer />
   </div>

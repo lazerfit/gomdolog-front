@@ -17,7 +17,7 @@ const postResponseStore = usePostResponseStore();
 const postDeleteUpdateStore = usePostDeleteUpdateStore();
 
 const BasicToast = defineAsyncComponent(() =>
-  import('./common/BasicToast.vue')
+  import('../common/BasicToast.vue')
 );
 
 const addUtterancesScript = () => {

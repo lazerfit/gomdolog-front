@@ -5,7 +5,7 @@ import { usePostResponseStore } from '@/stores/usePostResponseStore';
 import { usePostDeleteUpdateStore } from '@/stores/usePostDeleteUpdateStore';
 import { onBeforeMount, onUnmounted } from 'vue';
 import TiptapEditor from './TiptapEditor.vue';
-import TagInput from './common/TagInput.vue';
+import TagInput from './TagInput.vue';
 import { useRoute } from 'vue-router';
 
 const store = usePostSaveStore();

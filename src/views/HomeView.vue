@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import MainHeader from '@/components/common/MainHeader.vue';
-import MainBanner from '@/components/MainBanner.vue';
-import MainCategory from '@/components/MainCategory.vue'
-import AllPost from '@/components/AllPost.vue';
+import MainBanner from '@/components/common/MainBanner.vue';
+import MainCategory from '@/components/category/MainCategory.vue';
+import PostAll from '@/components/post/PostAll.vue';
 import MainFooter from '@/components/common/MainFooter.vue';
 import MoreButton from '@/components/common/MoreButton.vue';
-import PopularPost from '@/components/PopularPost.vue';
+import PopularPost from '@/components/post/PopularPost.vue';
 import { usePostResponseStore } from '@/stores/usePostResponseStore';
 import { onBeforeMount } from 'vue';
 
@@ -44,7 +44,7 @@ onBeforeMount(() => {
     <div class="all-post-title">
       <h1>All Posts</h1>
     </div>
-    <all-post />
+    <post-all />
     <more-button />
     <main-footer />
   </main>

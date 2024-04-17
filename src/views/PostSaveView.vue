@@ -1,6 +1,6 @@
 <script setup lang=ts>
 import MainHeader from '@/components/common/MainHeader.vue';
-import PostSave from '@/components/PostSave.vue';
+import PostSave from '@/components/post/PostSave.vue';
 import { onBeforeRouteLeave } from 'vue-router';
 
 

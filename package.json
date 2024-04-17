@@ -16,10 +16,13 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@tiptap/extension-image": "^2.2.6",
     "@tiptap/pm": "^2.2.4",
     "@tiptap/starter-kit": "^2.2.4",
     "@tiptap/vue-3": "^2.2.4",
     "@vueuse/core": "^10.9.0",
+    "@yaireo/tagify": "^4.23.0",
+    "axios": "^1.6.8",
     "pinia": "^2.1.7",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
