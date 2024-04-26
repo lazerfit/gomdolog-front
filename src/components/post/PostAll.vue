@@ -11,7 +11,7 @@ const store = usePostResponseStore();
       <div class="post-wrapper">
         <template v-if="store.posts.content && store.posts.content.length > 0">
           <div class="post" v-for="item in store.posts.content" :key="item.id">
-            <img src="../assets/img/pineapples.jpg" alt="all-post-img" v-if="item.thumbnail === 'Default Thumbnail'">
+            <img src="/src/assets/img/pineapples.jpg" alt="all-post-img" v-if="item.thumbnail === 'Default Thumbnail'">
             <img :src="item.thumbnail" v-else>
             <div class="content-wrapper">
               <div class="all-post-category">
@@ -107,16 +107,16 @@ const store = usePostResponseStore();
     width: 100%;
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 20px;
     margin-top: px-to-rem(50);
 
     @media screen and (max-width: 767px) {
-      width: 100%;
       margin-top: 0;
     }
 
     @media (min-width:768px) and (max-width: 1024px) {
-      justify-content: space-around;
+      justify-content: center;
     }
 
     .post {
@@ -127,6 +127,10 @@ const store = usePostResponseStore();
       @media screen and (max-width: 767px) {
         width: 100%;
         margin-top: 0;
+      }
+
+      @media (min-width:768px) and (max-width: 1024px) {
+        width: 360px;
       }
 
       img {

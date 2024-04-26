@@ -33,7 +33,9 @@ const hasNextPage = computed(() => postStore.posts.size > postStore.posts.number
   justify-content: center;
 
   @media screen and (max-width: 767px) {
-    display: none;
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 80px;
   }
 
   @media (min-width:768px) and (max-width: 1024px) {

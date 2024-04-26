@@ -2,8 +2,16 @@
 import { RouterLink } from 'vue-router';
 import { usePostResponseStore } from '@/stores/usePostResponseStore';
 import { formatDate } from '@/utils/FormatDate';
+import { onBeforeMount } from 'vue';
+import { fetchPopularPost } from '@/api';
 
 const store = usePostResponseStore();
+
+onBeforeMount(async () => {
+  await fetchPopularPost()
+    .then(response => store.popularPosts = response.data)
+    .catch(error => console.log('popular post error :', error))
+})
 
 </script>
 <template>

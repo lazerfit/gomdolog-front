@@ -8,7 +8,7 @@ import DarkmodeToggle from './DarkmodeToggle.vue';
 import { defineAsyncComponent } from 'vue';
 
 const isModalOpened = ref(false);
-const isLoginMenuOpened = ref(false);
+const isAdminMenuOpened = ref(false);
 
 const BasicModal = defineAsyncComponent(() =>
   import('./BasicModal.vue')
@@ -38,7 +38,7 @@ const submitHandler = () => {
       <search-bar />
       <span class="login">
         <i class="fa-regular fa-user" @click="openModal"></i>
-        <!-- <i class="fa-solid fa-user" @click="isLoginMenuOpened = !isLoginMenuOpened">
+        <!-- <i class="fa-solid fa-user" @click="isAdminMenuOpened = !isAdminMenuOpened">
           <Transition name="bounce">
             <div class="wrapper" v-show="isLoginMenuOpened">
               <div>

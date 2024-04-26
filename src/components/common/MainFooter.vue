@@ -32,7 +32,7 @@
   box-sizing: border-box;
 
   @media screen and (max-width: 767px) {
-    display: none;
+    height: 100px;
   }
 
   .content-wrapper {

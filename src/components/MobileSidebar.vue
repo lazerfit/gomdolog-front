@@ -40,10 +40,9 @@ watchEffect(() => {
         <search-bar />
       </div>
       <div class="category-wrapper">
-        <RouterLink :to="{ name: 'category', params: { title: item.title } }" class="category"
-          v-for="(item, index) in filteredCategory" :key="index">
-          {{ item.title }}
-        </RouterLink>
+        <div class="category" v-for="(item, index) in store.categories" :key="index">
+          {{ item }}
+        </div>
       </div>
       <div class="login-wrapper">
         <!-- <div class="login-btn">

@@ -37,7 +37,9 @@ export const usePostResponseStore = defineStore('post-response-store', () => {
     isPostLoaded.value = true;
     try {
       await fetchPostAll(pageSize.value).then((response) => (posts.value = response.data));
-      await fetchPopularPost().then((response) => (popularPosts.value = response.data));
+      await fetchPopularPost()
+        .then((response) => (popularPosts.value = response.data))
+        .catch((error) => console.log('popularPost error: ', error));
     } catch (error) {
       console.log(error);
     } finally {

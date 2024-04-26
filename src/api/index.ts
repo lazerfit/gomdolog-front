@@ -5,12 +5,20 @@ const config = {
   baseUrl: 'http://localhost:8080/api/'
 };
 
+const client = axios.create({
+  baseURL: config.baseUrl,
+  timeout: 15000,
+  headers: {
+    'Content-Type': 'application/json'
+  }
+});
+
 function savePost(postData: PostSave) {
   return axios.post(`${config.baseUrl}post/new`, postData);
 }
 
 function fetchPost(postId: string | string[]) {
-  return axios.get(`${config.baseUrl}post/${postId}`);
+  return client.get(`post/${postId}`);
 }
 
 function deletePost(id: string[] | string) {

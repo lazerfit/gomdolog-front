@@ -14,6 +14,18 @@ import { RouterLink } from 'vue-router';
 </template>
 
 <style lang='scss' scoped>
+.darkMode {
+  .container {
+    background-color: #121212 !important;
+    color: $pearl !important;
+
+    .main-page-btn {
+      background-color: $pearl;
+      color: $black-forest;
+    }
+  }
+}
+
 .container {
   display: flex;
   flex-flow: column wrap;
