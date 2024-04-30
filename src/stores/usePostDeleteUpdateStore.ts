@@ -49,9 +49,16 @@ export const usePostDeleteUpdateStore = defineStore('post-delete-update-store', 
   };
 
   const REVERT_DELETE = async (id: number) => {
+    const toast = useToasterStore();
     await revertPostDelete(id)
-      .then(() => FETCH_DELETED_POST())
-      .catch((error) => console.log(error));
+      .then(() => {
+        FETCH_DELETED_POST();
+        toast.showToast('게시글 복구를 완료하였습니다.', ToasterStatus.CHECK);
+      })
+      .catch((error) => {
+        toast.showToast('오류가 발생하였습니다.\n다시 시도해주세요.', ToasterStatus.ERROR);
+        console.log(error);
+      });
   };
 
   const FETCH_DELETED_POST = async () => {
@@ -61,6 +68,7 @@ export const usePostDeleteUpdateStore = defineStore('post-delete-update-store', 
   };
 
   const UPDATE = async (id: string[] | string) => {
+    const toast = useToasterStore();
     const store = usePostSaveStore();
     const loaderStore = useLoaderStore();
     loaderStore.isLoaded = true;
@@ -74,8 +82,14 @@ export const usePostDeleteUpdateStore = defineStore('post-delete-update-store', 
     };
     try {
       await updatePost(data)
-        .then(() => (window.location.href = '/'))
-        .catch((error) => console.log(error));
+        .then(() => {
+          toast.showToast('게시글 수정이 완료되었습니다.', ToasterStatus.CHECK);
+          window.location.href = '/';
+        })
+        .catch((error) => {
+          toast.showToast('오류가 발생하였습니다.\n다시 시도해주세요.', ToasterStatus.ERROR);
+          console.log(error);
+        });
     } finally {
       loaderStore.isLoaded = false;
     }

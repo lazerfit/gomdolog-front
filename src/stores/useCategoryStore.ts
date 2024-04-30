@@ -31,7 +31,10 @@ export const useCategoryResponseStore = defineStore('category-response-store', (
         FETCH_ALL();
         toast.showToast('삭제가 완료되었습니다.', ToasterStatus.CHECK);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        toast.showToast('오류가 발생하였습니다.\n다시 시도해주세요.', ToasterStatus.ERROR);
+        console.log(error);
+      });
   };
 
   const SAVE_CATEGORY = async (data: string) => {
@@ -44,19 +47,27 @@ export const useCategoryResponseStore = defineStore('category-response-store', (
         FETCH_ALL();
         toast.showToast('저장이 완료되었습니다.', ToasterStatus.CHECK);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        toast.showToast('오류가 발생하였습니다.\n다시 시도해주세요.', ToasterStatus.ERROR);
+        console.log(error);
+      });
   };
 
   const UPDATE_CATEGORY = async (id: number) => {
+    const toast = useToasterStore();
     await updateCategory({
       id: id,
       title: updateTitle.value
     })
       .then(() => {
+        toast.showToast('수정이 완료되었습니다.', ToasterStatus.CHECK);
         FETCH_ALL();
         updateTitle.value = '';
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        toast.showToast('오류가 발생하였습니다.\n다시 시도해주세요.', ToasterStatus.ERROR);
+        console.log(error);
+      });
   };
 
   return { categories, divList, updateTitle, FETCH_ALL, DELETE, SAVE_CATEGORY, UPDATE_CATEGORY };
