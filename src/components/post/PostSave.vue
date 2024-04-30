@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { usePostSaveStore } from '@/stores/usePostSaveStore';
-import { useCategoryResponseStore } from '@/stores/useCategoryResponseStore';
+import { useCategoryResponseStore } from '@/stores/useCategoryStore';
 import { usePostResponseStore } from '@/stores/usePostResponseStore';
 import { usePostDeleteUpdateStore } from '@/stores/usePostDeleteUpdateStore';
 import { onBeforeMount, onUnmounted } from 'vue';

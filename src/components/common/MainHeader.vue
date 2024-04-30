@@ -1,17 +1,22 @@
 <script setup lang=ts>
-import { ref } from 'vue';
+import { onBeforeMount, onBeforeUnmount, ref } from 'vue';
 import { RouterLink } from 'vue-router';
-// import BasicModal from './BasicModal.vue';
 import MobileSidebar from '../MobileSidebar.vue';
 import SearchBar from './SearchBar.vue';
 import DarkmodeToggle from './DarkmodeToggle.vue';
 import { defineAsyncComponent } from 'vue';
+import { useLoginStore } from '@/stores/useLoginStore';
 
 const isModalOpened = ref(false);
 const isAdminMenuOpened = ref(false);
+const loginStore = useLoginStore();
 
 const BasicModal = defineAsyncComponent(() =>
   import('./BasicModal.vue')
+);
+
+const BasicToast = defineAsyncComponent(() =>
+  import('./BasicToast.vue')
 );
 
 const openModal = () => {
@@ -25,6 +30,32 @@ const closeModal = () => {
 const submitHandler = () => {
   console.log("정상 제출 완료");
 }
+
+const signIn = () => {
+  loginStore.SIGN_IN()
+  closeModal()
+}
+
+const logout = () => {
+  loginStore.isAdmin = false;
+}
+
+const isAdmin = () => {
+  if (sessionStorage.getItem('userRole') === null || sessionStorage.getItem('useRole') === 'USER') {
+    loginStore.isAdmin = false;
+  } else {
+    loginStore.isAdmin = true;
+  }
+}
+
+onBeforeMount(() => {
+  isAdmin()
+})
+
+onBeforeUnmount(() => {
+  loginStore.isAdmin = false;
+})
+
 </script>
 
 <template>
@@ -34,13 +65,14 @@ const submitHandler = () => {
     </RouterLink>
     <darkmode-toggle />
     <mobile-sidebar />
+    <basic-toast />
     <div class="sub-logo-container">
       <search-bar />
       <span class="login">
-        <i class="fa-regular fa-user" @click="openModal"></i>
-        <!-- <i class="fa-solid fa-user" @click="isAdminMenuOpened = !isAdminMenuOpened">
+        <i class="fa-regular fa-user" @click="openModal" v-if="!loginStore.isAdmin"></i>
+        <i class="fa-solid fa-user" @click="isAdminMenuOpened = !isAdminMenuOpened" v-else>
           <Transition name="bounce">
-            <div class="wrapper" v-show="isLoginMenuOpened">
+            <div class="wrapper" v-show="isAdminMenuOpened">
               <div>
                 <RouterLink to="/post/new">글쓰기</RouterLink>
               </div>
@@ -48,11 +80,11 @@ const submitHandler = () => {
                 <RouterLink to="/admin">설정</RouterLink>
               </div>
               <div>
-                <a href="#none">로그아웃</a>
+                <a href="#none" @click="logout">로그아웃</a>
               </div>
             </div>
           </Transition>
-        </i> -->
+        </i>
         <Transition name="fade">
           <basic-modal :isOpen="isModalOpened" @modal-close="closeModal" @submit="submitHandler">
             <template #header>
@@ -68,15 +100,13 @@ const submitHandler = () => {
             <template #body>
               <div class="modal-body-container">
                 <div class="login-field">
-                  <form action="#none">
-                    <div>
-                      <input type="email" placeholder="이메일" required>
-                    </div>
-                    <div>
-                      <input type="password" placeholder="비밀번호" required>
-                    </div>
-                    <button class="btn-member-primary">로그인</button>
-                  </form>
+                  <div>
+                    <input type="email" placeholder="이메일" required v-model="loginStore.signInForm.email">
+                  </div>
+                  <div>
+                    <input type="password" placeholder="비밀번호" required v-model="loginStore.signInForm.password">
+                  </div>
+                  <button class="btn-member-primary" @click="signIn">로그인</button>
                 </div>
               </div>
             </template>

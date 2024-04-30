@@ -8,6 +8,8 @@ import { defineAsyncComponent } from 'vue';
 import { formatDate } from '@/utils/FormatDate';
 import { usePostDeleteUpdateStore } from '@/stores/usePostDeleteUpdateStore';
 import { RouterLink } from 'vue-router';
+import { useLoginStore } from '@/stores/useLoginStore';
+import { ToasterStatus } from '@/utils/types';
 
 const utterancesContainer: Ref<HTMLDivElement | null> = ref(null);
 const router = useRouter();
@@ -15,6 +17,7 @@ const route = useRoute();
 const toastStore = useToasterStore();
 const postResponseStore = usePostResponseStore();
 const postDeleteUpdateStore = usePostDeleteUpdateStore();
+const loginStore = useLoginStore();
 
 const BasicToast = defineAsyncComponent(() =>
   import('../common/BasicToast.vue')
@@ -50,7 +53,7 @@ const linkCopy = () => {
   const url = window.location.href;
   navigator.clipboard.writeText(url)
     .then(() => {
-      toastStore.showToast("복사가 완료되었습니다.");
+      toastStore.showToast("복사가 완료되었습니다.", ToasterStatus.CHECK);
     }).catch((error: string) => {
       console.log('링크 복사 중 오류 발생: ', error);
     })
@@ -95,7 +98,7 @@ onBeforeMount(() => {
           <div class="created-date">
             {{ formatDate(postResponseStore.post.createdDate) }}
           </div>
-          <div class="admin-wrapper">
+          <div class="admin-wrapper" v-if="loginStore.isAdmin">
             <RouterLink :to="{ name: 'post-update', params: { id: route.params.id } }">
               <span>
                 <i class="fa-solid fa-pen"></i>

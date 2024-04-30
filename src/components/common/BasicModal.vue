@@ -23,7 +23,7 @@ onClickOutside(target, () => emit('modal-close'));
         <div class="modal-footer">
           <slot name="footer">
             <div>
-              <button @click.stop="emit('modal-close')" @click="emit('submit')">Submit</button>
+              <button @click.stop="emit('modal-close')">Submit</button>
             </div>
           </slot>
         </div>

@@ -1,6 +1,6 @@
 <script setup lang=ts>
 import { RouterLink } from 'vue-router';
-import { useCategoryResponseStore } from '@/stores/useCategoryResponseStore';
+import { useCategoryResponseStore } from '@/stores/useCategoryStore';
 import { computed, onBeforeMount, watchEffect } from 'vue';
 import { usePostResponseStore } from '@/stores/usePostResponseStore';
 import { useRoute } from 'vue-router';
