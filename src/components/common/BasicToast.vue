@@ -7,7 +7,8 @@ const store = useToasterStore()
 <template>
   <Teleport to="body">
     <div v-if="store.show" class="toast">
-      <i class="fa-solid fa-circle-check"></i>
+      <i class="fa-solid fa-circle-check" v-if="store.status === 'check'"></i>
+      <i class="fa-solid fa-circle-xmark" v-else-if="store.status === 'error'"></i>
       {{ store.message }}
     </div>
   </Teleport>
@@ -32,7 +33,14 @@ const store = useToasterStore()
 
   i {
     margin-right: px-to-rem(5);
+  }
+
+  .fa-circle-check {
     color: #2ecc71;
+  }
+
+  .fa-circle-xmark {
+    color: crimson;
   }
 }
 </style>

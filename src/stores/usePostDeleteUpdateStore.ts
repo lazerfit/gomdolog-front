@@ -9,12 +9,14 @@ import {
 import { ref } from 'vue';
 import { useLoaderStore } from './useLoaderStore';
 import { usePostSaveStore } from './usePostSaveStore';
-import type { DeletePost } from '@/utils/types';
+import { type DeletePost, ToasterStatus } from '@/utils/types';
+import { useToasterStore } from './useToasterStore';
 
 export const usePostDeleteUpdateStore = defineStore('post-delete-update-store', () => {
   const deletedPosts = ref<DeletePost[] | null>([]);
 
   const DELETE = async (id: string[] | string) => {
+    const toast = useToasterStore();
     const loaderStore = useLoaderStore();
     loaderStore.isLoaded = true;
     try {
@@ -23,9 +25,13 @@ export const usePostDeleteUpdateStore = defineStore('post-delete-update-store', 
       if (confirmed) {
         await deletePost(id)
           .then(() => {
+            toast.showToast('게시글을 성공적으로 삭제하였습니다.', ToasterStatus.CHECK);
             window.location.href = '/';
           })
-          .catch((error) => console.log(error));
+          .catch((error) => {
+            toast.showToast('오류가 발생하였습니다.\n다시 시도해주세요.', ToasterStatus.ERROR);
+            console.log(error);
+          });
       }
     } finally {
       loaderStore.isLoaded = false;

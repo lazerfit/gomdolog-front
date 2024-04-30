@@ -58,3 +58,18 @@ export interface CategoryUpdate {
   id: number;
   title: string;
 }
+
+export interface SigninForm {
+  email: string;
+  password: string;
+}
+
+export interface AdminPopularPost {
+  title: string;
+  views: number;
+}
+
+export enum ToasterStatus {
+  CHECK = 'check',
+  ERROR = 'error'
+}
