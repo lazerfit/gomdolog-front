@@ -1,5 +1,7 @@
 import axios from 'axios';
-import type { PostSave, CategorySave, CategoryUpdate, PostUpdate } from '@/utils/types';
+import type { PostSave, CategorySave, CategoryUpdate, PostUpdate, SigninForm } from '@/utils/types';
+
+const JWT = sessionStorage.getItem('_token');
 
 const config = {
   baseUrl: 'http://localhost:8080/api/'
@@ -13,8 +15,17 @@ const client = axios.create({
   }
 });
 
+const clientWithJWT = axios.create({
+  baseURL: config.baseUrl,
+  timeout: 15000,
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${JWT}`
+  }
+});
+
 function savePost(postData: PostSave) {
-  return axios.post(`${config.baseUrl}post/new`, postData);
+  return clientWithJWT.post(`post/new`, postData);
 }
 
 function fetchPost(postId: string | string[]) {
@@ -22,19 +33,19 @@ function fetchPost(postId: string | string[]) {
 }
 
 function deletePost(id: string[] | string) {
-  return axios.post(`${config.baseUrl}post/delete/${id}`);
+  return clientWithJWT.post(`post/delete/${id}`);
 }
 
 function deletePostPermanent(id: number) {
-  return axios.post(`${config.baseUrl}post/deletePermanent/${id}`);
+  return clientWithJWT.post(`post/deletePermanent/${id}`);
 }
 
 function revertPostDelete(id: number) {
-  return axios.post(`${config.baseUrl}post/revertDelete/${id}`);
+  return clientWithJWT.post(`post/revertDelete/${id}`);
 }
 
 function updatePost(data: PostUpdate) {
-  return axios.post(`${config.baseUrl}post/update`, data);
+  return clientWithJWT.post(`post/update`, data);
 }
 
 function fetchPostAll(pageSize: number) {
@@ -66,11 +77,11 @@ function fetchPopularPost() {
 }
 
 function fetchDeletedPosts() {
-  return axios.get(`${config.baseUrl}post/recycling`);
+  return clientWithJWT.get(`post/recycling`);
 }
 
 function saveCategory(data: CategorySave) {
-  return axios.post(`${config.baseUrl}category/new`, data);
+  return clientWithJWT.post(`category/new`, data);
 }
 
 function fetchCategoryAll() {
@@ -78,11 +89,29 @@ function fetchCategoryAll() {
 }
 
 function deleteCategory(id: number) {
-  return axios.post(`${config.baseUrl}category/delete/${id}`);
+  return clientWithJWT.post(`category/delete/${id}`);
 }
 
 function updateCategory(data: CategoryUpdate) {
-  return axios.post(`${config.baseUrl}category/update`, data);
+  return clientWithJWT.post(`category/update`, data);
+}
+
+function submitSigninForm(form: SigninForm) {
+  return client.post(`auth/signin`, form);
+}
+
+function getRole(token: string) {
+  const header = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+  };
+  return axios.get(`${config.baseUrl}auth/getRole`, header);
+}
+
+function fetchTop5Post() {
+  return clientWithJWT.get(`post/popular/top5`);
 }
 
 export {
@@ -101,5 +130,8 @@ export {
   searchPostByCategory,
   deletePostPermanent,
   revertPostDelete,
-  addViews
+  addViews,
+  submitSigninForm,
+  getRole,
+  fetchTop5Post
 };

@@ -1,10 +1,34 @@
 <script setup lang=ts>
+import { useAdminStore } from '@/stores/useAdminStore';
 
+const adminStore = useAdminStore();
+
+const makeNotShowAll = () => {
+  adminStore.isCategoryShow = false;
+  adminStore.isDashboardShow = false;
+  adminStore.isRecycleBinShow = false;
+  adminStore.isUserShow = false;
+}
+
+const categoryShow = () => {
+  makeNotShowAll()
+  adminStore.isCategoryShow = !adminStore.isCategoryShow
+}
+
+const dashboardShow = () => {
+  makeNotShowAll()
+  adminStore.isDashboardShow = !adminStore.isDashboardShow;
+}
+
+const recycleBinShow = () => {
+  makeNotShowAll()
+  adminStore.isRecycleBinShow = !adminStore.isRecycleBinShow;
+}
 </script>
 <template>
   <aside>
     <div class="content-wrapper">
-      <div class="dashboard">
+      <div class="dashboard" @click="dashboardShow">
         <span>
           <i class="fa-solid fa-clapperboard"></i>
         </span>
@@ -12,7 +36,7 @@
           Dashboard
         </span>
       </div>
-      <div class="category">
+      <div class="category" @click="categoryShow">
         <span>
           <i class="fa-solid fa-table-list"></i>
         </span>
@@ -20,7 +44,7 @@
           Category
         </span>
       </div>
-      <div class="category">
+      <div class="category" @click="recycleBinShow">
         <span>
           <i class="fa-regular fa-trash-can"></i>
         </span>
@@ -33,6 +57,12 @@
 </template>
 
 <style lang='scss' scoped>
+.darkMode {
+  aside {
+    box-shadow: 1px 1px 5px $dim-black;
+  }
+}
+
 aside {
   border: 1px solid #000;
   width: px-to-rem(140);

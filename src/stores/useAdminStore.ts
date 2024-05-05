@@ -5,6 +5,10 @@ import type { AdminPopularPost } from '@/utils/types';
 
 export const useAdminStore = defineStore('admin-store', () => {
   const popularPosts = ref<AdminPopularPost[]>([]);
+  const isUserShow = ref(false);
+  const isDashboardShow = ref(true);
+  const isCategoryShow = ref(false);
+  const isRecycleBinShow = ref(false);
 
   const FETCH_POPULAR_POST = async () => {
     await fetchTop5Post()
@@ -12,5 +16,12 @@ export const useAdminStore = defineStore('admin-store', () => {
       .catch((error) => console.log('admin popular posts error: ', error));
   };
 
-  return { popularPosts, FETCH_POPULAR_POST };
+  return {
+    isUserShow,
+    isDashboardShow,
+    isCategoryShow,
+    popularPosts,
+    FETCH_POPULAR_POST,
+    isRecycleBinShow
+  };
 });

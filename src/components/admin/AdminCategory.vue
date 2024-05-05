@@ -1,7 +1,10 @@
 <script setup lang=ts>
 import { onBeforeMount } from 'vue';
-import { useCategoryResponseStore } from '@/stores/useCategoryResponseStore';
+import { useCategoryResponseStore } from '@/stores/useCategoryStore';
 import type { CategoryResponse } from '@/utils/types';
+import { useAdminStore } from '@/stores/useAdminStore';
+
+const adminStore = useAdminStore();
 
 const store = useCategoryResponseStore();
 
@@ -32,7 +35,7 @@ onBeforeMount(() => {
 
 </script>
 <template>
-  <div class="category-container">
+  <div class="category-container" v-if="adminStore.isCategoryShow">
     <h1>Category</h1>
     <div class="categories">
       <div class="category" v-for="item in store.categories" :key="item.id">
@@ -64,9 +67,19 @@ onBeforeMount(() => {
 </template>
 
 <style lang='scss' scoped>
+.darkMode {
+  .fa-plus {
+    color: $pearl;
+  }
+
+  .categories {
+    box-shadow: 1px 1px 5px $dim-black !important;
+  }
+}
+
 .category-container {
-  margin: px-to-rem(20);
-  width: 20%;
+  margin: 0 px-to-rem(20);
+  width: 100%;
 
   @media (max-width: 767px) {
     width: 100%;

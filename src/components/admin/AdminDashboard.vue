@@ -2,6 +2,9 @@
 import AdminAside from './AdminAside.vue';
 import AdminCategory from './AdminCategory.vue';
 import AdminRecycleBin from './AdminRecycleBin.vue';
+import AdminPopularPosts from './AdminPopularPosts.vue';
+import AdminUserList from './AdminUserList.vue';
+import BasicToast from '../common/BasicToast.vue';
 
 </script>
 <template>
@@ -9,86 +12,25 @@ import AdminRecycleBin from './AdminRecycleBin.vue';
     <admin-aside />
     <div class="main-content-container">
       <div class="content-wrapper">
-        <div class="popular-post">
-          <h1>Popular Posts</h1>
-          <div class="posts">
-            <div class="post">
-              <div class="post-title">
-                CSS와 SCSS의 차이점에 대하여
-              </div>
-              <div class="views">
-                30views
-              </div>
-            </div>
-            <div class="post">
-              <div class="post-title">
-                CSS와 SCSS의 차이점에 대하여1111111111111111111111
-              </div>
-              <div class="views">
-                30views
-              </div>
-            </div>
-            <div class="post">
-              <div class="post-title">
-                CSS와 SCSS의 차이점에 대하여
-              </div>
-              <div class="views">
-                30views
-              </div>
-            </div>
-            <div class="post">
-              <div class="post-title">
-                CSS와 SCSS의 차이점에 대하여
-              </div>
-              <div class="views">
-                30views
-              </div>
-            </div>
-            <div class="post">
-              <div class="post-title">
-                CSS와 SCSS의 차이점에 대하여
-              </div>
-              <div class="views">
-                30views
-              </div>
-            </div>
-          </div>
-        </div>
+        <admin-popular-posts />
         <div class="user-container">
-          <h1>Users</h1>
-          <div class="users">
-            <div class="user">
-              <div class="name">
-                redkafe98@gmail.com
-              </div>
-              <div class="role">
-                <select name="role" id="user-role">
-                  <option value="ADMIN">ADMIN</option>
-                  <option value="USER">USER</option>
-                </select>
-              </div>
-            </div>
-            <div class="user">
-              <div class="name">
-                redkafe12@gmail.com
-              </div>
-              <div class="role">
-                <select name="role" id="user-role">
-                  <option value="ADMIN">ADMIN</option>
-                  <option value="USER">USER</option>
-                </select>
-              </div>
-            </div>
-          </div>
+          <admin-user-list />
         </div>
         <admin-category />
         <admin-recycle-bin />
+        <basic-toast />
       </div>
     </div>
   </div>
 </template>
 
 <style lang='scss' scoped>
+.darkMode {
+  .main-content-container {
+    box-shadow: 1px 1px 5px $dim-black !important;
+  }
+}
+
 .container {
   width: $desktop-width;
   display: flex;
@@ -134,42 +76,6 @@ import AdminRecycleBin from './AdminRecycleBin.vue';
         margin: 0;
       }
 
-      .popular-post {
-        margin: px-to-rem(20);
-        width: 45%;
-
-        @media (max-width: 767px) {
-          width: 100%;
-        }
-
-        .posts {
-          border-radius: px-to-rem(10);
-          box-shadow: 3px 3px 10px $light-black;
-          margin-top: px-to-rem(15);
-          padding: px-to-rem(10);
-
-          .post {
-            display: flex;
-            margin: px-to-rem(15);
-
-            .post-title {
-              width: px-to-rem(350);
-              text-overflow: ellipsis;
-              overflow: hidden;
-              white-space: nowrap;
-
-              @media (max-width: 767px) {
-                width: 220px;
-              }
-            }
-
-            .views {
-              margin-left: px-to-rem(30);
-            }
-          }
-        }
-      }
-
       .user-container {
         margin: px-to-rem(20);
         width: 40%;
@@ -177,36 +83,7 @@ import AdminRecycleBin from './AdminRecycleBin.vue';
         @media (max-width: 767px) {
           width: 100%;
         }
-
-        .users {
-          border-radius: px-to-rem(10);
-          box-shadow: 3px 3px 10px $light-black;
-          margin-top: px-to-rem(15);
-          width: px-to-rem(350);
-          padding: px-to-rem(10);
-
-          @media (max-width: 767px) {
-            width: 100%;
-          }
-
-          .user {
-            display: flex;
-            justify-content: space-between;
-            margin: px-to-rem(15);
-
-            .role {
-              select {
-                font-family: $secondary-font;
-                border-radius: px-to-rem(10);
-              }
-            }
-          }
-        }
       }
-
-
-
-
     }
   }
 }

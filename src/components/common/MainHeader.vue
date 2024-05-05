@@ -38,6 +38,7 @@ const signIn = () => {
 
 const logout = () => {
   loginStore.isAdmin = false;
+  sessionStorage.removeItem('userRole');
 }
 
 const isAdmin = () => {
@@ -111,18 +112,7 @@ onBeforeUnmount(() => {
               </div>
             </template>
             <template #footer>
-              <div class="modal-footer-container">
-                <div class="easy-login-title">
-                  간편 로그인
-                </div>
-                <div class="easy-login">
-                  <div>
-                    <button class="google"></button>
-                  </div>
-                  <div>
-                    <button class="naver"></button>
-                  </div>
-                </div>
+              <div>
               </div>
             </template>
           </basic-modal>
@@ -267,6 +257,8 @@ header {
       }
 
       .modal-body-container {
+        margin-bottom: 15px;
+
         .login-field {
           button {
             cursor: pointer;
@@ -304,53 +296,6 @@ header {
 
             &:hover {
               @include box-shadow-animation($silver-black);
-            }
-          }
-        }
-      }
-
-      .modal-footer-container {
-        display: flex;
-        flex-direction: column;
-        margin: px-to-rem(20) 0;
-
-        .easy-login-title {
-          color: $dark-gray;
-          text-align: center;
-          font-size: 0.9rem;
-        }
-
-        .easy-login {
-          display: flex;
-          margin: px-to-rem(20) auto 0 auto;
-          gap: px-to-rem(10);
-
-          button {
-            width: px-to-rem(80);
-            height: px-to-rem(80);
-            border: none;
-            background-color: transparent;
-            border-radius: px-to-rem(10);
-            cursor: pointer;
-          }
-
-          .google {
-            background-image: url('/src/assets/img/google.png');
-            transition: all .3s ease-in-out;
-
-            &:hover {
-              @include box-shadow-animation($dim-gray);
-            }
-          }
-
-          .naver {
-            background-image: url('/src/assets/img/naver.png');
-            background-size: 80px 80px;
-
-            transition: all .3s ease-in-out;
-
-            &:hover {
-              @include box-shadow-animation(#17b377);
             }
           }
         }

@@ -1,7 +1,7 @@
 <script setup lang=ts>
 import SearchBar from './common/SearchBar.vue';
 import { RouterLink } from 'vue-router';
-import { useCategoryResponseStore } from '@/stores/useCategoryResponseStore';
+import { useCategoryResponseStore } from '@/stores/useCategoryStore';
 import { computed, onBeforeMount, ref, watchEffect } from 'vue';
 import { usePostResponseStore } from '@/stores/usePostResponseStore';
 import { useRoute } from 'vue-router';
