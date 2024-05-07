@@ -1,12 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
-import SignupView from '@/views/SignupView.vue';
 
 const PostView = () => import('../views/PostView.vue');
 const CategoryView = () => import('../views/CategoryView.vue');
 const PostSaveView = () => import('../views/PostSaveView.vue');
 const AdminView = () => import('../views/AdminView.vue');
 const NotFound = () => import('../views/404View.vue');
+const SignupView = () => import('@/views/SignupView.vue');
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
