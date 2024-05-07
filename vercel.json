@@ -1,8 +1,12 @@
 {
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "https://gomdolog.store/api/$1"
+      "source": "/api/:path*",
+      "destination": "https://gomdolog.store/api/:path*"
+    },
+    {
+      "source": "/api/:path*/",
+      "destination": "https://gomdolog.store/api/:path*/"
     }
   ]
 }
