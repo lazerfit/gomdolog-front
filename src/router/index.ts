@@ -6,6 +6,7 @@ const CategoryView = () => import('../views/CategoryView.vue');
 const PostSaveView = () => import('../views/PostSaveView.vue');
 const AdminView = () => import('../views/AdminView.vue');
 const NotFound = () => import('../views/404View.vue');
+const SignupView = () => import('../views/SignupView.vue');
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -49,6 +50,11 @@ const router = createRouter({
       path: '/:pathMatch(.*)*',
       name: 'not-found',
       component: NotFound
+    },
+    {
+      path: '/signup',
+      name: 'signup',
+      component: SignupView
     }
   ],
   scrollBehavior(to, from, savedPosition) {

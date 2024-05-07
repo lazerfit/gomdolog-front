@@ -110,6 +110,13 @@ function getRole(token: string) {
   return axios.get(`${config.baseUrl}auth/getRole`, header);
 }
 
+function signup(email: string, password: string) {
+  return client.post(`auth/signup`, {
+    email: email,
+    password: password
+  });
+}
+
 function fetchTop5Post() {
   return clientWithJWT.get(`post/popular/top5`);
 }
@@ -133,5 +140,6 @@ export {
   addViews,
   submitSigninForm,
   getRole,
-  fetchTop5Post
+  fetchTop5Post,
+  signup
 };

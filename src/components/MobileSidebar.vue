@@ -90,7 +90,7 @@ watchEffect(() => {
       </div>
       <div class="category-wrapper">
         <div class="category" v-for="(item, index) in filteredCategory" :key="index">
-          {{ item }}
+          {{ item.title }}
         </div>
       </div>
       <div class="login-wrapper">
