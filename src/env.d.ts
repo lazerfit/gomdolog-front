@@ -1,4 +1,5 @@
 /// <reference types="vite/client" />
+/// <reference types="@types/web-bluetooth" />
 
 interface ImportMetaEnv {
   readonly VITE_APP_TITLE: string;
