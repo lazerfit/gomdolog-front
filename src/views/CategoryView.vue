@@ -1,6 +1,6 @@
 <script setup lang=ts>
 import MainHeader from '@/components/common/MainHeader.vue';
-import MainBanner from '@/components/common/MainBanner.vue';
+import MainCategoryBanner from '@/components/common/MainCategoryBanner.vue';
 import MainCategory from '@/components/category/MainCategory.vue';
 import CategoryTitle from '@/components/category/CategoryTitle.vue';
 import PostAll from '@/components/post/PostAll.vue';
@@ -18,13 +18,12 @@ onBeforeMount(() => {
     postStore.BY_TITLE_SEARCH()
   }
 })
-const bannerImage = '/src/assets/img/banner3.jpg';
 </script>
 <template>
 
   <div class="container">
     <main-header />
-    <main-banner :img="bannerImage" />
+    <main-category-banner />
     <main-category />
     <category-title />
     <post-all />

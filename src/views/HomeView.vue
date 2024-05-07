@@ -9,8 +9,6 @@ import PopularPost from '@/components/post/PopularPost.vue';
 import { usePostResponseStore } from '@/stores/usePostResponseStore';
 import { onBeforeMount } from 'vue';
 
-const bannerImage = '../assets/img/banner4.jpg';
-
 const store = usePostResponseStore();
 
 const isExpired = () => {
@@ -38,7 +36,7 @@ onBeforeMount(() => {
 <template>
   <main>
     <main-header />
-    <main-banner :img="bannerImage" />
+    <main-banner />
     <main-category />
     <popular-post />
     <div class="all-post-title">

@@ -3,7 +3,7 @@
 <template>
   <div class="container">
     <div class="banner">
-      <img src="/src/assets/img/banner4.jpg" alt="main-banner">
+      <img src="/src/assets/img/banner3.jpg" alt="main-banner">
     </div>
   </div>
 </template>
