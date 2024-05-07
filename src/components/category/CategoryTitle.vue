@@ -17,8 +17,8 @@ const postStore = usePostResponseStore();
     <div class="category-title" v-else>
       {{ route.params.title }}
     </div>
-    <div class="post-count" v-if="postStore.posts?.numberOfElements">
-      {{ postStore.posts?.numberOfElements }} Posts
+    <div class="post-count" v-if="(postStore.posts && postStore.posts.numberOfElements)">
+      {{ postStore.posts?.numberOfElements || 0 }} Posts
     </div>
   </div>
 </template>

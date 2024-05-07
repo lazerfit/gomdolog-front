@@ -34,10 +34,10 @@ const isUpdateMode = () => {
 const postEditMode = () => {
   if (route.params.id) {
     postResponseStore.FETCH_POST(route.params.id)
-    store.postSaveForm.title = postResponseStore.post?.title ?? ''
-    store.postSaveForm.content = postResponseStore.post?.content ?? ''
-    store.postSaveForm.tags = postResponseStore.post?.tags ?? []
-    store.postSaveForm.categoryTitle = postResponseStore.post?.categoryTitle ?? ''
+    store.postSaveForm.title = postResponseStore?.post?.title || ''
+    store.postSaveForm.content = postResponseStore?.post?.content || ''
+    store.postSaveForm.tags = postResponseStore?.post?.tags || []
+    store.postSaveForm.categoryTitle = postResponseStore?.post?.categoryTitle || ''
   } else {
     store.postSaveForm.title = '';
     store.postSaveForm.content = '';
