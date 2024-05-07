@@ -9,7 +9,7 @@ import PopularPost from '@/components/post/PopularPost.vue';
 import { usePostResponseStore } from '@/stores/usePostResponseStore';
 import { onBeforeMount } from 'vue';
 
-const bannerImage = '/src/assets/img/banner4.jpg';
+const bannerImage = '@/assets/img/banner4.jpg';
 
 const store = usePostResponseStore();
 
