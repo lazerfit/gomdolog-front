@@ -4,7 +4,7 @@ import type { PostSave, CategorySave, CategoryUpdate, PostUpdate, SigninForm } f
 const JWT = sessionStorage.getItem('_token');
 
 const config = {
-  baseUrl: 'http://localhost:8080/api/'
+  baseUrl: 'https://gomdolog.store/api/'
 };
 
 const client = axios.create({
