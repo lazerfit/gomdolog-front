@@ -15,7 +15,7 @@ const store = usePostResponseStore();
 
 const isExpired = () => {
   if (localStorage.getItem('visitedPostCreatedAt')) {
-    const storedCreatedAt = parseInt(localStorage.getItem('visitedPostCreatedAt'));
+    const storedCreatedAt = parseInt(localStorage.getItem('visitedPostCreatedAt') || '0');
     return Date.now() - storedCreatedAt >= 24 * 60 * 60 * 1000
   }
 }

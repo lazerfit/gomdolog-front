@@ -15,7 +15,7 @@ import { useRoute } from 'vue-router';
 
 export const usePostResponseStore = defineStore('post-response-store', () => {
   const posts = ref<PostPageResponse | null>(null);
-  const popularPosts = ref<PostResopnseWithoutTags[]>([]);
+  const popularPosts = ref<PostResopnseWithoutTags[] | null>([]);
   const searchQuery = ref('');
   const isPostLoaded = ref(false);
   const route = useRoute();

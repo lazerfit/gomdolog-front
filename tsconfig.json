@@ -1,6 +1,13 @@
 {
   "files": [],
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "tests/**/*.ts", "tests/**/*.tsx"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "tests/**/*.ts",
+    "tests/**/*.tsx",
+    "src/**/*.d.ts"
+  ],
   "references": [
     {
       "path": "./tsconfig.node.json"
@@ -18,7 +25,8 @@
     "target": "es2016",
     "paths": {
       "@/*": ["src/*"]
-    }
+    },
+    "types": ["vite/client"]
   },
   "exclude": ["dist", "node_modules"]
 }

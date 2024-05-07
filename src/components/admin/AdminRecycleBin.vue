@@ -24,7 +24,7 @@ onBeforeMount(() => {
 <template>
   <div class="recyclebin-container" v-if="adminStore.isRecycleBinShow">
     <h1>Recycle Bin</h1>
-    <div class="posts" v-if="postStore.deletedPosts.length > 0">
+    <div class="posts" v-if="postStore.deletedPosts?.length ?? 0 > 0">
       <div class="post" v-for="item in postStore.deletedPosts" :key="item.id">
         <div class="title">
           {{ item.title }}

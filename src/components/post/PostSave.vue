@@ -34,10 +34,10 @@ const isUpdateMode = () => {
 const postEditMode = () => {
   if (route.params.id) {
     postResponseStore.FETCH_POST(route.params.id)
-    store.postSaveForm.title = postResponseStore.post.title
-    store.postSaveForm.content = postResponseStore.post.content
-    store.postSaveForm.tags = postResponseStore.post.tags
-    store.postSaveForm.categoryTitle = postResponseStore.post.categoryTitle
+    store.postSaveForm.title = postResponseStore.post?.title ?? ''
+    store.postSaveForm.content = postResponseStore.post?.content ?? ''
+    store.postSaveForm.tags = postResponseStore.post?.tags ?? []
+    store.postSaveForm.categoryTitle = postResponseStore.post?.categoryTitle ?? ''
   } else {
     store.postSaveForm.title = '';
     store.postSaveForm.content = '';
@@ -49,7 +49,8 @@ const postEditMode = () => {
 const loadDraft = () => {
   if (localStorage.getItem('draft')) {
     if (window.confirm('임시저장된 게시글이 존재합니다. 불러오시겠습니까?')) {
-      const draft = JSON.parse(localStorage.getItem('draft'));
+      const draftToString = localStorage.getItem('draft') || '';
+      const draft = JSON.parse(draftToString);
       store.postSaveForm = draft
     }
   }

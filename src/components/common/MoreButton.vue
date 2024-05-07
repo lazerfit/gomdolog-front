@@ -9,7 +9,7 @@ const fetchMorePost = () => {
   postStore.FETCH_ALL(postStore.pageSize)
 }
 
-const hasNextPage = computed(() => postStore.posts.size > postStore.posts.numberOfElements)
+const hasNextPage = computed(() => (postStore?.posts?.size || 0) > (postStore?.posts?.numberOfElements || 0))
 
 </script>
 <template>

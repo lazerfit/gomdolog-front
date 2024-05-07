@@ -6,7 +6,7 @@ import { useToasterStore } from './useToasterStore';
 
 export const useCategoryResponseStore = defineStore('category-response-store', () => {
   const categories = ref<CategoryResponse[]>([]);
-  const divList = ref([]);
+  const divList = ref<{ inputValue: string }[]>([]);
   const updateTitle = ref('');
 
   const FETCH_ALL = async () => {

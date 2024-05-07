@@ -9,8 +9,8 @@ const store = usePostResponseStore();
   <transition name="fade">
     <div class="container" v-if="!store.isPostLoaded">
       <div class="post-wrapper">
-        <template v-if="store.posts.content && store.posts.content.length > 0">
-          <div class="post" v-for="item in store.posts.content" :key="item.id">
+        <template v-if="store.posts?.content && store.posts?.content?.length > 0">
+          <div class="post" v-for="item in store.posts?.content" :key="item.id">
             <img src="/src/assets/img/pineapples.jpg" alt="all-post-img" v-if="item.thumbnail === 'Default Thumbnail'">
             <img :src="item.thumbnail" v-else>
             <div class="content-wrapper">

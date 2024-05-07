@@ -76,7 +76,8 @@ onBeforeMount(() => {
   postResponseStore.FETCH_POST(route.params.id);
   if (!isVisitedPost()) {
     postResponseStore.ADD_VIEWS(route.params.id as string)
-    const visitedPost = JSON.parse(localStorage.getItem('visitedPost'));
+    const visitedPostString = localStorage.getItem('visitedPost') || '';
+    const visitedPost = JSON.parse(visitedPostString);
     visitedPost.push(route.params.id);
     localStorage.setItem('visitedPost', JSON.stringify(visitedPost));
   }
@@ -89,14 +90,14 @@ onBeforeMount(() => {
     <div class="content-wrapper">
       <div class="post-title">
         <div class="post-title-tags">
-          <span v-for="(tag, index) in postResponseStore.post.tags" :key="index">#{{ tag }}</span>
+          <span v-for="(tag, index) in postResponseStore.post?.tags" :key="index">#{{ tag }}</span>
         </div>
         <div class="title">
-          {{ postResponseStore.post.title }}
+          {{ postResponseStore.post?.title }}
         </div>
         <div class="date-admin-wrapper">
           <div class="created-date">
-            {{ formatDate(postResponseStore.post.createdDate) }}
+            {{ formatDate(postResponseStore.post?.createdDate ?? '') }}
           </div>
           <div class="admin-wrapper" v-if="loginStore.isAdmin">
             <RouterLink :to="{ name: 'post-update', params: { id: route.params.id } }">
@@ -110,7 +111,7 @@ onBeforeMount(() => {
           </div>
         </div>
       </div>
-      <div class="post-text" v-html="postResponseStore.post.content">
+      <div class="post-text" v-html="postResponseStore.post?.content">
       </div>
       <div class="sns">
         <div class="back-btn">
