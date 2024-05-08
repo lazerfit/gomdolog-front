@@ -62,7 +62,7 @@ export const usePostResponseStore = defineStore('post-response-store', () => {
           }
         })
         .catch((error) => {
-          window.location.href = '/notfound';
+          // window.location.href = '/notfound';
           console.error('Error fetching post: ', error);
         });
     } finally {

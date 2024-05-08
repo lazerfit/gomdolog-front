@@ -74,7 +74,7 @@ onMounted(() => {
 
 onBeforeMount(() => {
   postResponseStore.FETCH_POST(route.params.id);
-  if (!isVisitedPost()) {
+  if (!isVisitedPost() && !loginStore.isAdmin) {
     postResponseStore.ADD_VIEWS(route.params.id as string)
     const visitedPostString = localStorage.getItem('visitedPost') || '';
     const visitedPost = JSON.parse(visitedPostString);
