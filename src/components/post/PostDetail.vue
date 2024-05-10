@@ -68,6 +68,11 @@ const isVisitedPost = () => {
   return visitedPost ? visitedPost.includes(route.params.id as string) : false;
 }
 
+const shareTwitter = () => {
+  window.open('https://twitter.com/intent/tweet?url=' + document.URL + '&text=' + postResponseStore.post?.title, "_blank", "width=450,height=500")
+}
+
+
 onMounted(() => {
   addUtterancesScript();
 });
@@ -120,13 +125,7 @@ onBeforeMount(() => {
         </div>
         <div class="wrapper">
           <span>
-            <i class="fa-brands fa-x-twitter"></i>
-          </span>
-          <span>
-            <i class="fa-brands fa-facebook"></i>
-          </span>
-          <span>
-            <i class="fa-regular fa-comment"></i>
+            <i class="fa-brands fa-x-twitter" @click="shareTwitter"></i>
           </span>
           <span>
             <basic-toast />
