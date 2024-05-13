@@ -5,7 +5,7 @@ import MainCategory from '@/components/category/MainCategory.vue';
 import CategoryTitle from '@/components/category/CategoryTitle.vue';
 import PostAll from '@/components/post/PostAll.vue';
 import MoreButton from '@/components/common/MoreButton.vue';
-import MainFooter from '@/components/common/MainFooter.vue';
+import TheFooter from '@/components/common/TheFooter.vue';
 import { usePostResponseStore } from '@/stores/usePostResponseStore';
 import { onBeforeMount } from 'vue';
 import { useRoute } from 'vue-router';
@@ -28,7 +28,7 @@ onBeforeMount(() => {
     <category-title />
     <post-all />
     <more-button />
-    <main-footer />
+    <the-footer />
   </div>
 </template>
 

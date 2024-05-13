@@ -2,10 +2,18 @@
 import { RouterLink } from 'vue-router';
 import { usePostResponseStore } from '@/stores/usePostResponseStore';
 import { formatDate } from '@/utils/FormatDate';
-import { onBeforeMount } from 'vue';
+import { computed, onBeforeMount } from 'vue';
 import { fetchPopularPost } from '@/api';
 
 const store = usePostResponseStore();
+
+const mainPostThumbnail = computed(() => {
+  if (store?.popularPosts[0]?.thumbnail !== 'Default Thumbnail') {
+    return store?.popularPosts[0]?.thumbnail
+  } else {
+    return '/src/assets/img/pineapples.jpg'
+  }
+})
 
 onBeforeMount(async () => {
   await fetchPopularPost()
@@ -25,7 +33,7 @@ onBeforeMount(async () => {
       <div class="main-post">
         <RouterLink class="main-post-img"
           :to="{ name: 'post', params: { id: store.popularPosts && store.popularPosts[0].id } }">
-          <img src="@/assets/img/pineapples.jpg" alt="mockup">
+          <img :src=mainPostThumbnail alt="mockup">
         </RouterLink>
         <div class="content-wrapper">
           <div class="main-post-category">
@@ -40,7 +48,7 @@ onBeforeMount(async () => {
           </RouterLink>
           <div class="main-post-day">
             {{ formatDate(store.popularPosts && store.popularPosts[0]?.createdDate ? store.popularPosts[0].createdDate :
-            '') }}
+              '') }}
           </div>
         </div>
       </div>
@@ -183,7 +191,10 @@ onBeforeMount(async () => {
           margin-top: px-to-rem(14);
           color: $dim-black;
           cursor: pointer;
+        }
 
+        .main-post-text:deep(img) {
+          display: none;
         }
 
         .main-post-day {
@@ -249,6 +260,10 @@ onBeforeMount(async () => {
             margin-top: px-to-rem(14);
             color: #555;
             cursor: pointer;
+          }
+
+          .sub-post-text:deep(img) {
+            display: none;
           }
 
           .sub-post-day {

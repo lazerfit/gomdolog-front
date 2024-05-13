@@ -1,13 +1,13 @@
 <script setup lang=ts>
 import MainHeader from '@/components/common/MainHeader.vue';
 import PostDetail from '@/components/post/PostDetail.vue';
-import MainFooter from '@/components/common/MainFooter.vue';
+import TheFooter from '@/components/common/TheFooter.vue';
 </script>
 <template>
   <div>
     <main-header />
     <post-detail />
-    <main-footer />
+    <the-footer />
   </div>
 </template>
 

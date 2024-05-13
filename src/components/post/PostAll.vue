@@ -1,7 +1,6 @@
 <script setup lang=ts>
 import { usePostResponseStore } from '@/stores/usePostResponseStore';
 import { formatDate } from '@/utils/FormatDate';
-
 const store = usePostResponseStore();
 
 </script>
@@ -11,8 +10,11 @@ const store = usePostResponseStore();
       <div class="post-wrapper">
         <template v-if="store.posts?.content && store.posts?.content?.length > 0">
           <div class="post" v-for="item in store.posts?.content" :key="item.id">
-            <img src="/src/assets/img/pineapples.jpg" alt="all-post-img" v-if="item.thumbnail === 'Default Thumbnail'">
-            <img :src="item.thumbnail" v-else>
+            <RouterLink :to="{ name: 'post', params: { id: item.id } }">
+              <img src="/src/assets/img/pineapples.jpg" alt="all-post-img"
+                v-if="item.thumbnail === 'Default Thumbnail'">
+              <img :src="item.thumbnail" v-else>
+            </RouterLink>
             <div class="content-wrapper">
               <div class="all-post-category">
                 {{ item.categoryTitle }}
@@ -175,6 +177,10 @@ const store = usePostResponseStore();
           margin-top: px-to-rem(14);
           color: $dim-black;
           cursor: pointer;
+        }
+
+        .all-post-text:deep(img) {
+          display: none;
         }
 
         .all-post-day {
