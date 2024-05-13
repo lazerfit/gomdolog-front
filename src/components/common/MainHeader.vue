@@ -149,6 +149,10 @@ onBeforeUnmount(() => {
       filter: invert(100%);
     }
   }
+
+  header {
+    background-color: #121212 !important;
+  }
 }
 
 header {
@@ -156,9 +160,13 @@ header {
   margin: px-to-rem(15) auto px-to-rem(10) auto;
   display: flex;
   align-items: center;
+  background-color: #fff;
+  position: sticky;
+  top: 0;
 
   @media screen and (max-width: 767px) {
     width: 100%;
+    margin: 0 auto;
   }
 
   @media (min-width:768px) and (max-width: 1024px) {
