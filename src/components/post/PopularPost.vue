@@ -193,6 +193,23 @@ onBeforeMount(async () => {
           display: none;
         }
 
+        .main-post-text:deep(a) {
+          text-decoration: none;
+          color: #fff !important;
+
+          &:link {
+            color: #fff !important;
+          }
+
+          &:visited {
+            color: blueviolet !important;
+          }
+
+          &:hover {
+            color: #2c974b !important;
+          }
+        }
+
         .main-post-day {
           margin-top: px-to-rem(30);
           font-size: px-to-rem(13);
@@ -259,6 +276,23 @@ onBeforeMount(async () => {
 
           .sub-post-text:deep(img) {
             display: none;
+          }
+
+          .sub-post-text:deep(a) {
+            text-decoration: none;
+            color: #fff !important;
+
+            &:link {
+              color: #fff !important;
+            }
+
+            &:visited {
+              color: blueviolet !important;
+            }
+
+            &:hover {
+              color: #2c974b !important;
+            }
           }
 
           .sub-post-day {
