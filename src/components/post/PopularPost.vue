@@ -2,19 +2,10 @@
 import { RouterLink } from 'vue-router';
 import { usePostResponseStore } from '@/stores/usePostResponseStore';
 import { formatDate } from '@/utils/FormatDate';
-import { computed, onBeforeMount } from 'vue';
+import { onBeforeMount } from 'vue';
 import { fetchPopularPost } from '@/api';
 
 const store = usePostResponseStore();
-
-const mainPostThumbnail = computed(() => {
-  const thumbnail = store.popularPosts?.[0]?.thumbnail;
-  if ((thumbnail && thumbnail !== 'Default Thumbnail')) {
-    return thumbnail;
-  } else {
-    return '/src/assets/img/pineapples.jpg'
-  }
-})
 
 onBeforeMount(async () => {
   await fetchPopularPost()
@@ -34,7 +25,9 @@ onBeforeMount(async () => {
       <div class="main-post">
         <RouterLink class="main-post-img"
           :to="{ name: 'post', params: { id: store.popularPosts && store.popularPosts[0].id } }">
-          <img :src=mainPostThumbnail alt="mockup">
+          <img src=/src/assets/img/pineapples.jpg alt="mockup"
+            v-if="store.popularPosts?.[0]?.thumbnail === 'Default Thumbnail'">
+          <img :src=store.popularPosts?.[0]?.thumbnail v-else>
         </RouterLink>
         <div class="content-wrapper">
           <div class="main-post-category">
