@@ -1,7 +1,9 @@
 <script setup lang=ts>
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
+import Link from '@tiptap/extension-link'
 import Image from '@tiptap/extension-image'
+import Dropcursor from '@tiptap/extension-dropcursor'
 import { usePostSaveStore } from '@/stores/usePostSaveStore';
 
 const store = usePostSaveStore();
@@ -16,7 +18,11 @@ const editor = useEditor({
   },
   extensions: [
     StarterKit,
-    Image
+    Image,
+    Link.configure({
+      openOnClick: 'whenNotEditable',
+    }),
+    Dropcursor
   ],
   editorProps: {
     attributes: {

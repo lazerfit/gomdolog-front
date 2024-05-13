@@ -245,6 +245,23 @@ onBeforeMount(() => {
       margin: px-to-rem(30) auto;
     }
 
+    .post-text:deep(a) {
+      text-decoration: none;
+      color: #fff !important;
+
+      &:link {
+        color: #fff !important;
+      }
+
+      &:visited {
+        color: blueviolet !important;
+      }
+
+      &:hover {
+        color: #2c974b !important;
+      }
+    }
+
     .sns {
       display: flex;
       justify-content: space-between;

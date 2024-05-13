@@ -183,6 +183,24 @@ const store = usePostResponseStore();
           display: none;
         }
 
+        .all-post-text:deep(a) {
+          text-decoration: none;
+          color: #fff !important;
+
+          &:link {
+            color: #fff !important;
+          }
+
+          &:visited {
+            color: blueviolet !important;
+          }
+
+          &:hover {
+            color: #2c974b !important;
+          }
+        }
+
+
         .all-post-day {
           margin-top: px-to-rem(15);
           font-size: px-to-rem(13);
