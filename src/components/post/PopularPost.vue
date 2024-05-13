@@ -48,8 +48,10 @@ onBeforeMount(async () => {
       </div>
       <div class="sub-post-wrapper">
         <div class="sub-post" v-for="item in (store.popularPosts && store?.popularPosts.slice(1, 3))" :key="item.id">
-          <RouterLink class="sub-post-img" :to="{ name: 'post', params: { id: item.id } }">
-            <img src="@/assets/img/pineapples.jpg" alt="mockup">
+          <RouterLink class="sub-post-img"
+            :to="{ name: 'post', params: { id: store.popularPosts && store.popularPosts[0].id } }">
+            <img src=/src/assets/img/pineapples.jpg alt="mockup" v-if="item.thumbnail === 'Default Thumbnail'">
+            <img :src=item.thumbnail v-else>
           </RouterLink>
           <div class="content-wrapper">
             <div class="sub-post-category">
@@ -222,7 +224,6 @@ onBeforeMount(async () => {
             object-fit: cover;
             border-radius: px-to-rem(10);
             cursor: pointer;
-
           }
         }
 
