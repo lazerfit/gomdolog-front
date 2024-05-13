@@ -3,7 +3,7 @@ import MainHeader from '@/components/common/MainHeader.vue';
 import MainBanner from '@/components/common/MainBanner.vue';
 import MainCategory from '@/components/category/MainCategory.vue';
 import PostAll from '@/components/post/PostAll.vue';
-import MainFooter from '@/components/common/MainFooter.vue';
+import TheFooter from '@/components/common/TheFooter.vue';
 import MoreButton from '@/components/common/MoreButton.vue';
 import PopularPost from '@/components/post/PopularPost.vue';
 import { usePostResponseStore } from '@/stores/usePostResponseStore';
@@ -44,7 +44,7 @@ onBeforeMount(() => {
     </div>
     <post-all />
     <more-button />
-    <main-footer />
+    <the-footer />
   </main>
 </template>
 

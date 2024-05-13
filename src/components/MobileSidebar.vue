@@ -245,7 +245,7 @@ watchEffect(() => {
       position: fixed;
       background-color: $background-color;
       right: -300px;
-      top: 70px;
+      top: 50px;
       transition: .5s ease;
 
       .searchbar-wrapper {
@@ -380,7 +380,7 @@ watchEffect(() => {
 
     .login-wrapper {
       position: absolute;
-      bottom: 40px;
+      bottom: 20px;
       left: 50%;
       translate: -50% 0;
       width: 100%;

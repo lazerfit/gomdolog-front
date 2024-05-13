@@ -237,12 +237,12 @@ onBeforeMount(() => {
       @media (min-width:768px) and (max-width: 1024px) {
         margin: 30px 20px;
       }
+    }
 
-      img {
-        width: 100%;
-        border-radius: px-to-rem(10);
-        margin: px-to-rem(30) auto;
-      }
+    .post-text:deep(img) {
+      max-width: 100%;
+      border-radius: px-to-rem(10);
+      margin: px-to-rem(30) auto;
     }
 
     .sns {
