@@ -10,7 +10,7 @@ const store = usePostResponseStore();
 const mainPostThumbnail = computed(() => {
   const thumbnail = store.popularPosts?.[0]?.thumbnail;
   if ((thumbnail && thumbnail !== 'Default Thumbnail')) {
-    return store.popularPosts && store?.popularPosts[0]?.thumbnail
+    return thumbnail;
   } else {
     return '/src/assets/img/pineapples.jpg'
   }
