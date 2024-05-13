@@ -15,6 +15,7 @@ const postUpdateStore = usePostDeleteUpdateStore();
 const route = useRoute();
 
 const updatePost = () => {
+  localStorage.removeItem('draft')
   postUpdateStore.UPDATE(route.params.id)
 };
 

@@ -105,7 +105,8 @@ onBeforeUnmount(() => {
                     <input type="email" placeholder="이메일" required v-model="loginStore.signInForm.email">
                   </div>
                   <div>
-                    <input type="password" placeholder="비밀번호" required v-model="loginStore.signInForm.password">
+                    <input type="password" placeholder="비밀번호" required v-model="loginStore.signInForm.password"
+                      @keyup.enter="signIn">
                   </div>
                   <button class="btn-member-primary" @click="signIn">로그인</button>
                 </div>
