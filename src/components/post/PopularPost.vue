@@ -8,7 +8,7 @@ import { fetchPopularPost } from '@/api';
 const store = usePostResponseStore();
 
 const mainPostThumbnail = computed(() => {
-  if (store?.popularPosts[0]?.thumbnail !== 'Default Thumbnail') {
+  if ((store.popularPosts && store?.popularPosts[0]?.thumbnail) !== 'Default Thumbnail') {
     return store?.popularPosts[0]?.thumbnail
   } else {
     return '/src/assets/img/pineapples.jpg'
