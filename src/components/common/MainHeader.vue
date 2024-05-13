@@ -62,7 +62,7 @@ onBeforeUnmount(() => {
 <template>
   <header>
     <RouterLink class="main-logo" to="/">
-      <img src="@/assets/img/gomdol2.jpg" alt="main-logo">
+      <img src="@/assets/img/gomdolog3.png" alt="main-logo">
     </RouterLink>
     <darkmode-toggle />
     <mobile-sidebar />
