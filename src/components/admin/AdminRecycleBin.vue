@@ -72,6 +72,7 @@ onBeforeMount(() => {
 
     @media (max-width: 767px) {
       width: 100%;
+      margin-bottom: 30px;
     }
 
     .empty-img-container {

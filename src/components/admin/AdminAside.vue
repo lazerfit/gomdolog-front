@@ -73,7 +73,8 @@ aside {
   box-shadow: 5px 5px 5px $light-black;
 
   @media (max-width: 767px) {
-    display: none;
+    height: 50px;
+    width: 100%;
   }
 
   .content-wrapper {
@@ -83,6 +84,19 @@ aside {
     flex-direction: column;
     gap: px-to-rem(15);
     transition: all .3s ease;
+
+    @media (max-width: 767px) {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      height: 100%;
+      margin: 0;
+
+      .title {
+        display: none;
+      }
+    }
 
     span {
       font-family: $secondary-font;
