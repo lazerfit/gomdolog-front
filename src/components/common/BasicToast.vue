@@ -28,7 +28,7 @@ const store = useToasterStore()
   animation: toast-bounce .2s linear;
 
   @media (max-width: 767px) {
-    width: 220px;
+    max-width: 90vw;
   }
 
   i {
