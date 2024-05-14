@@ -240,9 +240,14 @@ onBeforeMount(() => {
     }
 
     .post-text:deep(img) {
-      max-width: 100%;
+      max-width: 900px;
       border-radius: px-to-rem(10);
       margin: px-to-rem(30) auto;
+      object-fit: cover;
+
+      @media (max-width: 767px) {
+        max-width: 360px;
+      }
     }
 
     .post-text:deep(a) {
