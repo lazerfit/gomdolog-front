@@ -39,6 +39,8 @@ import BasicToast from '../common/BasicToast.vue';
 
   @media (max-width: 767px) {
     width: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   @media (min-width:768px) and (max-width: 1024px) {
