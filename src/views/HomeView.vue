@@ -5,7 +5,7 @@ import MainCategory from '@/components/category/MainCategory.vue';
 import PostAll from '@/components/post/PostAll.vue';
 import TheFooter from '@/components/common/TheFooter.vue';
 import MoreButton from '@/components/common/MoreButton.vue';
-import PopularPost from '@/components/post/PopularPost.vue';
+import PostPopular from '@/components/post/PostPopular.vue';
 import { usePostResponseStore } from '@/stores/usePostResponseStore';
 import { onBeforeMount } from 'vue';
 
@@ -38,7 +38,7 @@ onBeforeMount(() => {
     <main-header />
     <main-banner />
     <main-category />
-    <popular-post />
+    <post-popular />
     <div class="all-post-title">
       <h1>All Posts</h1>
     </div>

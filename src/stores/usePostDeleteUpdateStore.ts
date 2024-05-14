@@ -68,10 +68,7 @@ export const usePostDeleteUpdateStore = defineStore('post-delete-update-store', 
   };
 
   const UPDATE = async (id: string[] | string) => {
-    const toast = useToasterStore();
     const store = usePostSaveStore();
-    const loaderStore = useLoaderStore();
-    loaderStore.isLoaded = true;
 
     const data = {
       title: store.postSaveForm.title,
@@ -80,19 +77,13 @@ export const usePostDeleteUpdateStore = defineStore('post-delete-update-store', 
       tags: store.postSaveForm.tags,
       id: id
     };
-    try {
-      await updatePost(data)
-        .then(() => {
-          toast.showToast('게시글 수정이 완료되었습니다.', ToasterStatus.CHECK);
-          window.location.href = '/';
-        })
-        .catch((error) => {
-          toast.showToast('오류가 발생하였습니다.\n다시 시도해주세요.', ToasterStatus.ERROR);
-          console.log(error);
-        });
-    } finally {
-      loaderStore.isLoaded = false;
-    }
+    await updatePost(data)
+      .then(() => {
+        window.location.href = '/';
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return { DELETE, UPDATE, deletedPosts, FETCH_DELETED_POST, DELETE_PERMANENT, REVERT_DELETE };
