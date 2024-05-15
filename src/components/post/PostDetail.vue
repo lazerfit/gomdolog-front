@@ -113,6 +113,7 @@ onBeforeMount(() => {
     </div>
     <div class="content-wrapper" v-if="isSuccess">
       <div class="post-title">
+        <!-- {{ data }} -->
         <div class="post-title-tags">
           <span v-for="(tag, index) in (data.data && data.data.tags)" :key="index">#{{ tag
             }}</span>

@@ -8,6 +8,18 @@ export interface Post {
   tags: string[];
 }
 
+export interface PostQuery {
+  data: {
+    id: number;
+    title: string;
+    content: string;
+    createdDate: string;
+    thumbnail: string;
+    categoryTitle: string;
+    tags: string[];
+  };
+}
+
 export interface DeletePost {
   id: number;
   title: string;
