@@ -114,15 +114,15 @@ onBeforeMount(() => {
     <div class="content-wrapper" v-if="isSuccess">
       <div class="post-title">
         <div class="post-title-tags">
-          <span v-for="(tag, index) in (data.data.tags)" :key="index">#{{ tag
+          <span v-for="(tag, index) in (data.data && data.data.tags)" :key="index">#{{ tag
             }}</span>
         </div>
         <div class="title">
-          {{ data.data.title }}
+          {{ data.data && data.data.title }}
         </div>
         <div class="date-admin-wrapper">
           <div class="created-date">
-            {{ formatDate(data.data.createdDate) }}
+            {{ formatDate(data.data && data.data.createdDate) }}
           </div>
           <div class="admin-wrapper" v-if="loginStore.isAdmin">
             <RouterLink :to="{ name: 'post-update', params: { id: route.params.id } }">
@@ -136,7 +136,7 @@ onBeforeMount(() => {
           </div>
         </div>
       </div>
-      <div class="post-text" v-html="data.data.content">
+      <div class="post-text" v-html="data.data && data.data.content">
       </div>
       <div class="sns">
         <div class="back-btn">
