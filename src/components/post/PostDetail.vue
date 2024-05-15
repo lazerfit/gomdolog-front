@@ -1,5 +1,5 @@
 <script setup lang=ts>
-import { ref, onBeforeMount, onMounted } from 'vue';
+import { ref, onBeforeMount, onMounted, reactive } from 'vue';
 import type { Ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useToasterStore } from '@/stores/useToasterStore';
@@ -12,6 +12,7 @@ import { useLoginStore } from '@/stores/useLoginStore';
 import { ToasterStatus } from '@/utils/types';
 import { useQuery } from '@tanstack/vue-query';
 import { fetchPost } from '@/api';
+import type { PostQuery } from '@/utils/types';
 
 const utterancesContainer: Ref<HTMLDivElement | null> = ref(null);
 const router = useRouter();
@@ -86,7 +87,10 @@ const useFetchPostQuery = () => {
   })
 }
 
-const { isLoading, isSuccess, data } = useFetchPostQuery();
+const { isLoading, isSuccess, data } = reactive(useFetchPostQuery());
+if (isSuccess) {
+  data
+}
 
 onMounted(() => {
   addUtterancesScript();
