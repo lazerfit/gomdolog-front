@@ -87,10 +87,7 @@ const useFetchPostQuery = () => {
   })
 }
 
-const { isLoading, isSuccess, data } = reactive(useFetchPostQuery());
-if (isSuccess) {
-  data
-}
+const { isLoading, isSuccess, data } = useFetchPostQuery();
 
 onMounted(() => {
   addUtterancesScript();
