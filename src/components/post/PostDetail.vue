@@ -118,11 +118,11 @@ onBeforeMount(() => {
             }}</span>
         </div>
         <div class="title">
-          {{ data.data && data.data.title }}
+          {{ data.data.title || '' }}
         </div>
         <div class="date-admin-wrapper">
           <div class="created-date">
-            {{ formatDate(data.data && data.data.createdDate) }}
+            {{ formatDate(data.data.createdDate || '') }}
           </div>
           <div class="admin-wrapper" v-if="loginStore.isAdmin">
             <RouterLink :to="{ name: 'post-update', params: { id: route.params.id } }">
@@ -136,7 +136,7 @@ onBeforeMount(() => {
           </div>
         </div>
       </div>
-      <div class="post-text" v-html="data.data && data.data.content">
+      <div class="post-text" v-html="data.data.content || ''">
       </div>
       <div class="sns">
         <div class="back-btn">
