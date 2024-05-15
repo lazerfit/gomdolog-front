@@ -16,6 +16,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@tanstack/vue-query": "^5.36.0",
     "@tiptap/extension-dropcursor": "^2.3.2",
     "@tiptap/extension-image": "^2.2.6",
     "@tiptap/extension-link": "^2.3.2",

@@ -10,6 +10,8 @@ import { usePostDeleteUpdateStore } from '@/stores/usePostDeleteUpdateStore';
 import { RouterLink } from 'vue-router';
 import { useLoginStore } from '@/stores/useLoginStore';
 import { ToasterStatus } from '@/utils/types';
+import { useQuery } from '@tanstack/vue-query';
+import { fetchPost } from '@/api';
 
 const utterancesContainer: Ref<HTMLDivElement | null> = ref(null);
 const router = useRouter();
@@ -18,6 +20,7 @@ const toastStore = useToasterStore();
 const postResponseStore = usePostResponseStore();
 const postDeleteUpdateStore = usePostDeleteUpdateStore();
 const loginStore = useLoginStore();
+const fetchEnable = ref(false);
 
 const BasicToast = defineAsyncComponent(() =>
   import('../common/BasicToast.vue')
@@ -72,13 +75,26 @@ const shareTwitter = () => {
   window.open('https://twitter.com/intent/tweet?url=' + document.URL + '&text=' + postResponseStore.post?.title, "_blank", "width=450,height=500")
 }
 
+const postId = route.params.id as string;
+
+const useFetchPostQuery = () => {
+  return useQuery({
+    queryKey: ['post', postId],
+    queryFn: () => fetchPost(postId),
+    staleTime: 5 * 1000,
+    enabled: fetchEnable,
+  })
+}
+
+const { isLoading, isSuccess, data } = useFetchPostQuery();
 
 onMounted(() => {
   addUtterancesScript();
 });
 
 onBeforeMount(() => {
-  postResponseStore.FETCH_POST(route.params.id);
+  // postResponseStore.FETCH_POST(route.params.id);
+  fetchEnable.value = true;
   if (!isVisitedPost() && !loginStore.isAdmin) {
     postResponseStore.ADD_VIEWS(route.params.id as string)
     const visitedPostString = localStorage.getItem('visitedPost') || '';
@@ -92,18 +108,21 @@ onBeforeMount(() => {
 
 <template>
   <div class="container">
-    <div class="content-wrapper">
+    <div v-if="isLoading">
+      Loading...
+    </div>
+    <div class="content-wrapper" v-if="isSuccess">
       <div class="post-title">
         <div class="post-title-tags">
-          <span v-for="(tag, index) in (postResponseStore.post && postResponseStore.post.tags)" :key="index">#{{ tag
+          <span v-for="(tag, index) in (data.data.tags)" :key="index">#{{ tag
             }}</span>
         </div>
         <div class="title">
-          {{ postResponseStore.post?.title || '' }}
+          {{ data.data.title }}
         </div>
         <div class="date-admin-wrapper">
           <div class="created-date">
-            {{ formatDate(postResponseStore.post?.createdDate || '') }}
+            {{ formatDate(data.data.createdDate) }}
           </div>
           <div class="admin-wrapper" v-if="loginStore.isAdmin">
             <RouterLink :to="{ name: 'post-update', params: { id: route.params.id } }">
@@ -117,7 +136,7 @@ onBeforeMount(() => {
           </div>
         </div>
       </div>
-      <div class="post-text" v-html="postResponseStore.post?.content || ''">
+      <div class="post-text" v-html="data.data.content">
       </div>
       <div class="sns">
         <div class="back-btn">
@@ -136,9 +155,9 @@ onBeforeMount(() => {
           <i class="fa-solid fa-chevron-up" @click="scrollToTop"></i>
         </div>
       </div>
-      <div class="comment">
-        <div ref="utterancesContainer"></div>
-      </div>
+    </div>
+    <div class="comment">
+      <div ref="utterancesContainer"></div>
     </div>
   </div>
 </template>
@@ -164,6 +183,9 @@ onBeforeMount(() => {
   margin: px-to-rem(40) auto;
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
 
   @media (max-width: 767px) {
     width: 100%;
@@ -173,8 +195,29 @@ onBeforeMount(() => {
     width: 100%;
   }
 
+  .comment {
+    margin-top: px-to-rem(40);
+    width: px-to-rem(900);
+
+    @media (max-width: 767px) {
+      width: 100%;
+    }
+
+    @media (min-width:768px) and (max-width: 1024px) {
+      width: 100%;
+    }
+  }
+
   .content-wrapper {
     width: px-to-rem(900);
+
+    @media (max-width: 767px) {
+      width: 100%;
+    }
+
+    @media (min-width:768px) and (max-width: 1024px) {
+      width: 100%;
+    }
 
     .post-title {
       text-align: center;
@@ -325,10 +368,6 @@ onBeforeMount(() => {
         cursor: pointer;
 
       }
-    }
-
-    .comment {
-      margin-top: px-to-rem(40);
     }
   }
 }
