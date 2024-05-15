@@ -36,7 +36,7 @@ function savePost(postData: PostSave) {
 }
 
 function fetchPost(postId: string | string[]): Promise<PostQuery> {
-  return client.get(`post/${postId}`);
+  return client.get(`post/${postId}`).then((response) => response.data);
 }
 
 function deletePost(id: string[] | string) {
