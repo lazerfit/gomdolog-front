@@ -1,12 +1,5 @@
 import axios from 'axios';
-import type {
-  PostSave,
-  CategorySave,
-  CategoryUpdate,
-  PostUpdate,
-  SigninForm,
-  PostQuery
-} from '@/utils/types';
+import type { PostSave, CategorySave, CategoryUpdate, PostUpdate, SigninForm } from '@/utils/types';
 
 const JWT = sessionStorage.getItem('_token');
 
@@ -35,8 +28,8 @@ function savePost(postData: PostSave) {
   return clientWithJWT.post(`post/new`, postData);
 }
 
-function fetchPost(postId: string | string[]): Promise<PostQuery> {
-  return client.get(`post/${postId}`).then((response) => response.data);
+function fetchPost(postId: string | string[]) {
+  return client.get(`post/${postId}`);
 }
 
 function deletePost(id: string[] | string) {

@@ -12,7 +12,7 @@ import { useLoginStore } from '@/stores/useLoginStore';
 import { ToasterStatus } from '@/utils/types';
 import { useQuery } from '@tanstack/vue-query';
 import { fetchPost } from '@/api';
-import type { PostQuery } from '@/utils/types';
+import type { Post, PostQuery } from '@/utils/types';
 
 const utterancesContainer: Ref<HTMLDivElement | null> = ref(null);
 const router = useRouter();
@@ -79,9 +79,9 @@ const shareTwitter = () => {
 const postId = route.params.id as string;
 
 const useFetchPostQuery = () => {
-  return useQuery({
+  return useQuery<Post>({
     queryKey: ['post', postId],
-    queryFn: () => fetchPost(postId),
+    queryFn: () => fetchPost(postId).then(response => response.data),
     staleTime: 5 * 1000,
     enabled: fetchEnable,
   })
@@ -112,19 +112,19 @@ onBeforeMount(() => {
     <div v-if="isLoading">
       Loading...
     </div>
-    <div class="content-wrapper" v-if="isSuccess">
+    <div class="content-wrapper" v-if="isSuccess && (data != undefined)">
       <div class="post-title">
         <!-- {{ data }} -->
         <div class="post-title-tags">
-          <span v-for="(tag, index) in (data.data && data.data.tags)" :key="index">#{{ tag
+          <span v-for="(tag, index) in (data && data.tags)" :key="index">#{{ tag
             }}</span>
         </div>
         <div class="title">
-          {{ data.data.title || '' }}
+          {{ data.title || '' }}
         </div>
         <div class="date-admin-wrapper">
           <div class="created-date">
-            {{ formatDate(data.data.createdDate || '') }}
+            {{ formatDate(data.createdDate || '') }}
           </div>
           <div class="admin-wrapper" v-if="loginStore.isAdmin">
             <RouterLink :to="{ name: 'post-update', params: { id: route.params.id } }">
@@ -138,7 +138,7 @@ onBeforeMount(() => {
           </div>
         </div>
       </div>
-      <div class="post-text" v-html="data.data.content || ''">
+      <div class="post-text" v-html="data.content || ''">
       </div>
       <div class="sns">
         <div class="back-btn">
