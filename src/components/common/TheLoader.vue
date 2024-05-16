@@ -1,10 +1,8 @@
 <script setup lang=ts>
-import { useLoaderStore } from '@/stores/useLoaderStore';
 
-const loader = useLoaderStore();
 </script>
 <template>
-  <div class="wrapper" v-if="loader.isLoaded">
+  <div class="wrapper">
     <span class="loader"></span>
   </div>
 </template>

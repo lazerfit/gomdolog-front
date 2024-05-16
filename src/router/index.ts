@@ -7,6 +7,7 @@ const PostSaveView = () => import('../views/PostSaveView.vue');
 const AdminView = () => import('../views/AdminView.vue');
 const NotFound = () => import('../views/404View.vue');
 const SignupView = () => import('@/views/SignupView.vue');
+const PostUpdate = () => import('@/views/PostUpdateView.vue');
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -24,7 +25,7 @@ const router = createRouter({
     {
       path: '/post/:id/update',
       name: 'post-update',
-      component: PostSaveView
+      component: PostUpdate
     },
     {
       path: '/category/:title',
@@ -61,10 +62,10 @@ const router = createRouter({
     if (savedPosition) {
       return savedPosition;
     } else {
-      return new Promise((resolve) => {
+      return new Promise((resolve, reject) => {
         setTimeout(() => {
-          resolve({ top: 0 });
-        }, 350);
+          resolve({ left: 0, top: 0 });
+        }, 500);
       });
     }
   }
