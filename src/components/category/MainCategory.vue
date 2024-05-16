@@ -64,8 +64,6 @@ watchEffect(() => {
     cursor: pointer;
     box-shadow: 5px 5px 20px rgba($color: #333, $alpha: .17);
     overflow: hidden;
-    z-index: 1;
-    position: relative;
     transition: all .3s ease;
 
     @media (min-width:768px) and (max-width: 1024px) {

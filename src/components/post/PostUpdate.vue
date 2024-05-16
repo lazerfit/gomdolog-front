@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { usePostSaveStore } from '@/stores/usePostSaveStore';
 import { useCategoryResponseStore } from '@/stores/useCategoryStore';
+import { usePostResponseStore } from '@/stores/usePostResponseStore';
 import { onBeforeMount, onUnmounted } from 'vue';
 import TiptapEditor from './TiptapEditor.vue';
 import TagInput from './TagInput.vue';
@@ -10,13 +11,30 @@ import { updatePost } from '@/api';
 
 const store = usePostSaveStore();
 const categoryStore = useCategoryResponseStore();
+const postResponseStore = usePostResponseStore();
 const route = useRoute();
 const queryClient = useQueryClient();
 const id = route.params.id as string;
 
-const submitSavePost = () => {
+const { mutate } = useMutation({
+  mutationFn: updatePost,
+  onSettled: async () => {
+    await queryClient.invalidateQueries({ queryKey: ['post', id] })
+    window.location.href = '/';
+  }
+})
+
+const UPDATE_POST = () => {
+  const data = {
+    title: store.postSaveForm.title,
+    content: store.postSaveForm.content,
+    categoryTitle: store.postSaveForm.categoryTitle,
+    tags: store.postSaveForm.tags,
+    id: id
+  };
+
   localStorage.removeItem('draft')
-  store.SAVE_POST()
+  mutate(data)
 }
 
 const loadDraft = () => {
@@ -36,8 +54,17 @@ const saveDraft = () => {
 
 const timer = setInterval(() => saveDraft(), 30 * 1000)
 
+const postEditMode = () => {
+  postResponseStore.FETCH_POST(route.params.id)
+  store.postSaveForm.title = postResponseStore?.post?.title || ''
+  store.postSaveForm.content = postResponseStore?.post?.content || ''
+  store.postSaveForm.tags = postResponseStore?.post?.tags || []
+  store.postSaveForm.categoryTitle = postResponseStore?.post?.categoryTitle || ''
+}
+
 onBeforeMount(() => {
   categoryStore.FETCH_ALL();
+  postEditMode();
   loadDraft();
   timer
 })
@@ -62,7 +89,7 @@ onUnmounted(() => {
       <div class="tip-tap-tag-submit">
         <tag-input v-model="store.postSaveForm.tags" />
         <div class="tip-tap-submit">
-          <button @click="submitSavePost">Submit</button>
+          <button @click="UPDATE_POST">Update</button>
         </div>
       </div>
     </div>

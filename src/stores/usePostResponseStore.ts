@@ -49,26 +49,14 @@ export const usePostResponseStore = defineStore('post-response-store', () => {
   };
 
   const FETCH_POST = async (postId: string | string[]) => {
-    const loaderStore = useLoaderStore();
-    loaderStore.isLoaded = true;
-    isPostLoaded.value = true;
-    try {
-      await fetchPost(postId)
-        .then((response) => {
-          if (response.data) {
-            post.value = response.data;
-          } else {
-            console.log('Invalid response data');
-          }
-        })
-        .catch((error) => {
-          // window.location.href = '/notfound';
-          console.error('Error fetching post: ', error);
-        });
-    } finally {
-      loaderStore.isLoaded = false;
-      isPostLoaded.value = false;
-    }
+    await fetchPost(postId)
+      .then((response) => {
+        post.value = response.data;
+      })
+      .catch((error) => {
+        // window.location.href = '/notfound';
+        console.error('Error fetching post: ', error);
+      });
   };
 
   const FETCH_POPULAR = async () => {

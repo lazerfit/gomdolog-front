@@ -1,5 +1,5 @@
 <script setup lang=ts>
-import { ref, onBeforeMount, onMounted, reactive } from 'vue';
+import { ref, onBeforeMount, onMounted } from 'vue';
 import type { Ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useToasterStore } from '@/stores/useToasterStore';
@@ -12,7 +12,8 @@ import { useLoginStore } from '@/stores/useLoginStore';
 import { ToasterStatus } from '@/utils/types';
 import { useQuery } from '@tanstack/vue-query';
 import { fetchPost } from '@/api';
-import type { Post, PostQuery } from '@/utils/types';
+import type { Post } from '@/utils/types';
+import TheLoader from '../common/TheLoader.vue';
 
 const utterancesContainer: Ref<HTMLDivElement | null> = ref(null);
 const router = useRouter();
@@ -82,19 +83,18 @@ const useFetchPostQuery = () => {
   return useQuery<Post>({
     queryKey: ['post', postId],
     queryFn: () => fetchPost(postId).then(response => response.data),
-    staleTime: 5 * 1000,
+    staleTime: 60 * 60 * 24 * 1000,
     enabled: fetchEnable,
   })
 }
 
-const { isLoading, isSuccess, data } = useFetchPostQuery();
+const { isSuccess, data, isPending } = useFetchPostQuery();
 
 onMounted(() => {
   addUtterancesScript();
 });
 
 onBeforeMount(() => {
-  // postResponseStore.FETCH_POST(route.params.id);
   fetchEnable.value = true;
   if (!isVisitedPost() && !loginStore.isAdmin) {
     postResponseStore.ADD_VIEWS(route.params.id as string)
@@ -108,13 +108,13 @@ onBeforeMount(() => {
 </script>
 
 <template>
+  <div v-if="isPending">
+    <the-loader />
+  </div>
   <div class="container">
-    <div v-if="isLoading">
-      Loading...
-    </div>
+
     <div class="content-wrapper" v-if="isSuccess && (data != undefined)">
       <div class="post-title">
-        <!-- {{ data }} -->
         <div class="post-title-tags">
           <span v-for="(tag, index) in (data && data.tags)" :key="index">#{{ tag
             }}</span>
