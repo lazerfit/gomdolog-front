@@ -13,6 +13,7 @@ import { ToasterStatus } from '@/utils/types';
 import { useQuery } from '@tanstack/vue-query';
 import { fetchPost } from '@/api';
 import type { Post } from '@/utils/types';
+import TheLoader from '../common/TheLoader.vue';
 
 const utterancesContainer: Ref<HTMLDivElement | null> = ref(null);
 const router = useRouter();
@@ -82,12 +83,12 @@ const useFetchPostQuery = () => {
   return useQuery<Post>({
     queryKey: ['post', postId],
     queryFn: () => fetchPost(postId).then(response => response.data),
-    staleTime: Infinity,
+    staleTime: 60 * 60 * 24 * 1000,
     enabled: fetchEnable,
   })
 }
 
-const { isLoading, isSuccess, data } = useFetchPostQuery();
+const { isSuccess, data, isPending } = useFetchPostQuery();
 
 onMounted(() => {
   addUtterancesScript();
@@ -107,13 +108,13 @@ onBeforeMount(() => {
 </script>
 
 <template>
+  <div v-if="isPending">
+    <the-loader />
+  </div>
   <div class="container">
-    <div v-if="isLoading">
-      Loading...
-    </div>
+
     <div class="content-wrapper" v-if="isSuccess && (data != undefined)">
       <div class="post-title">
-        <!-- {{ data }} -->
         <div class="post-title-tags">
           <span v-for="(tag, index) in (data && data.tags)" :key="index">#{{ tag
             }}</span>
