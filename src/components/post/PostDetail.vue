@@ -1,5 +1,5 @@
 <script setup lang=ts>
-import { ref, onBeforeMount, onMounted, reactive } from 'vue';
+import { ref, onBeforeMount, onMounted } from 'vue';
 import type { Ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useToasterStore } from '@/stores/useToasterStore';
@@ -12,7 +12,7 @@ import { useLoginStore } from '@/stores/useLoginStore';
 import { ToasterStatus } from '@/utils/types';
 import { useQuery } from '@tanstack/vue-query';
 import { fetchPost } from '@/api';
-import type { Post, PostQuery } from '@/utils/types';
+import type { Post } from '@/utils/types';
 
 const utterancesContainer: Ref<HTMLDivElement | null> = ref(null);
 const router = useRouter();
@@ -82,7 +82,7 @@ const useFetchPostQuery = () => {
   return useQuery<Post>({
     queryKey: ['post', postId],
     queryFn: () => fetchPost(postId).then(response => response.data),
-    staleTime: 5 * 1000,
+    staleTime: Infinity,
     enabled: fetchEnable,
   })
 }
@@ -94,7 +94,6 @@ onMounted(() => {
 });
 
 onBeforeMount(() => {
-  // postResponseStore.FETCH_POST(route.params.id);
   fetchEnable.value = true;
   if (!isVisitedPost() && !loginStore.isAdmin) {
     postResponseStore.ADD_VIEWS(route.params.id as string)
