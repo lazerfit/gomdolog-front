@@ -60,12 +60,16 @@ const router = createRouter({
   ],
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
-      return savedPosition;
-    } else {
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         setTimeout(() => {
-          resolve({ left: 0, top: 0 });
-        }, 500);
+          resolve(savedPosition);
+        }, 700);
+      });
+    } else {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve({ top: 0 });
+        }, 350);
       });
     }
   }

@@ -11,7 +11,7 @@
 <style lang='scss' scoped>
 .container {
   width: $desktop-width;
-  height: px-to-rem(440);
+  // height: px-to-rem(440);
   margin: px-to-rem(10) auto;
   display: flex;
   flex-direction: column;
@@ -36,6 +36,7 @@
       width: 100%;
       height: 100%;
       border-radius: px-to-rem(25);
+      object-fit: cover;
     }
   }
 }
