@@ -102,7 +102,7 @@ onBeforeMount(async () => {
 .container {
   color: $black-forest;
   width: $desktop-width;
-  height: 650px;
+  // height: 650px;
   margin: px-to-rem(100) auto;
   display: flex;
   flex-direction: column;
