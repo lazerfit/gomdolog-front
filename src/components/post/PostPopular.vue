@@ -18,7 +18,7 @@ onBeforeMount(async () => {
   <div class="container" v-if="store.popularPosts?.length ?? 0 > 0">
     <div>
       <h1>
-        Popular Posts
+        Popular blog posts
       </h1>
     </div>
     <div class="post-wrapper">
@@ -102,7 +102,6 @@ onBeforeMount(async () => {
 .container {
   color: $black-forest;
   width: $desktop-width;
-  // height: 650px;
   margin: px-to-rem(100) auto;
   display: flex;
   flex-direction: column;
@@ -118,9 +117,9 @@ onBeforeMount(async () => {
   }
 
   h1 {
-    font-weight: 600;
+    font-weight: 500;
     font-family: $secondary-font-en;
-    font-size: px-to-rem(40);
+    font-size: px-to-rem(34);
   }
 
   .post-wrapper {

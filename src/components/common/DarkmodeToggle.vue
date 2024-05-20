@@ -7,7 +7,7 @@ const store = useDarkModeStore();
 <template>
   <div class="container">
     <button @click="store.toggleDarkMode">
-      <Transition name="slide-fade">
+      <Transition name="fade">
         <i class="fa-solid fa-sun" v-if="!store.isDarkMode"></i>
         <i class="fa-regular fa-moon" v-else></i>
       </Transition>
@@ -16,17 +16,13 @@ const store = useDarkModeStore();
 </template>
 
 <style lang='scss' scoped>
-.slide-fade-enter-active {
-  transition: all 0.3s ease-out;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.6s ease;
 }
 
-.slide-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
-}
-
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-  transform: translateX(-20px);
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
 }
 
@@ -57,10 +53,15 @@ const store = useDarkModeStore();
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 
     i {
       height: auto;
       font-size: 20px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 

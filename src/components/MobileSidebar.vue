@@ -165,6 +165,10 @@ watchEffect(() => {
     }
   }
 
+  .mobile-menu {
+    border: 2px solid $pearl !important;
+  }
+
   .sidebar {
     background-color: #121212 !important;
 
@@ -184,7 +188,7 @@ watchEffect(() => {
     display: none;
   }
 
-  border: 2px solid $pearl;
+  border: 2px solid $black-forest;
   border-radius: 7px;
   width: 30px;
   height: 30px;

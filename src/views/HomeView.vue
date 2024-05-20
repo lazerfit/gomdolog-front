@@ -41,7 +41,7 @@ onBeforeMount(() => {
     <main-category />
     <post-popular />
     <div class="all-post-title">
-      <h1>All Posts</h1>
+      <h1>All blog posts</h1>
     </div>
     <post-all />
     <more-button />
@@ -70,9 +70,9 @@ onBeforeMount(() => {
 
 
   h1 {
-    font-weight: 600;
+    font-weight: 500;
     font-family: $secondary-font-en;
-    font-size: px-to-rem(40);
+    font-size: px-to-rem(34);
   }
 }
 </style>
