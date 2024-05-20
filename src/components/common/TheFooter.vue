@@ -24,11 +24,29 @@
 </template>
 
 <style lang='scss' scoped>
+.darkMode {
+  .container {
+    border-top: 1px solid $pearl !important;
+
+    .content-wrapper {
+      color: $pearl !important;
+
+      .sns {
+        span {
+          a {
+            color: $pearl !important;
+          }
+        }
+      }
+    }
+  }
+}
+
 .container {
   width: 100%;
   height: px-to-rem(120);
   display: flex;
-  background-color: #dddddd73;
+  border-top: 1px solid $black-forest;
   box-sizing: border-box;
 
   @media screen and (max-width: 767px) {

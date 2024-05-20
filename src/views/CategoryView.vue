@@ -1,7 +1,7 @@
 <script setup lang=ts>
 import MainHeader from '@/components/common/MainHeader.vue';
-import MainCategoryBanner from '@/components/common/MainCategoryBanner.vue';
 import MainCategory from '@/components/category/MainCategory.vue';
+import TheBanner from '@/components/common/TheBanner.vue';
 import CategoryTitle from '@/components/category/CategoryTitle.vue';
 import PostAll from '@/components/post/PostAll.vue';
 import MoreButton from '@/components/common/MoreButton.vue';
@@ -23,7 +23,7 @@ onBeforeMount(() => {
 
   <div class="container">
     <main-header />
-    <main-category-banner />
+    <the-banner />
     <main-category />
     <category-title />
     <post-all />
