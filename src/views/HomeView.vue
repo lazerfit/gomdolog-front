@@ -59,7 +59,7 @@ onBeforeMount(() => {
 
   @media screen and (max-width: 767px) {
     width: 100%;
-    margin-top: 270px;
+    margin-top: 260px;
     text-align: center;
   }
 
