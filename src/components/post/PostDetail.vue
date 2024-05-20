@@ -282,6 +282,8 @@ onBeforeMount(() => {
       margin: px-to-rem(30) auto;
       font-size: px-to-rem(16);
       line-height: px-to-rem(31);
+      white-space: pre-wrap;
+      word-wrap: break-word;
 
       @media (max-width: 767px) {
         margin: 30px 10px;
@@ -300,7 +302,7 @@ onBeforeMount(() => {
       object-fit: cover;
 
       @media (max-width: 767px) {
-        max-width: 360px;
+        max-width: 330px;
       }
     }
 
