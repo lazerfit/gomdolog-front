@@ -34,6 +34,8 @@ const store = useDarkModeStore();
   background-color: transparent;
 
   button {
+    border: 2px solid $pearl !important;
+
     i {
       color: $pearl;
     }
@@ -44,11 +46,13 @@ const store = useDarkModeStore();
   width: 30px;
   margin-right: 5px;
 
+
   button {
-    width: 100%;
-    height: 100%;
-    border: none;
+    width: 30px;
+    height: 30px;
+    border: 2px solid $black-forest;
     background-color: transparent;
+    border-radius: 7px;
     cursor: pointer;
     display: flex;
     align-items: center;

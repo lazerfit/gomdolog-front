@@ -167,6 +167,7 @@ header {
   @media screen and (max-width: 767px) {
     width: 100%;
     margin: 0 auto;
+    padding: 3px;
   }
 
   @media (min-width:768px) and (max-width: 1024px) {
@@ -175,15 +176,15 @@ header {
 
   .main-logo {
     @media screen and (max-width: 767px) {
-      margin: 0 auto;
-      padding-left: 60px;
+      padding: 14px 13px 13px 13px;
+      margin-right: auto;
     }
 
     img {
       width: px-to-rem(250);
 
       @media screen and (max-width: 767px) {
-        width: 200px;
+        width: 100px;
       }
     }
   }
