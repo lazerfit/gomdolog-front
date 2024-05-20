@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import MainHeader from '@/components/common/MainHeader.vue';
-import MainBanner from '@/components/common/MainBanner.vue';
 import MainCategory from '@/components/category/MainCategory.vue';
 import TheBanner from '@/components/common/TheBanner.vue';
 import PostAll from '@/components/post/PostAll.vue';
