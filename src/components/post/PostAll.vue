@@ -108,7 +108,7 @@ const store = usePostResponseStore();
 
   @media screen and (max-width: 767px) {
     width: 100%;
-    margin-top: 40px;
+    margin-top: 20px;
   }
 
   @media (min-width:768px) and (max-width: 1024px) {

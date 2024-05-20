@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import MainHeader from '@/components/common/MainHeader.vue';
-import MainBanner from '@/components/common/MainBanner.vue';
 import MainCategory from '@/components/category/MainCategory.vue';
+import TheBanner from '@/components/common/TheBanner.vue';
 import PostAll from '@/components/post/PostAll.vue';
 import TheFooter from '@/components/common/TheFooter.vue';
 import MoreButton from '@/components/common/MoreButton.vue';
@@ -37,7 +37,7 @@ onBeforeMount(() => {
 <template>
   <main>
     <main-header />
-    <main-banner />
+    <the-banner />
     <main-category />
     <post-popular />
     <div class="all-post-title">
@@ -57,7 +57,7 @@ onBeforeMount(() => {
 
   @media screen and (max-width: 767px) {
     width: 100%;
-    margin-top: 260px;
+    margin-top: 60px;
     text-align: center;
   }
 
@@ -66,11 +66,10 @@ onBeforeMount(() => {
     margin-top: 0;
   }
 
-
   h1 {
     font-weight: 500;
     font-family: $secondary-font-en;
-    font-size: px-to-rem(34);
+    font-size: px-to-rem(24);
   }
 }
 </style>

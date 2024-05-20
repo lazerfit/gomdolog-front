@@ -31,7 +31,7 @@ const postStore = usePostResponseStore();
   @media screen and (max-width: 767px) {
     width: 100%;
     margin: 0;
-    margin-top: 270px;
+    margin-top: 50px;
   }
 
   @media (min-width:768px) and (max-width: 1024px) {
@@ -55,9 +55,12 @@ const postStore = usePostResponseStore();
 
   .category-title {
     font-weight: 300;
-    // font-family: $secondary-font;
     font-size: px-to-rem(55);
     text-align: center;
+
+    @media screen and (max-width: 767px) {
+      font-size: px-to-rem(34);
+    }
   }
 
   .post-count {
