@@ -59,6 +59,16 @@ const store = usePostResponseStore();
 .darkMode {
   .post {
 
+    @media screen and (max-width: 767px) {
+      width: 100%;
+      display: flex;
+      height: 220px;
+      box-shadow: 5px 5px 15px black !important;
+      border-radius: 7px;
+      background-color: #0d182150 !important;
+      padding-top: 15px;
+    }
+
     .all-post-category {
       color: $black-forest !important;
     }
@@ -74,6 +84,7 @@ const store = usePostResponseStore();
 }
 
 .container {
+
   width: $desktop-width;
   margin: px-to-rem(50) auto 0 auto;
 
@@ -97,7 +108,7 @@ const store = usePostResponseStore();
 
   @media screen and (max-width: 767px) {
     width: 100%;
-    margin-top: 50px;
+    margin-top: 40px;
   }
 
   @media (min-width:768px) and (max-width: 1024px) {
@@ -110,11 +121,14 @@ const store = usePostResponseStore();
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-start;
+    align-items: center;
     gap: 20px;
     margin-top: px-to-rem(50);
 
     @media screen and (max-width: 767px) {
       margin-top: 0;
+      justify-content: space-between;
+      gap: 5px;
     }
 
     @media (min-width:768px) and (max-width: 1024px) {
@@ -128,7 +142,12 @@ const store = usePostResponseStore();
 
       @media screen and (max-width: 767px) {
         width: 100%;
-        margin-top: 0;
+        display: flex;
+        height: 220px;
+        box-shadow: 5px 5px 10px $light-gray;
+        border-radius: 7px;
+        background-color: #fffaf036;
+        padding-top: 15px;
       }
 
       @media (min-width:768px) and (max-width: 1024px) {
@@ -142,12 +161,17 @@ const store = usePostResponseStore();
         object-fit: cover;
 
         @media screen and (max-width: 767px) {
-          height: 200px;
+          height: 190px;
         }
       }
 
       .content-wrapper {
         margin: 0 px-to-rem(10);
+
+        @media screen and (max-width: 767px) {
+          min-width: 60%;
+          max-width: 60%;
+        }
 
         .all-post-category {
           font-family: $secondary-font;
@@ -177,6 +201,10 @@ const store = usePostResponseStore();
           margin-top: px-to-rem(14);
           color: $dim-black;
           cursor: pointer;
+
+          @media screen and (max-width: 767px) {
+            font-size: px-to-rem(24);
+          }
         }
 
         .all-post-text:deep(img) {

@@ -41,7 +41,7 @@ onBeforeMount(() => {
     <main-category />
     <post-popular />
     <div class="all-post-title">
-      <h1>All Posts</h1>
+      <h1>All blog posts</h1>
     </div>
     <post-all />
     <more-button />
@@ -50,8 +50,6 @@ onBeforeMount(() => {
 </template>
 
 <style lang="scss" scoped>
-@import '../assets/main.scss';
-
 .all-post-title {
   width: $desktop-width;
   margin: px-to-rem(10) auto;
@@ -59,7 +57,7 @@ onBeforeMount(() => {
 
   @media screen and (max-width: 767px) {
     width: 100%;
-    margin-top: 270px;
+    margin-top: 260px;
     text-align: center;
   }
 
@@ -70,9 +68,9 @@ onBeforeMount(() => {
 
 
   h1 {
-    font-weight: 600;
+    font-weight: 500;
     font-family: $secondary-font-en;
-    font-size: px-to-rem(40);
+    font-size: px-to-rem(34);
   }
 }
 </style>

@@ -228,6 +228,10 @@ onBeforeMount(() => {
 
       .title {
         font-size: px-to-rem(35);
+
+        @media (max-width: 767px) {
+          font-size: px-to-rem(44);
+        }
       }
 
       .post-title-tags {
@@ -235,6 +239,10 @@ onBeforeMount(() => {
           font-size: 0.9rem;
           color: #ffda79;
           margin-right: px-to-rem(7);
+
+          @media (max-width: 767px) {
+            font-size: 1.2rem;
+          }
         }
       }
 
@@ -277,6 +285,7 @@ onBeforeMount(() => {
 
       @media (max-width: 767px) {
         margin: 30px 10px;
+        font-size: px-to-rem(28);
       }
 
       @media (min-width:768px) and (max-width: 1024px) {
@@ -298,6 +307,8 @@ onBeforeMount(() => {
     .post-text:deep(a) {
       text-decoration: none;
       color: #fff !important;
+      white-space: pre-wrap;
+      word-wrap: break-word;
 
       &:link {
         color: #fff !important;

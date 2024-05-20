@@ -34,8 +34,8 @@ const hasNextPage = computed(() => (postStore?.posts?.size || 0) > (postStore?.p
 
   @media screen and (max-width: 767px) {
     width: 100%;
-    margin-top: 15px;
     margin-bottom: 80px;
+    margin-top: 60px;
   }
 
   @media (min-width:768px) and (max-width: 1024px) {
