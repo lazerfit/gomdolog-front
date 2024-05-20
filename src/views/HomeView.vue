@@ -50,8 +50,6 @@ onBeforeMount(() => {
 </template>
 
 <style lang="scss" scoped>
-@import '../assets/main.scss';
-
 .all-post-title {
   width: $desktop-width;
   margin: px-to-rem(10) auto;

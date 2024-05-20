@@ -16,7 +16,7 @@ export const useDarkModeStore = defineStore('darkmode-store', () => {
 
   const setDarkMode = () => {
     const savedSetting = localStorage.getItem('darkMode');
-    if (savedSetting) {
+    if (savedSetting === 'true') {
       document.body.classList.add('darkMode');
     } else {
       document.body.classList.remove('darkMode');
