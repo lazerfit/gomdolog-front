@@ -17,15 +17,14 @@ const route = useRoute();
 const queryClient = useQueryClient();
 const id = route.params.id as string;
 
-const { mutate } = useMutation({
+const { mutateAsync } = useMutation({
   mutationFn: updatePost,
-  onSettled: async () => {
+  onSuccess: async () => {
     await queryClient.invalidateQueries({ queryKey: ['post', id] })
-    window.location.href = '/';
   }
 })
 
-const UPDATE_POST = () => {
+const UPDATE_POST = async () => {
   const data = {
     title: store.postSaveForm.title,
     content: store.postSaveForm.content,
@@ -35,7 +34,13 @@ const UPDATE_POST = () => {
   };
 
   localStorage.removeItem('draft')
-  mutate(data)
+  try {
+    await mutateAsync(data)
+  } catch (error) {
+    console.log(error);
+  } finally {
+    window.location.href = '/';
+  }
 }
 
 const loadDraft = () => {
