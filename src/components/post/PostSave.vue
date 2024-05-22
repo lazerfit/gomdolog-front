@@ -4,15 +4,9 @@ import { useCategoryResponseStore } from '@/stores/useCategoryStore';
 import { onBeforeMount, onUnmounted } from 'vue';
 import TiptapEditor from './TiptapEditor.vue';
 import TagInput from './TagInput.vue';
-import { useRoute } from 'vue-router';
-import { useMutation, useQueryClient } from '@tanstack/vue-query';
-import { updatePost } from '@/api';
 
 const store = usePostSaveStore();
 const categoryStore = useCategoryResponseStore();
-const route = useRoute();
-const queryClient = useQueryClient();
-const id = route.params.id as string;
 
 const submitSavePost = () => {
   localStorage.removeItem('draft')
