@@ -11,7 +11,7 @@ import {
 } from '@/api';
 import type { Post, PostResopnseWithoutTags } from '@/utils/types';
 import { useLoaderStore } from './useLoaderStore';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
 export const usePostResponseStore = defineStore('post-response-store', () => {
   const posts = ref<PostPageResponse | null>(null);
@@ -49,14 +49,25 @@ export const usePostResponseStore = defineStore('post-response-store', () => {
   };
 
   const FETCH_POST = async (postId: string | string[]) => {
-    await fetchPost(postId)
-      .then((response) => {
-        post.value = response.data;
-      })
-      .catch((error) => {
-        // window.location.href = '/notfound';
-        console.error('Error fetching post: ', error);
-      });
+    const router = useRouter();
+    const loaderStore = useLoaderStore();
+    loaderStore.isLoaded = true;
+    isPostLoaded.value = true;
+    try {
+      await fetchPost(postId)
+        .then((response) => {
+          post.value = response.data;
+        })
+        .catch((error) => {
+          router.push('/404');
+          console.error('Error fetching post: ', error);
+        });
+    } catch (error) {
+      console.error('Error fetching post: ', error);
+    } finally {
+      loaderStore.isLoaded = false;
+      isPostLoaded.value = false;
+    }
   };
 
   const FETCH_POPULAR = async () => {

@@ -1,17 +1,18 @@
 <script setup lang="ts">
 import { usePostSaveStore } from '@/stores/usePostSaveStore';
 import { useCategoryResponseStore } from '@/stores/useCategoryStore';
-import { usePostResponseStore } from '@/stores/usePostResponseStore';
-import { onBeforeMount, onUnmounted } from 'vue';
+import { onBeforeMount, onMounted, onUnmounted, ref } from 'vue';
 import TiptapEditor from './TiptapEditor.vue';
 import TagInput from './TagInput.vue';
 import { useRoute } from 'vue-router';
 import { useMutation, useQueryClient } from '@tanstack/vue-query';
-import { updatePost } from '@/api';
+import { updatePost, fetchPost } from '@/api';
+import { useQuery } from '@tanstack/vue-query';
+import type { Post } from '@/utils/types';
+import TheLoader from '../common/TheLoader.vue';
 
 const store = usePostSaveStore();
 const categoryStore = useCategoryResponseStore();
-const postResponseStore = usePostResponseStore();
 const route = useRoute();
 const queryClient = useQueryClient();
 const id = route.params.id as string;
@@ -54,19 +55,31 @@ const saveDraft = () => {
 
 const timer = setInterval(() => saveDraft(), 30 * 1000)
 
-const postEditMode = () => {
-  postResponseStore.FETCH_POST(route.params.id)
-  store.postSaveForm.title = postResponseStore?.post?.title || ''
-  store.postSaveForm.content = postResponseStore?.post?.content || ''
-  store.postSaveForm.tags = postResponseStore?.post?.tags || []
-  store.postSaveForm.categoryTitle = postResponseStore?.post?.categoryTitle || ''
+const useFetchPostQuery = () => {
+  return useQuery<Post>({
+    queryKey: ['post', id],
+    queryFn: () => fetchPost(id).then(response => response.data),
+    staleTime: 60 * 60 * 24 * 1000,
+    enabled: fetchEnable,
+  })
 }
+
+const fetchEnable = ref(false);
+
+const { isSuccess, data, isPending } = useFetchPostQuery();
 
 onBeforeMount(() => {
   categoryStore.FETCH_ALL();
-  postEditMode();
+  fetchEnable.value = true;
   loadDraft();
   timer
+  store.postSaveForm.content = data.value.content
+  store.postSaveForm.tags = data.value.tags
+})
+
+onMounted(() => {
+  store.postSaveForm.title = data.value.title
+  store.postSaveForm.categoryTitle = data.value.categoryTitle
 })
 
 onUnmounted(() => {
@@ -76,7 +89,10 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="tip-tap-container">
+  <div class="pending" v-if="isPending">
+    <the-loader />
+  </div>
+  <div class="tip-tap-container" v-if="isSuccess">
     <div class="tip-tap-submit">
       <div class="tip-tap-category-wrapper">
         <select name="category" id="post-category" v-model="store.postSaveForm.categoryTitle">
