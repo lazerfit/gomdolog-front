@@ -68,20 +68,25 @@ const fetchEnable = ref(false);
 
 const { isSuccess, data, isPending } = useFetchPostQuery();
 
-const post = computed(() => data.value ?? null)
+const post = computed(() => data.value ?? {
+  title: '',
+  tags: [],
+  content: '',
+  categoryTitle: ''
+})
 
 onBeforeMount(() => {
   categoryStore.FETCH_ALL();
   fetchEnable.value = true;
   loadDraft();
   timer
-  store.postSaveForm.content = post.value.title || ''
-  store.postSaveForm.tags = post.value.tags || []
+  store.postSaveForm.content = post.value.content
+  store.postSaveForm.tags = post.value.tags
 })
 
 onMounted(() => {
-  store.postSaveForm.title = post.value.title || ''
-  store.postSaveForm.categoryTitle = post.value.categoryTitle || ''
+  store.postSaveForm.title = post.value.title
+  store.postSaveForm.categoryTitle = post.value.categoryTitle
 })
 
 onUnmounted(() => {
