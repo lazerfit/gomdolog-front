@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { usePostSaveStore } from '@/stores/usePostSaveStore';
 import { useCategoryResponseStore } from '@/stores/useCategoryStore';
-import { onBeforeMount, onMounted, onUnmounted, ref } from 'vue';
+import { computed, onBeforeMount, onMounted, onUnmounted, ref } from 'vue';
 import TiptapEditor from './TiptapEditor.vue';
 import TagInput from './TagInput.vue';
 import { useRoute } from 'vue-router';
@@ -68,18 +68,20 @@ const fetchEnable = ref(false);
 
 const { isSuccess, data, isPending } = useFetchPostQuery();
 
+const post = computed(() => data.value ?? null)
+
 onBeforeMount(() => {
   categoryStore.FETCH_ALL();
   fetchEnable.value = true;
   loadDraft();
   timer
-  store.postSaveForm.content = data?.value.content
-  store.postSaveForm.tags = data?.value.tags
+  store.postSaveForm.content = post.value.title || ''
+  store.postSaveForm.tags = post.value.tags || []
 })
 
 onMounted(() => {
-  store.postSaveForm.title = data?.value.title
-  store.postSaveForm.categoryTitle = data?.value.categoryTitle
+  store.postSaveForm.title = post.value.title || ''
+  store.postSaveForm.categoryTitle = post.value.categoryTitle || ''
 })
 
 onUnmounted(() => {
