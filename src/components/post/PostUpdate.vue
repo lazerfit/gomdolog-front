@@ -73,13 +73,13 @@ onBeforeMount(() => {
   fetchEnable.value = true;
   loadDraft();
   timer
-  store.postSaveForm.content = data.value.content || ''
-  store.postSaveForm.tags = data.value.tags || []
+  store.postSaveForm.content = data?.value.content
+  store.postSaveForm.tags = data?.value.tags
 })
 
 onMounted(() => {
-  store.postSaveForm.title = data.value.title || ''
-  store.postSaveForm.categoryTitle = data.value.categoryTitle || ''
+  store.postSaveForm.title = data?.value.title
+  store.postSaveForm.categoryTitle = data?.value.categoryTitle
 })
 
 onUnmounted(() => {
