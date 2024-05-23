@@ -14,6 +14,8 @@ import { useQuery } from '@tanstack/vue-query';
 import { fetchPost } from '@/api';
 import type { Post } from '@/utils/types';
 import TheLoader from '../common/TheLoader.vue';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/atom-one-dark.css'
 
 const utterancesContainer: Ref<HTMLDivElement | null> = ref(null);
 const router = useRouter();
@@ -90,9 +92,11 @@ const useFetchPostQuery = () => {
 
 const { isSuccess, data, isPending } = useFetchPostQuery();
 
-onMounted(() => {
-  addUtterancesScript();
-});
+const highlightCode = () => {
+  document.querySelectorAll('pre code').forEach(block => {
+    hljs.highlightElement(block as HTMLElement)
+  })
+}
 
 onBeforeMount(() => {
   fetchEnable.value = true;
@@ -103,6 +107,11 @@ onBeforeMount(() => {
     visitedPost.push(route.params.id);
     localStorage.setItem('visitedPost', JSON.stringify(visitedPost));
   }
+});
+
+onMounted(() => {
+  addUtterancesScript();
+  highlightCode()
 });
 
 </script>
