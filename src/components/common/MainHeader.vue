@@ -2,14 +2,15 @@
 import { onBeforeMount, onBeforeUnmount, ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import MobileSidebar from '../MobileSidebar.vue';
-import SearchBar from './SearchBar.vue';
-import DarkmodeToggle from './DarkmodeToggle.vue';
+import DarkmodeToggle2 from './DarkmodeToggle2.vue';
 import { defineAsyncComponent } from 'vue';
 import { useLoginStore } from '@/stores/useLoginStore';
+import { useDarkModeStore } from '@/stores/useDarkModeStore';
 
 const isModalOpened = ref(false);
 const isAdminMenuOpened = ref(false);
 const loginStore = useLoginStore();
+const darkmodeStore = useDarkModeStore();
 
 const BasicModal = defineAsyncComponent(() =>
   import('./BasicModal.vue')
@@ -51,6 +52,11 @@ const isAdmin = () => {
 
 onBeforeMount(() => {
   isAdmin()
+  if (localStorage.getItem('darkMode') && localStorage.getItem('darkMode') === 'true') {
+    darkmodeStore.isDarkMode = true
+  } else {
+    darkmodeStore.isDarkMode = false
+  }
 })
 
 onBeforeUnmount(() => {
@@ -64,12 +70,11 @@ onBeforeUnmount(() => {
     <RouterLink class="main-logo" to="/">
       <img src="@/assets/img/gomdolog3.png" alt="main-logo">
     </RouterLink>
-    <darkmode-toggle />
-    <mobile-sidebar />
     <basic-toast />
     <div class="sub-logo-container">
-      <search-bar />
-      <span class="login">
+      <DarkmodeToggle2 />
+      <mobile-sidebar />
+      <div class="login">
         <i class="fa-regular fa-user" @click="openModal" v-if="!loginStore.isAdmin"></i>
         <i class="fa-solid fa-user" @click="isAdminMenuOpened = !isAdminMenuOpened" v-else>
           <Transition name="bounce">
@@ -118,7 +123,7 @@ onBeforeUnmount(() => {
             </template>
           </basic-modal>
         </Transition>
-      </span>
+      </div>
     </div>
   </header>
 </template>
@@ -192,6 +197,7 @@ header {
   .sub-logo-container {
     margin-left: auto;
     display: flex;
+    align-items: center;
 
     @media screen and (max-width: 767px) {
       display: none;

@@ -68,7 +68,7 @@ onBeforeMount(() => {
 
   h1 {
     font-weight: 500;
-    font-family: $secondary-font-en;
+    font-family: "Playfair Display", serif;
     font-size: px-to-rem(24);
   }
 }
