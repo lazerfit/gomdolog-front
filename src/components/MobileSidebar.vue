@@ -1,5 +1,4 @@
 <script setup lang=ts>
-import SearchBar from './common/SearchBar.vue';
 import { RouterLink } from 'vue-router';
 import { useCategoryResponseStore } from '@/stores/useCategoryStore';
 import { computed, onBeforeMount, ref, watchEffect } from 'vue';
@@ -86,9 +85,6 @@ watchEffect(() => {
       </label>
       <basic-toast />
       <div class="sidebar">
-        <div class="searchbar-wrapper">
-          <search-bar />
-        </div>
         <div class="category-wrapper">
           <RouterLink :to="{ name: 'category', params: { title: item.title } }" class="category"
             v-for="(item, index) in filteredCategory" :key="index">
@@ -254,21 +250,15 @@ watchEffect(() => {
 
     .sidebar {
       @media screen and (max-width: 767px) {
-        width: 300px;
-        height: 100vh;
+        width: 80%;
+        height: 100%;
         position: fixed;
         background-color: $background-color;
-        right: -300px;
+        right: -767px;
         top: 50px;
-        transition: .5s ease;
-        z-index: 100;
-
-        .searchbar-wrapper {
-          position: absolute;
-          left: 50%;
-          translate: -50% 0;
-          top: 20px;
-        }
+        transition: .3s ease;
+        z-index: 1000;
+        overflow: hidden;
 
         .category-wrapper {
           position: absolute;
@@ -324,7 +314,6 @@ watchEffect(() => {
           }
         }
       }
-
     }
 
     .modal-header-container {

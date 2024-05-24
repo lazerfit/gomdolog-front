@@ -14,6 +14,8 @@ import { useQuery } from '@tanstack/vue-query';
 import { fetchPost } from '@/api';
 import type { Post } from '@/utils/types';
 import TheLoader from '../common/TheLoader.vue';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/atom-one-dark.css'
 
 const utterancesContainer: Ref<HTMLDivElement | null> = ref(null);
 const router = useRouter();
@@ -90,9 +92,11 @@ const useFetchPostQuery = () => {
 
 const { isSuccess, data, isPending } = useFetchPostQuery();
 
-onMounted(() => {
-  addUtterancesScript();
-});
+const highlightCode = () => {
+  document.querySelectorAll('pre code').forEach(block => {
+    hljs.highlightElement(block as HTMLElement)
+  })
+}
 
 onBeforeMount(() => {
   fetchEnable.value = true;
@@ -103,6 +107,11 @@ onBeforeMount(() => {
     visitedPost.push(route.params.id);
     localStorage.setItem('visitedPost', JSON.stringify(visitedPost));
   }
+});
+
+onMounted(() => {
+  addUtterancesScript();
+  highlightCode()
 });
 
 </script>
@@ -280,7 +289,7 @@ onBeforeMount(() => {
 
     .post-text {
       margin: px-to-rem(30) auto;
-      font-size: px-to-rem(16);
+      font-size: px-to-rem(18);
       line-height: px-to-rem(31);
       white-space: pre-wrap;
       word-wrap: break-word;
@@ -295,11 +304,28 @@ onBeforeMount(() => {
       }
     }
 
+    .post-text:deep(p) {
+      font-size: px-to-rem(18);
+      line-height: px-to-rem(24);
+    }
+
+    .post-text:deep(h1) {
+      font-size: px-to-rem(24);
+      line-height: px-to-rem(38.4);
+    }
+
+    .post-text:deep(h2) {
+      font-size: px-to-rem(20);
+      line-height: px-to-rem(32);
+    }
+
     .post-text:deep(img) {
       max-width: 900px;
       border-radius: px-to-rem(10);
       margin: px-to-rem(30) auto;
       object-fit: cover;
+      display: block;
+      margin: 20px auto;
 
       @media (max-width: 767px) {
         max-width: 330px;

@@ -1,10 +1,25 @@
 <script setup lang=ts>
-import { useEditor, EditorContent } from '@tiptap/vue-3'
+import { useEditor, EditorContent, BubbleMenu, FloatingMenu } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
 import Link from '@tiptap/extension-link'
 import Image from '@tiptap/extension-image'
 import Dropcursor from '@tiptap/extension-dropcursor'
 import { usePostSaveStore } from '@/stores/usePostSaveStore';
+import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
+import css from 'highlight.js/lib/languages/css'
+import js from 'highlight.js/lib/languages/javascript'
+import ts from 'highlight.js/lib/languages/typescript'
+import html from 'highlight.js/lib/languages/xml'
+import java from 'highlight.js/lib/languages/java'
+import { createLowlight } from 'lowlight'
+
+const lowlight = createLowlight();
+
+lowlight.register('css', css);
+lowlight.register('js', js);
+lowlight.register('ts', ts);
+lowlight.register('html', html);
+lowlight.register('java', java);
 
 const store = usePostSaveStore();
 
@@ -22,7 +37,10 @@ const editor = useEditor({
     Link.configure({
       openOnClick: 'whenNotEditable',
     }),
-    Dropcursor
+    Dropcursor,
+    CodeBlockLowlight.configure({
+      lowlight,
+    })
   ],
   editorProps: {
     attributes: {
@@ -40,39 +58,37 @@ const addImage = () => {
 </script>
 <template>
   <div class=" tip-tap-buttons" v-if="editor">
-    <button @click="editor.chain().focus().toggleBold().run()"
-      :disabled="!editor.can().chain().focus().toggleBold().run()" :class="{ 'is-active': editor.isActive('bold') }"
-      class="menu-btn">
-      <i class="fa-solid fa-bold"></i>
-    </button>
-    <button @click="editor.chain().focus().toggleItalic().run()"
-      :disabled="!editor.can().chain().focus().toggleItalic().run()" :class="{ 'is-active': editor.isActive('italic') }"
-      class="menu-btn">
-      <i class="fa-solid fa-italic"></i>
-    </button>
+    <bubble-menu class="bubble-menu" :tippy-options="{ duration: 100 }" :editor="editor">
+      <button @click="editor.chain().focus().toggleBold().run()"
+        :disabled="!editor.can().chain().focus().toggleBold().run()" :class="{ 'is-active': editor.isActive('bold') }">
+        Bold
+      </button>
+      <button @click="editor.chain().focus().toggleItalic().run()"
+        :disabled="!editor.can().chain().focus().toggleItalic().run()"
+        :class="{ 'is-active': editor.isActive('italic') }">
+        Italic
+      </button>
+      <button @click="editor.chain().focus().toggleCodeBlock().run()"
+        :class="{ 'is-active': editor.isActive('codeBlock') }">
+        Code
+      </button>
+    </bubble-menu>
     <button @click="editor.chain().focus().toggleStrike().run()"
       :disabled="!editor.can().chain().focus().toggleStrike().run()" :class="{ 'is-active': editor.isActive('strike') }"
       class="menu-btn">
       <i class="fa-solid fa-strikethrough"></i>
     </button>
-    <button @click="editor.chain().focus().toggleCode().run()"
-      :disabled="!editor.can().chain().focus().toggleCode().run()" :class="{ 'is-active': editor.isActive('code') }"
-      class="menu-btn">
-      <i class="fa-solid fa-code"></i>
-    </button>
-    <button @click="editor.chain().focus().toggleCodeBlock().run()"
-      :class="{ 'is-active': editor.isActive('codeBlock') }" class="menu-btn">
-      <i class="fa-brands fa-codepen"></i>
-    </button>
-    <button @click="addImage" class="menu-btn"><i class="fa-solid fa-image"></i></button>
-    <button @click="editor.chain().focus().toggleHeading({ level: 1 }).run()"
-      :class="{ 'is-active': editor.isActive('heading', { level: 1 }) }" class="menu-btn">
-      <i class="fa-solid fa-heading"></i>1
-    </button>
-    <button @click="editor.chain().focus().toggleHeading({ level: 2 }).run()"
-      :class="{ 'is-active': editor.isActive('heading', { level: 2 }) }" class="menu-btn">
-      <i class="fa-solid fa-heading"></i>2
-    </button>
+    <floating-menu class="floating-menu" :tippy-options="{ duration: 100 }" :editor="editor">
+      <button @click="addImage">Image</button>
+      <button @click="editor.chain().focus().toggleHeading({ level: 1 }).run()"
+        :class="{ 'is-active': editor.isActive('heading', { level: 1 }) }">
+        H1
+      </button>
+      <button @click="editor.chain().focus().toggleHeading({ level: 2 }).run()"
+        :class="{ 'is-active': editor.isActive('heading', { level: 2 }) }">
+        H2
+      </button>
+    </floating-menu>
     <button @click="editor.chain().focus().toggleBulletList().run()"
       :class="{ 'is-active': editor.isActive('bulletList') }" class="menu-btn">
       <i class="fa-solid fa-list-ul"></i>
@@ -180,6 +196,58 @@ const addImage = () => {
       background: none;
       font-size: 0.8rem;
     }
+
+    .hljs-comment,
+    .hljs-quote {
+      color: #616161;
+    }
+
+    .hljs-variable,
+    .hljs-template-variable,
+    .hljs-attribute,
+    .hljs-tag,
+    .hljs-name,
+    .hljs-regexp,
+    .hljs-link,
+    .hljs-name,
+    .hljs-selector-id,
+    .hljs-selector-class {
+      color: #F98181;
+    }
+
+    .hljs-number,
+    .hljs-meta,
+    .hljs-built_in,
+    .hljs-builtin-name,
+    .hljs-literal,
+    .hljs-type,
+    .hljs-params {
+      color: #FBBC88;
+    }
+
+    .hljs-string,
+    .hljs-symbol,
+    .hljs-bullet {
+      color: #B9F18D;
+    }
+
+    .hljs-title,
+    .hljs-section {
+      color: #FAF594;
+    }
+
+    .hljs-keyword,
+    .hljs-selector-tag {
+      color: #70CFF8;
+    }
+
+    .hljs-emphasis {
+      font-style: italic;
+    }
+
+    .hljs-strong {
+      font-weight: 700;
+    }
   }
 
   img {
@@ -196,6 +264,65 @@ const addImage = () => {
     border: none;
     border-top: 2px solid rgba(#0D0D0D, 0.1);
     margin: 2rem 0;
+  }
+}
+
+.bubble-menu {
+  display: flex;
+  background-color: #0D0D0D;
+  padding: 0.2rem;
+  border-radius: 0.5rem;
+
+  button {
+    border: none;
+    background: none;
+    color: #FFF;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.3rem;
+    opacity: 0.6;
+
+    &:hover,
+    &.is-active {
+      opacity: 1;
+    }
+  }
+}
+
+.floating-menu {
+  display: flex;
+  background-color: #0D0D0D10;
+  padding: 0.2rem;
+  border-radius: 0.5rem;
+
+  button {
+    border: none;
+    background: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.3rem;
+    opacity: 0.6;
+
+    &:hover,
+    &.is-active {
+      opacity: 1;
+    }
+  }
+}
+
+.darkMode {
+
+  .floating-menu {
+    background-color: $pearl !important;
+    color: $black-forest !important;
+  }
+
+  .bubble-menu {
+    background-color: $pearl !important;
+
+    button {
+      color: $black-forest !important;
+    }
   }
 }
 </style>

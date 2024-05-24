@@ -6,6 +6,8 @@ import { useToasterStore } from './useToasterStore';
 
 export const useLoginStore = defineStore('login-store', () => {
   const isAdmin = ref(false);
+  const isModalOpened = ref(false);
+  const isAdminMenuOpened = ref(false);
 
   const signInForm = ref<SigninForm>({
     email: '',
@@ -22,6 +24,7 @@ export const useLoginStore = defineStore('login-store', () => {
           .then((response) => {
             sessionStorage.setItem('userRole', response.data);
             isAdmin.value = true;
+            isModalOpened.value = false;
             toast.showToast('로그인이 완료되었습니다. 🎉', ToasterStatus.CHECK);
           })
           .catch((error) => {
@@ -32,5 +35,5 @@ export const useLoginStore = defineStore('login-store', () => {
       .catch((error) => console.log('login error : ', error));
   };
 
-  return { isAdmin, SIGN_IN, signInForm };
+  return { isModalOpened, isAdmin, SIGN_IN, signInForm, isAdminMenuOpened };
 });

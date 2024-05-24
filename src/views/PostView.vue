@@ -1,11 +1,11 @@
 <script setup lang=ts>
-import MainHeader from '@/components/common/MainHeader.vue';
+import TheHeader from '@/components/header/TheHeader.vue';
 import PostDetail from '@/components/post/PostDetail.vue';
 import TheFooter from '@/components/common/TheFooter.vue';
 </script>
 <template>
   <div>
-    <main-header />
+    <the-header />
     <post-detail />
     <the-footer />
   </div>
