@@ -32,6 +32,10 @@ const logout = () => {
 .container {
   position: relative;
 
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
+
   .wrapper {
     position: absolute;
     border: 1px solid #000;

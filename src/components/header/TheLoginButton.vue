@@ -37,6 +37,10 @@ $fs-size: 1em;
 }
 
 .button {
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
+
   margin: 0;
   height: auto;
   background: transparent;

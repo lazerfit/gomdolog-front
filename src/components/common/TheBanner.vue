@@ -1,5 +1,6 @@
 <script setup lang=ts>
 import { usePostResponseStore } from '@/stores/usePostResponseStore';
+import TheCategory from '../category/TheCategory.vue';
 
 const store = usePostResponseStore();
 
@@ -11,12 +12,14 @@ const searchPost = () => {
   <div class="container">
     <div class="title">
       <p>Unlocking the Future with Technology</p>
+      <p>Innovate, Integrate, Inspire</p>
     </div>
     <div class="search-bar">
       <i class="fa-solid fa-magnifying-glass"></i>
       <input type="search" name="search" pattern=".*\S.*" required placeholder="search..." v-model="store.searchQuery"
         @keyup.enter="searchPost">
     </div>
+    <the-category />
   </div>
 </template>
 
@@ -28,7 +31,13 @@ const searchPost = () => {
 
     .title {
       p {
-        background-image: url('/src/assets/img/textBannerDark.jpg');
+        &:first-child {
+          background-image: url('/src/assets/img/textBannerDark.jpg');
+        }
+
+        &:last-child {
+          color: $pearl;
+        }
       }
     }
 
@@ -64,13 +73,21 @@ const searchPost = () => {
     text-align: center;
 
     p {
-      font-size: px-to-rem(38);
-      font-family: "Playfair Display", serif;
-      font-weight: 600;
-      background-image: url('/src/assets/img/textBanner.jpg');
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
+      &:first-child {
+        font-size: px-to-rem(40);
+        font-family: "Playfair Display", serif;
+        font-weight: 600;
+        background-image: url('/src/assets/img/textBanner.jpg');
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+      }
+
+      &:last-child {
+        font-size: 1.2rem;
+        font-family: "Playfair Display", serif;
+        margin: 11px 0;
+      }
     }
   }
 
@@ -87,7 +104,7 @@ const searchPost = () => {
     }
 
     input {
-      width: 220px;
+      width: 300px;
       background-color: transparent;
       border: none;
       padding: 3px;
