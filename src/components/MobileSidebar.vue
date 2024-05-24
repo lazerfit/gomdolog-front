@@ -56,6 +56,8 @@ const isAdmin = () => {
   }
 }
 
+const isSidebarOpen = ref(false);
+
 onBeforeMount(() => {
   isAdmin()
   store.FETCH_ALL()
@@ -77,37 +79,37 @@ watchEffect(() => {
 <template>
   <div class="mobile-menu">
     <div class="wrapper">
-      <input type="checkbox" id="trigger" v-model="isBoxChecked">
-      <label for="trigger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </label>
+      <button class="button" data-text="Awesome" @click="isSidebarOpen = !isSidebarOpen">
+        <span class="actual-text">&nbsp;menu&nbsp;</span>
+        <span aria-hidden="true" class="hover-text">&nbsp;menu&nbsp;</span>
+      </button>
       <basic-toast />
-      <div class="sidebar">
-        <div class="category-wrapper">
-          <RouterLink :to="{ name: 'category', params: { title: item.title } }" class="category"
-            v-for="(item, index) in filteredCategory" :key="index">
-            {{ item.title }}
-          </RouterLink>
-        </div>
-        <div class="login-wrapper">
-          <div class="login-btn" v-if="!loginStore.isAdmin" @click="openModal">
-            로그인
+      <Transition name="bounce">
+        <div class="sidebar" v-show="isSidebarOpen">
+          <div class="category-wrapper">
+            <RouterLink :to="{ name: 'category', params: { title: item.title } }" class="category"
+              v-for="(item, index) in filteredCategory" :key="index">
+              {{ item.title }}
+            </RouterLink>
           </div>
-          <div class="admin-menu-wrapper" v-else>
-            <div>
-              <RouterLink to="/post/new">글쓰기</RouterLink>
+          <div class="login-wrapper">
+            <div class="login-btn" v-if="!loginStore.isAdmin" @click="openModal">
+              로그인
             </div>
-            <div>
-              <RouterLink to="/admin">설정</RouterLink>
-            </div>
-            <div>
-              <a href="#none" @click="logout">로그아웃</a>
+            <div class="admin-menu-wrapper" v-else>
+              <div>
+                <RouterLink to="/post/new">글쓰기</RouterLink>
+              </div>
+              <div>
+                <RouterLink to="/admin">설정</RouterLink>
+              </div>
+              <div>
+                <a href="#none" @click="logout">로그아웃</a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </Transition>
       <Transition name="fade">
         <basic-modal :isOpen="isModalOpened" @modal-close="closeModal" @submit="submitHandler">
           <template #header>
@@ -144,6 +146,28 @@ watchEffect(() => {
 </template>
 
 <style lang='scss' scoped>
+.bounce-enter-active {
+  animation: bounce-in .5s;
+}
+
+.bounce-leave-active {
+  animation: bounce-in .5s reverse;
+}
+
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
@@ -155,24 +179,30 @@ watchEffect(() => {
 }
 
 .darkMode {
-  label[for=trigger] {
-    span {
-      background-color: $pearl !important;
+  .wrapper {
+    .button {
+      -webkit-text-stroke: 1px rgba(255, 255, 255, 0.6) !important;
+      border: none !important;
+
+      &:hover .hover-text {
+        filter: drop-shadow(0 0 23px #37ff8b);
+      }
+
+      .hover-text {
+        border-right: 4px solid #37ff8b !important;
+      }
+    }
+
+    .sidebar {
+      background-color: #121212 !important;
+
+      .category {
+        background-color: $pearl !important;
+        color: $black-forest !important;
+      }
     }
   }
 
-  .mobile-menu {
-    border: 2px solid $pearl !important;
-  }
-
-  .sidebar {
-    background-color: #121212 !important;
-
-    .category {
-      background-color: $pearl !important;
-      color: $black-forest !important;
-    }
-  }
 }
 
 .mobile-menu {
@@ -184,15 +214,8 @@ watchEffect(() => {
     display: none;
   }
 
-  border: 2px solid $black-forest;
-  border-radius: 7px;
-  width: 30px;
-  height: 30px;
-
   .wrapper {
-    height: 20px;
-    width: 20px;
-    position: relative;
+    @include the-menu;
 
     input[id=trigger] {
       @media screen and (max-width: 767px) {
@@ -250,12 +273,12 @@ watchEffect(() => {
 
     .sidebar {
       @media screen and (max-width: 767px) {
-        width: 80%;
+        width: 100%;
         height: 100%;
         position: fixed;
-        background-color: $background-color;
-        right: -767px;
-        top: 50px;
+        background-color: #f9f9f9;
+        left: 0;
+        top: 53px;
         transition: .3s ease;
         z-index: 1000;
         overflow: hidden;

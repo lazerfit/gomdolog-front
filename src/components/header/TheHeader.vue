@@ -63,9 +63,9 @@ onBeforeUnmount(() => {
       <RouterLink class="main-logo" to="/">
         <img src="@/assets/img/gomdolog3.png" alt="main-logo">
       </RouterLink>
-      <mobile-sidebar />
       <div class="login">
         <DarkmodeToggle3 />
+        <mobile-sidebar />
         <the-login-button />
         <the-admin-menu />
         <the-admin-menu-bar />
@@ -153,7 +153,7 @@ header {
   @media screen and (max-width: 767px) {
     width: 100%;
     margin: 0 auto;
-    padding: 3px;
+    margin-top: 10px;
   }
 
   @media (min-width:768px) and (max-width: 1024px) {
@@ -167,7 +167,6 @@ header {
 
     .main-logo {
       @media screen and (max-width: 767px) {
-        padding: 14px 13px 13px 13px;
         margin-right: auto;
       }
 
@@ -185,10 +184,6 @@ header {
       margin-left: auto;
       display: flex;
       align-items: center;
-
-      @media screen and (max-width: 767px) {
-        display: none;
-      }
 
       .fa-user {
         font-size: px-to-rem(23);
