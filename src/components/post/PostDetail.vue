@@ -113,7 +113,6 @@ onMounted(() => {
   addUtterancesScript();
   highlightCode()
 });
-
 </script>
 
 <template>
