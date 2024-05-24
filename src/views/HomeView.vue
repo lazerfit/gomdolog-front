@@ -38,36 +38,11 @@ onBeforeMount(() => {
     <the-header />
     <the-banner />
     <post-popular />
-    <div class="all-post-title">
-      <h1>All blog posts</h1>
-    </div>
+
     <post-all />
     <more-button />
     <the-footer />
   </main>
 </template>
 
-<style lang="scss" scoped>
-.all-post-title {
-  width: $desktop-width;
-  margin: px-to-rem(10) auto;
-  margin-top: px-to-rem(200);
-
-  @media screen and (max-width: 767px) {
-    width: 100%;
-    margin-top: 60px;
-    text-align: center;
-  }
-
-  @media (min-width:768px) and (max-width: 1024px) {
-    width: 100%;
-    margin-top: 0;
-  }
-
-  h1 {
-    font-weight: 500;
-    font-family: "Playfair Display", serif;
-    font-size: px-to-rem(24);
-  }
-}
-</style>
+<style lang="scss" scoped></style>
