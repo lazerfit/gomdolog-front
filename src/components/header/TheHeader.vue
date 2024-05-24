@@ -8,7 +8,6 @@ import { useDarkModeStore } from '@/stores/useDarkModeStore';
 import DarkmodeToggle3 from './DarkmodeToggle3.vue';
 import TheLoginButton from './TheLoginButton.vue';
 import TheAdminMenu from './TheAdminMenu.vue';
-import TheAdminMenuBar from './TheAdminMenuBar.vue';
 
 const loginStore = useLoginStore();
 const darkmodeStore = useDarkModeStore();
@@ -58,17 +57,16 @@ onBeforeUnmount(() => {
 
 <template>
   <header>
-    <RouterLink class="main-logo" to="/">
-      <img src="@/assets/img/gomdolog3.png" alt="main-logo">
-    </RouterLink>
     <basic-toast />
     <div class="sub-logo-container">
-      <DarkmodeToggle3 />
+      <RouterLink class="main-logo" to="/">
+        <img src="@/assets/img/gomdolog3.png" alt="main-logo">
+      </RouterLink>
       <mobile-sidebar />
       <div class="login">
+        <DarkmodeToggle3 />
         <the-login-button />
         <the-admin-menu />
-        <the-admin-menu-bar />
         <Transition name="fade">
           <basic-modal :isOpen="loginStore.isModalOpened" @modal-close="loginStore.isModalOpened = false"
             @submit="submitHandler" @keyup.esc="loginStore.isModalOpened = false">
@@ -140,11 +138,12 @@ onBeforeUnmount(() => {
 }
 
 header {
-  width: $desktop-width;
+  width: 100%;
   margin: px-to-rem(15) auto px-to-rem(10) auto;
   display: flex;
   align-items: center;
-  background-color: #fff;
+  justify-content: center;
+  background-color: #f9f9f9;
   position: sticky;
   padding: 15px 10px;
   top: 0;
@@ -159,28 +158,31 @@ header {
     width: 100%;
   }
 
-  .main-logo {
-    @media screen and (max-width: 767px) {
-      padding: 14px 13px 13px 13px;
-      margin-right: auto;
-    }
-
-    img {
-      width: px-to-rem(130);
-
-      @media screen and (max-width: 767px) {
-        width: 100px;
-      }
-    }
-  }
-
   .sub-logo-container {
-    margin-left: auto;
+    width: 1180px;
     display: flex;
     align-items: center;
 
+    .main-logo {
+      @media screen and (max-width: 767px) {
+        padding: 14px 13px 13px 13px;
+        margin-right: auto;
+      }
+
+      img {
+        width: px-to-rem(130);
+
+        @media screen and (max-width: 767px) {
+          width: 100px;
+        }
+      }
+    }
+
     .login {
       margin-right: px-to-rem(5);
+      margin-left: auto;
+      display: flex;
+      align-items: center;
 
       @media screen and (max-width: 767px) {
         display: none;

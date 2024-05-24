@@ -31,7 +31,7 @@ const store = useDarkModeStore();
 
 <style scoped>
 .wrapper {
-  margin-right: 7px;
+  margin-right: 5px;
 }
 
 .theme-switch {
