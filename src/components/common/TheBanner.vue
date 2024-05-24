@@ -26,6 +26,12 @@ const searchPost = () => {
     border-bottom: 1px solid $dim-black;
     border-top: 1px solid $pearl !important;
 
+    .title {
+      p {
+        background-image: url('/src/assets/img/textBannerDark.jpg');
+      }
+    }
+
     .search-bar {
       border: 1px solid $pearl;
 
@@ -50,13 +56,21 @@ const searchPost = () => {
   border-top: 1px solid $black-forest;
   margin-top: 10px;
 
+  @media screen and (min-width: 1024px) {
+    height: 330px;
+  }
+
   .title {
     text-align: center;
 
     p {
-      font-size: px-to-rem(34);
+      font-size: px-to-rem(38);
       font-family: "Playfair Display", serif;
-      font-weight: 500;
+      font-weight: 600;
+      background-image: url('/src/assets/img/textBanner.jpg');
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
     }
   }
 

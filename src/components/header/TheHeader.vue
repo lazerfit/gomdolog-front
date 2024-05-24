@@ -1,32 +1,25 @@
 <script setup lang=ts>
-import { onBeforeMount, onBeforeUnmount, ref } from 'vue';
+import { onBeforeMount, onBeforeUnmount } from 'vue';
 import { RouterLink } from 'vue-router';
 import MobileSidebar from '../MobileSidebar.vue';
-import DarkmodeToggle2 from './DarkmodeToggle2.vue';
 import { defineAsyncComponent } from 'vue';
 import { useLoginStore } from '@/stores/useLoginStore';
 import { useDarkModeStore } from '@/stores/useDarkModeStore';
+import DarkmodeToggle3 from './DarkmodeToggle3.vue';
+import TheLoginButton from './TheLoginButton.vue';
+import TheAdminMenu from './TheAdminMenu.vue';
+import TheAdminMenuBar from './TheAdminMenuBar.vue';
 
-const isModalOpened = ref(false);
-const isAdminMenuOpened = ref(false);
 const loginStore = useLoginStore();
 const darkmodeStore = useDarkModeStore();
 
 const BasicModal = defineAsyncComponent(() =>
-  import('./BasicModal.vue')
+  import('@/components/common/BasicModal.vue')
 );
 
 const BasicToast = defineAsyncComponent(() =>
-  import('./BasicToast.vue')
+  import('@/components/common/BasicToast.vue')
 );
-
-const openModal = () => {
-  isModalOpened.value = true;
-}
-
-const closeModal = () => {
-  isModalOpened.value = false;
-}
 
 const submitHandler = () => {
   console.log("정상 제출 완료");
@@ -34,12 +27,6 @@ const submitHandler = () => {
 
 const signIn = () => {
   loginStore.SIGN_IN()
-  closeModal()
-}
-
-const logout = () => {
-  loginStore.isAdmin = false;
-  sessionStorage.removeItem('userRole');
 }
 
 const isAdmin = () => {
@@ -50,13 +37,17 @@ const isAdmin = () => {
   }
 }
 
-onBeforeMount(() => {
-  isAdmin()
+const isDarkMode = () => {
   if (localStorage.getItem('darkMode') && localStorage.getItem('darkMode') === 'true') {
     darkmodeStore.isDarkMode = true
   } else {
     darkmodeStore.isDarkMode = false
   }
+}
+
+onBeforeMount(() => {
+  isAdmin();
+  isDarkMode();
 })
 
 onBeforeUnmount(() => {
@@ -72,31 +63,19 @@ onBeforeUnmount(() => {
     </RouterLink>
     <basic-toast />
     <div class="sub-logo-container">
-      <DarkmodeToggle2 />
+      <DarkmodeToggle3 />
       <mobile-sidebar />
       <div class="login">
-        <i class="fa-regular fa-user" @click="openModal" v-if="!loginStore.isAdmin"></i>
-        <i class="fa-solid fa-user" @click="isAdminMenuOpened = !isAdminMenuOpened" v-else>
-          <Transition name="bounce">
-            <div class="wrapper" v-show="isAdminMenuOpened">
-              <div>
-                <RouterLink to="/post/new">글쓰기</RouterLink>
-              </div>
-              <div>
-                <RouterLink to="/admin">설정</RouterLink>
-              </div>
-              <div>
-                <a href="#none" @click="logout">로그아웃</a>
-              </div>
-            </div>
-          </Transition>
-        </i>
+        <the-login-button />
+        <the-admin-menu />
+        <the-admin-menu-bar />
         <Transition name="fade">
-          <basic-modal :isOpen="isModalOpened" @modal-close="closeModal" @submit="submitHandler">
+          <basic-modal :isOpen="loginStore.isModalOpened" @modal-close="loginStore.isModalOpened = false"
+            @submit="submitHandler" @keyup.esc="loginStore.isModalOpened = false">
             <template #header>
               <div class="modal-header-container">
                 <div class="close-btn">
-                  <i class="fa-solid fa-x" @click="closeModal"></i>
+                  <i class="fa-solid fa-x" @click="loginStore.isModalOpened = false"></i>
                 </div>
                 <div class="login-welcome">
                   <img src="/src/assets/img/cat4.jpg" alt="login-welcome-img">
@@ -167,6 +146,7 @@ header {
   align-items: center;
   background-color: #fff;
   position: sticky;
+  padding: 15px 10px;
   top: 0;
 
   @media screen and (max-width: 767px) {
@@ -186,7 +166,7 @@ header {
     }
 
     img {
-      width: px-to-rem(250);
+      width: px-to-rem(130);
 
       @media screen and (max-width: 767px) {
         width: 100px;
@@ -199,49 +179,17 @@ header {
     display: flex;
     align-items: center;
 
-    @media screen and (max-width: 767px) {
-      display: none;
-    }
-
     .login {
       margin-right: px-to-rem(5);
+
+      @media screen and (max-width: 767px) {
+        display: none;
+      }
 
       .fa-user {
         font-size: px-to-rem(23);
         cursor: pointer;
         position: relative;
-
-        .wrapper {
-          position: absolute;
-          border: 1px solid #000;
-          width: px-to-rem(65);
-          top: 100%;
-          left: px-to-rem(-65);
-          transform: translateX(35%);
-          margin-top: px-to-rem(10);
-          background-color: #fff;
-          box-shadow: 3px 3px 5px $light-black;
-
-          div {
-            text-align: center;
-            padding: px-to-rem(5);
-
-            &:hover {
-              background-color: $black-forest;
-
-              a {
-                color: $pearl;
-              }
-            }
-
-            a {
-              font-size: px-to-rem(13);
-              cursor: pointer;
-              font-family: $secondary-font;
-              color: $black-forest;
-            }
-          }
-        }
       }
 
       .fa-x {

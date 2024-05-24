@@ -1,5 +1,5 @@
 <script setup lang=ts>
-import MainHeader from '@/components/common/MainHeader.vue';
+import TheHeader from '@/components/header/TheHeader.vue';
 import PostSave from '@/components/post/PostSave.vue';
 import { onBeforeRouteLeave } from 'vue-router';
 
@@ -12,7 +12,7 @@ onBeforeRouteLeave((to, from) => {
 </script>
 <template>
   <div class="container">
-    <main-header />
+    <the-header />
     <post-save />
   </div>
 </template>

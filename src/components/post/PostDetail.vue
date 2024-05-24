@@ -289,7 +289,7 @@ onMounted(() => {
 
     .post-text {
       margin: px-to-rem(30) auto;
-      font-size: px-to-rem(16);
+      font-size: px-to-rem(18);
       line-height: px-to-rem(31);
       white-space: pre-wrap;
       word-wrap: break-word;
@@ -304,11 +304,28 @@ onMounted(() => {
       }
     }
 
+    .post-text:deep(p) {
+      font-size: px-to-rem(18);
+      line-height: px-to-rem(24);
+    }
+
+    .post-text:deep(h1) {
+      font-size: px-to-rem(24);
+      line-height: px-to-rem(38.4);
+    }
+
+    .post-text:deep(h2) {
+      font-size: px-to-rem(20);
+      line-height: px-to-rem(32);
+    }
+
     .post-text:deep(img) {
       max-width: 900px;
       border-radius: px-to-rem(10);
       margin: px-to-rem(30) auto;
       object-fit: cover;
+      display: block;
+      margin: 20px auto;
 
       @media (max-width: 767px) {
         max-width: 330px;

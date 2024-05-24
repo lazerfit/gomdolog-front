@@ -1,10 +1,10 @@
 <script setup lang=ts>
 import AdminDashboard from '@/components/admin/AdminDashboard.vue';
-import MainHeader from '@/components/common/MainHeader.vue';
+import TheHeader from '@/components/header/TheHeader.vue';
 </script>
 <template>
   <div>
-    <main-header />
+    <the-header />
     <admin-dashboard />
   </div>
 </template>

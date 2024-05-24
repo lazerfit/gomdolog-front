@@ -1,5 +1,5 @@
 <script setup lang=ts>
-import MainHeader from '@/components/common/MainHeader.vue';
+import TheHeader from '@/components/header/TheHeader.vue';
 import MainCategory from '@/components/category/MainCategory.vue';
 import TheBanner from '@/components/common/TheBanner.vue';
 import CategoryTitle from '@/components/category/CategoryTitle.vue';
@@ -22,7 +22,7 @@ onBeforeMount(() => {
 <template>
 
   <div class="container">
-    <main-header />
+    <the-header />
     <the-banner />
     <main-category />
     <category-title />

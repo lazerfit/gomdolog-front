@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import MainHeader from '@/components/common/MainHeader.vue';
+import TheHeader from '@/components/header/TheHeader.vue';
 import MainCategory from '@/components/category/MainCategory.vue';
 import TheBanner from '@/components/common/TheBanner.vue';
 import PostAll from '@/components/post/PostAll.vue';
@@ -36,7 +36,7 @@ onBeforeMount(() => {
 
 <template>
   <main>
-    <main-header />
+    <the-header />
     <the-banner />
     <main-category />
     <post-popular />
