@@ -7,6 +7,9 @@ const store = usePostResponseStore();
 <template>
   <transition name="fade">
     <div class="container" v-if="!store.isPostLoaded">
+      <div class="all-post-title">
+        <h1>All blog posts</h1>
+      </div>
       <div class="post-wrapper">
         <template v-if="store.posts?.content && store.posts?.content?.length > 0">
           <div class="post" v-for="item in store.posts?.content" :key="item.id">
@@ -86,7 +89,15 @@ const store = usePostResponseStore();
 .container {
 
   width: $desktop-width;
-  margin: px-to-rem(50) auto 0 auto;
+  margin: px-to-rem(0) auto 0 auto;
+
+  .all-post-title {
+    h1 {
+      font-weight: 500;
+      font-family: "Playfair Display", serif;
+      font-size: px-to-rem(24);
+    }
+  }
 
   .empty-img-container {
     display: flex;
@@ -123,7 +134,7 @@ const store = usePostResponseStore();
     justify-content: flex-start;
     align-items: center;
     gap: 20px;
-    margin-top: px-to-rem(50);
+    margin-top: px-to-rem(10);
 
     @media screen and (max-width: 767px) {
       margin-top: 0;

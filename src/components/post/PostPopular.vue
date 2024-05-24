@@ -76,6 +76,10 @@ onBeforeMount(async () => {
 <style lang='scss' scoped>
 .darkMode {
 
+  .container {
+    border-bottom: 1px solid $dim-black !important;
+  }
+
   h1 {
     color: $pearl !important;
   }
@@ -101,9 +105,11 @@ onBeforeMount(async () => {
 .container {
   color: $black-forest;
   width: $desktop-width;
-  margin: px-to-rem(100) auto;
+  margin: px-to-rem(30) auto;
   display: flex;
   flex-direction: column;
+  border-bottom: 1px solid lightgray;
+  padding-bottom: 50px;
 
   @media screen and (max-width: 767px) {
     display: none;
@@ -126,7 +132,7 @@ onBeforeMount(async () => {
     width: 100%;
     height: 100%;
     height: px-to-rem(600);
-    margin-top: px-to-rem(60);
+    margin-top: px-to-rem(30);
     justify-content: space-between;
 
     .main-post {
