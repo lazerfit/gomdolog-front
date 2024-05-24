@@ -8,6 +8,7 @@ import { useDarkModeStore } from '@/stores/useDarkModeStore';
 import DarkmodeToggle3 from './DarkmodeToggle3.vue';
 import TheLoginButton from './TheLoginButton.vue';
 import TheAdminMenu from './TheAdminMenu.vue';
+import TheAdminMenuBar from './TheAdminMenuBar.vue';
 
 const loginStore = useLoginStore();
 const darkmodeStore = useDarkModeStore();
@@ -67,6 +68,7 @@ onBeforeUnmount(() => {
         <DarkmodeToggle3 />
         <the-login-button />
         <the-admin-menu />
+        <the-admin-menu-bar />
         <Transition name="fade">
           <basic-modal :isOpen="loginStore.isModalOpened" @modal-close="loginStore.isModalOpened = false"
             @submit="submitHandler" @keyup.esc="loginStore.isModalOpened = false">

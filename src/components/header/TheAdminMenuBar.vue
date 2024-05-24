@@ -37,7 +37,7 @@ const logout = () => {
     border: 1px solid #000;
     width: px-to-rem(65);
     top: 100%;
-    left: px-to-rem(-20);
+    left: px-to-rem(-95);
     transform: translateX(35%);
     margin-top: px-to-rem(10);
     background-color: #fff;
