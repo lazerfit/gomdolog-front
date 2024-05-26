@@ -28,30 +28,39 @@ const recycleBinShow = () => {
 <template>
   <aside>
     <div class="content-wrapper">
-      <div class="dashboard" @click="dashboardShow">
-        <span>
-          <i class="fa-solid fa-clapperboard"></i>
-        </span>
-        <span class="title">
-          Dashboard
-        </span>
-      </div>
-      <div class="category" @click="categoryShow">
-        <span>
-          <i class="fa-solid fa-table-list"></i>
-        </span>
-        <span class="title">
-          Category
-        </span>
-      </div>
-      <div class="category" @click="recycleBinShow">
-        <span>
-          <i class="fa-regular fa-trash-can"></i>
-        </span>
-        <span class="title">
-          Recycle Bin
-        </span>
-      </div>
+      <input type="radio" id="home" name="asdie" value="home" checked>
+      <label for="home">
+        <div class="dashboard menu" @click="dashboardShow">
+          <span>
+            <i class="fa-solid fa-house"></i>
+          </span>
+          <span class="title">
+            Home
+          </span>
+        </div>
+      </label>
+      <input type="radio" id="category" name="asdie" value="category">
+      <label for="category">
+        <div class="category menu" @click="categoryShow">
+          <span>
+            <i class="fa-solid fa-table-list"></i>
+          </span>
+          <span class="title">
+            Category
+          </span>
+        </div>
+      </label>
+      <input type="radio" id="recycleBin" name="asdie" value="recycleBin">
+      <label for="recycleBin">
+        <div class="recycleBin menu" @click="recycleBinShow">
+          <span>
+            <i class="fa-regular fa-trash-can"></i>
+          </span>
+          <span class="title">
+            Recycle Bin
+          </span>
+        </div>
+      </label>
     </div>
   </aside>
 </template>
@@ -61,11 +70,20 @@ const recycleBinShow = () => {
   aside {
     box-shadow: 1px 1px 5px $dim-black;
   }
+
+  input[type="radio"] {
+    display: none;
+
+    &:checked+label>div {
+      background-color: $pearl !important;
+      color: $black-forest !important;
+    }
+  }
 }
 
 aside {
   border: 1px solid #000;
-  width: px-to-rem(140);
+  width: px-to-rem(160);
   height: px-to-rem(1050);
   margin: px-to-rem(30) px-to-rem(30) px-to-rem(30) 0;
   border: 1px solid #000;
@@ -85,6 +103,11 @@ aside {
     gap: px-to-rem(15);
     transition: all .3s ease;
 
+    .menu {
+      padding: 5px;
+      border-radius: 5px;
+    }
+
     @media (max-width: 767px) {
       display: flex;
       flex-direction: row;
@@ -95,6 +118,15 @@ aside {
 
       .title {
         display: none;
+      }
+    }
+
+    input[type="radio"] {
+      display: none;
+
+      &:checked+label>div {
+        background-color: #121212;
+        color: $pearl;
       }
     }
 

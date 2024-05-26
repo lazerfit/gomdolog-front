@@ -93,9 +93,7 @@ const useFetchPostQuery = () => {
 const { isSuccess, data, isPending } = useFetchPostQuery();
 
 const highlightCode = () => {
-  document.querySelectorAll('pre code').forEach(block => {
-    hljs.highlightElement(block as HTMLElement)
-  })
+  hljs.highlightAll()
 }
 
 onBeforeMount(() => {
@@ -301,11 +299,6 @@ onMounted(() => {
       @media (min-width:768px) and (max-width: 1024px) {
         margin: 30px 20px;
       }
-    }
-
-    .post-text:deep(p) {
-      font-size: px-to-rem(18);
-      line-height: px-to-rem(24);
     }
 
     .post-text:deep(h1) {
