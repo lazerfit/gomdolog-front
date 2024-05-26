@@ -9,12 +9,12 @@ const darkModeStore = useDarkModeStore();
 
 useMeta({
   title: 'gomdolog',
-  meta: [
-    { vmid: 'description', name: 'description', content: 'Java/Spring/vue.js 관련 포스팅과 일상/맛집/블록체인을 다루는 개인 블로그입니다.' },
-    { vmid: 'keywords', name: 'keywords', content: 'blog, java, spring, vue.js' },
-    { vmid: 'og:title', name: 'og:title', content: 'gomdolog' },
-    { vmid: 'og:description', name: 'og:description', content: 'Java/Spring/vue.js 관련 포스팅과 일상/맛집/블록체인을 다루는 개인 블로그입니다.' },
-  ]
+  og: {
+    title: 'gomdolog',
+    description: 'Java/Spring/vue.js 관련 포스팅과 일상/맛집/블록체인을 다루는 개인 블로그입니다.',
+    type: 'website',
+    keyword: 'blog, java, spring, vue.js'
+  }
 })
 
 onBeforeMount(() => {

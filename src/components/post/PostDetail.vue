@@ -107,15 +107,17 @@ const highlightCode = () => {
   hljs.highlightAll()
 }
 
-useMeta({
-  title: 'gomdolog',
-  meta: [
-    { vmid: 'description', name: 'description', content: postContent.value },
-    { vmid: 'keywords', name: 'keywords', content: 'blog, java, spring, vue.js' },
-    { vmid: 'og:title', name: 'og:title', content: post.value.title },
-    { vmid: 'og:description', name: 'og:description', content: postContent.value },
-  ]
-})
+const updateMeta = () => {
+  useMeta({
+    title: 'gomdolog',
+    og: {
+      title: post.value.title,
+      description: postContent.value,
+      type: 'website',
+      keyword: 'blog, java, spring, vue.js'
+    }
+  })
+}
 
 onBeforeMount(() => {
   fetchEnable.value = true;
@@ -126,11 +128,12 @@ onBeforeMount(() => {
     visitedPost.push(route.params.id);
     localStorage.setItem('visitedPost', JSON.stringify(visitedPost));
   }
+  updateMeta();
 });
 
 onMounted(() => {
   addUtterancesScript();
-  highlightCode()
+  highlightCode();
 });
 </script>
 
