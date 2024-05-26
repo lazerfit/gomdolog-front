@@ -1,5 +1,5 @@
 <script setup lang=ts>
-import { ref, onBeforeMount, onMounted } from 'vue';
+import { ref, onBeforeMount, onMounted, computed } from 'vue';
 import type { Ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useToasterStore } from '@/stores/useToasterStore';
@@ -16,6 +16,7 @@ import type { Post } from '@/utils/types';
 import TheLoader from '../common/TheLoader.vue';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/atom-one-dark.css'
+import { useMeta } from 'vue-meta';
 
 const utterancesContainer: Ref<HTMLDivElement | null> = ref(null);
 const router = useRouter();
@@ -92,9 +93,29 @@ const useFetchPostQuery = () => {
 
 const { isSuccess, data, isPending } = useFetchPostQuery();
 
+const post = computed(() => data.value ?? {
+  title: '',
+  tags: [],
+  content: '',
+  categoryTitle: '',
+  createdDate: ''
+})
+
+const postContent = computed(() => post.value.content.replace(/(<([^>]+)>)/ig, ""))
+
 const highlightCode = () => {
   hljs.highlightAll()
 }
+
+useMeta({
+  title: 'gomdolog',
+  meta: [
+    { vmid: 'description', name: 'description', content: postContent.value },
+    { vmid: 'keywords', name: 'keywords', content: 'blog, java, spring, vue.js' },
+    { vmid: 'og:title', name: 'og:title', content: post.value.title },
+    { vmid: 'og:description', name: 'og:description', content: postContent.value },
+  ]
+})
 
 onBeforeMount(() => {
   fetchEnable.value = true;
@@ -122,7 +143,7 @@ onMounted(() => {
     <div class="content-wrapper" v-if="isSuccess && (data != undefined)">
       <div class="post-title">
         <div class="post-title-tags">
-          <span v-for="(tag, index) in (data && data.tags)" :key="index">#{{ tag
+          <span v-for="(tag, index) in (post.tags)" :key="index">#{{ tag
             }}</span>
         </div>
         <div class="title">
@@ -130,7 +151,7 @@ onMounted(() => {
         </div>
         <div class="date-admin-wrapper">
           <div class="created-date">
-            {{ formatDate(data.createdDate || '') }}
+            {{ formatDate(post.createdDate) }}
           </div>
           <div class="admin-wrapper" v-if="loginStore.isAdmin">
             <RouterLink :to="{ name: 'post-update', params: { id: route.params.id } }">
@@ -144,7 +165,7 @@ onMounted(() => {
           </div>
         </div>
       </div>
-      <div class="post-text" v-html="data.content || ''">
+      <div class="post-text" v-html="post.content">
       </div>
       <div class="sns">
         <div class="back-btn">
